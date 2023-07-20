@@ -1,2 +1,3 @@
 # snippets-web
-Web client for youzarsiph/snippets
+
+Create beautiful images of your code.

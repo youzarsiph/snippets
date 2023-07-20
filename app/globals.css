@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply text-stone-800 transition-all duration-[400ms] dark:text-stone-200;
+  }
+
+  pre code.hljs {
+    @apply p-0;
+  }
+}
