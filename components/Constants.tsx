@@ -241,7 +241,6 @@ const Constants = {
     "rainbow",
     "routeros",
     "school-book",
-    "script.py",
     "shades-of-purple",
     "srcery",
     "stackoverflow-dark",
