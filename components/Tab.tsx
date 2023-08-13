@@ -2,15 +2,15 @@ import React from "react";
 import Image from "next/image";
 import { getIconForFile } from "vscode-icons-js";
 import { PencilSquareIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Tab } from "@/types";
+import { TabType } from "@/types";
 import TabStyles from "../styles/components/Tab.module.css";
 
 const Tab = (props: {
-  tab: Tab;
+  tab: TabType;
   isLast: boolean;
   switchTab: () => void;
   removeTab: () => void;
-  updateTab: (tab: Tab, title: string) => void;
+  updateTab: (tab: TabType, title: string) => void;
 }) => {
   const [display, setDisplay] = React.useState<boolean>(true);
   const [title, setTitle] = React.useState<string>(props.tab.title);

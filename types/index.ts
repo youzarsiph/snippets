@@ -8,11 +8,11 @@ interface Reactions {
   bookmarks: number;
 }
 
-interface Tab {
+interface TabType {
   title: string;
   active: boolean;
   code: string;
   language: string;
 }
 
-export type { Reactions, Tab };
+export type { Reactions, TabType };

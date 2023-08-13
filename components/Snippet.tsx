@@ -9,7 +9,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Tab from "./Tab";
 import Buttons from "./Buttons";
-import type { Tab as TabType } from "@/types";
+import type { TabType } from "@/types";
 import SnippetStyles from "../styles/components/Snippet.module.css";
 
 const Snippet = (props: { tabs: TabType[] }) => {
