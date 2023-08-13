@@ -26,8 +26,8 @@ const Tab = (props: {
           width={16}
           height={16}
           alt={`${getIconForFile(title)}`}
-          src={`icons/${getIconForFile(title)}`}
           className="h-8 w-8 rounded bg-white/75 p-1 dark:bg-stone-900/75"
+          src={`https://github.com/vscode-icons/vscode-icons/blob/master/icons/${getIconForFile(title)}`}
         />
       </div>
       {display ? (

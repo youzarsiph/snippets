@@ -291,8 +291,9 @@ const Snippet = (props: { tabs: TabType[] }) => {
             width={16}
             height={16}
             alt={`${getIconForFile(activeTab.title)}`}
-            src={`icons/${getIconForFile(activeTab.title)}`}
+            
             className="h-7 w-7 rounded bg-white/75 p-1 dark:bg-stone-800/75"
+            src={`https://github.com/vscode-icons/vscode-icons/blob/master/icons/${getIconForFile(title)}`}
           />
 
           <select
