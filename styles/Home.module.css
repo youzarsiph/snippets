@@ -7,7 +7,7 @@
 }
 
 .main {
-  @apply relative flex h-full w-full items-center justify-center;
+  @apply relative flex h-full w-full items-center justify-center py-32;
 }
 
 .section {

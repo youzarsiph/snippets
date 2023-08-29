@@ -392,7 +392,7 @@ const Home = () => {
             <Menu />
 
             <div
-              className="relative w-full py-32 lg:h-fit lg:w-fit"
+              className="relative h-fit w-full lg:w-fit"
               ref={format === "svg" ? ref : undefined}
               style={
                 size.name === Constants.container.size[1]?.name
@@ -402,7 +402,6 @@ const Home = () => {
             >
               {bg === Constants.container.bg.colors.light[0] ? (
                 <>
-                  {/* <div className="absolute inset-0 -z-20 animate-pulse"> */}
                   <div className="absolute inset-0 -z-20">
                     <div className="absolute left-0 top-0 h-60 w-60 rounded-3xl bg-lime-400"></div>
                     <div className="absolute right-1 top-0 h-56 w-56 rounded-3xl bg-sky-400"></div>
