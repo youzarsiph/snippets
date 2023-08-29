@@ -15,8 +15,8 @@ import {
   UserPlusIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import "../styles/home.css";
 import { TabType } from "@/types";
-import styles from "../styles/Home.module.css";
 import {
   Account,
   Background,
@@ -48,9 +48,7 @@ const Home = () => {
     name: "linear",
     value: "bg-gradient-to-tr",
   });
-  const [bg, setBg] = React.useState<string>(
-    Constants.container.bg.colors.light[0]
-  );
+  const [bg, setBg] = React.useState<string>(Constants.container.bg.colors[0]);
   const [direction, setDirection] = React.useState<string>(
     Constants.container.bg.directions[0].value
   );
@@ -131,8 +129,8 @@ const Home = () => {
     const [displayMenu, setDisplayMenu] = React.useState<boolean>(false);
 
     return (
-      <nav className={styles.nav}>
-        <div className={styles.bar}>
+      <nav className={"home-nav"}>
+        <div className={"home-bar"}>
           <div className="flex items-center gap-4">
             <button
               className={`${
@@ -142,7 +140,7 @@ const Home = () => {
             >
               <Logo />
             </button>
-            <h1 className={styles.brand}>Snippets</h1>
+            <h1 className={"home-brand"}>Snippets</h1>
           </div>
 
           <div
@@ -154,16 +152,20 @@ const Home = () => {
               <div className="group relative">
                 <button
                   type="button"
-                  className={`group peer relative flex items-center justify-center ${styles.menu}`}
+                  className={
+                    "home-menu group peer relative flex items-center justify-center"
+                  }
                 >
                   <Bars2Icon className="absolute h-6 w-6 group-hover:scale-0 group-focus:scale-0" />
                   <XMarkIcon className="absolute h-6 w-6 scale-0 group-hover:scale-100 group-focus:scale-100" />
                 </button>
 
                 <ul
-                  className={`${styles.list} peer-hover:scale-100 peer-focus:scale-100 md:min-w-[30rem]`}
+                  className={
+                    "home-list peer-hover:scale-100 peer-focus:scale-100 md:min-w-[30rem]"
+                  }
                 >
-                  <li className={styles.listItem}>
+                  <li className={"home-list-item"}>
                     <ArrowsPointingOutIcon className="h-6 w-6" />
                     <h2 className="text-lg">Size</h2>
                     <select
@@ -181,13 +183,13 @@ const Home = () => {
                     </select>
                   </li>
 
-                  <li className={styles.listItem}>
+                  <li className={"home-list-item"}>
                     <div className="grid gap-4">
                       <div className="flex items-center gap-4">
                         <SwatchIcon className="h-6 w-6" />
                         <h2 className="text-lg">Background</h2>
                       </div>
-                      <div className={styles.listItem}>
+                      <div className={"home-list-item"}>
                         <h2 className="text-lg">Type</h2>
 
                         <select
@@ -205,60 +207,32 @@ const Home = () => {
                         </select>
                       </div>
 
-                      <div className="grid gap-4 dark:hidden">
-                        <h2 className="text-lg">Light Colors</h2>
-                        <div className="flex flex-wrap items-center gap-4">
-                          {Constants.container.bg.colors.light.map(
-                            (item, index) => (
-                              <button
-                                key={item}
-                                onClick={() => setBg(item)}
-                                className={`h-8 w-8 rounded shadow-lg hover:scale-[300%] hover:shadow-xl ${
-                                  index === 0 ? "backdrop-blur-3xl" : ""
-                                } ${
-                                  type.value !== "bg-gradient-to-tr"
-                                    ? type.value
-                                    : ""
-                                } ${
-                                  type.name === "linear" ? direction : ""
-                                } ${item}${
-                                  bg === item
-                                    ? " ring-4 ring-stone-800/95 ring-offset-2 dark:ring-white/95"
-                                    : ""
-                                }`}
-                              ></button>
-                            )
-                          )}
-                        </div>
-                      </div>
-                      <div className="hidden gap-4 dark:grid">
+                      <div className="grid gap-4">
                         <h2 className="text-lg">Dark Colors</h2>
                         <div className="flex flex-wrap items-center gap-4">
-                          {Constants.container.bg.colors.dark.map(
-                            (item, index) => (
-                              <button
-                                key={item}
-                                onClick={() => setBg(item)}
-                                className={`h-8 w-8 rounded shadow-lg hover:scale-[300%] hover:shadow-xl ${
-                                  index === 0 ? "backdrop-blur-3xl" : ""
-                                } ${
-                                  type.value !== "bg-gradient-to-tr"
-                                    ? type.value
-                                    : ""
-                                } ${
-                                  type.name === "linear" ? direction : ""
-                                } ${item}${
-                                  bg === item
-                                    ? " ring-4 ring-stone-800/95 ring-offset-2 dark:ring-white/95"
-                                    : ""
-                                }`}
-                              ></button>
-                            )
-                          )}
+                          {Constants.container.bg.colors.map((item, index) => (
+                            <button
+                              key={item}
+                              onClick={() => setBg(item)}
+                              className={`h-8 w-8 rounded shadow-lg hover:scale-[300%] hover:shadow-xl ${
+                                index === 0 ? "backdrop-blur-3xl" : ""
+                              } ${
+                                type.value !== "bg-gradient-to-tr"
+                                  ? type.value
+                                  : ""
+                              } ${
+                                type.name === "linear" ? direction : ""
+                              } ${item}${
+                                bg === item
+                                  ? " ring-4 ring-stone-800/95 ring-offset-2 dark:ring-white/95"
+                                  : ""
+                              }`}
+                            ></button>
+                          ))}
                         </div>
                       </div>
 
-                      <div className={styles.listItem}>
+                      <div className={"home-list-item"}>
                         <h2>Direction</h2>
 
                         <select
@@ -280,21 +254,22 @@ const Home = () => {
               </div>
 
               <div title="Export" className="relative">
-                <button type="button" className={`peer ${styles.menu}`}>
+                <button type="button" className={"home-menu peer"}>
                   <DocumentArrowDownIcon className="h-6 w-6" />
                 </button>
 
                 <ul
-                  className={`${styles.list} peer-hover:scale-100 peer-focus:scale-100`}
+                  className={
+                    "home-list peer-hover:scale-100 peer-focus:scale-100"
+                  }
                 >
                   {Constants.formats.map((i) => (
-                    <li key={i} className={styles.listItem}>
+                    <li key={i} className={"home-list-item"}>
                       <button
                         type="button"
                         className="flex items-center gap-4 disabled:opacity-50"
                         disabled={
-                          bg === Constants.container.bg.colors.light[0] &&
-                          i !== "svg"
+                          bg === Constants.container.bg.colors[0] && i !== "svg"
                         }
                         onClick={() => {
                           setFormat(i);
@@ -311,7 +286,7 @@ const Home = () => {
 
               <button
                 type="button"
-                className={styles.menu}
+                className={"home-menu"}
                 onClick={() => setTheme(!theme)}
               >
                 {theme ? (
@@ -323,7 +298,7 @@ const Home = () => {
 
               <button
                 type="button"
-                className={styles.menu}
+                className={"home-menu"}
                 onClick={() => setDisplayOwner(!displayOwner)}
               >
                 {displayOwner ? (
@@ -384,23 +359,23 @@ const Home = () => {
         href={`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/${codeTheme}.min.css`}
       />
 
-      <div className={`${theme ? "dark " : ""}${styles.container}`}>
+      <div className={`${theme ? "dark " : ""}${"home-container"}`}>
         <Background />
 
-        <div className={styles.screen}>
-          <main className={styles.main}>
+        <div className={"home-screen"}>
+          <main className={"home-main"}>
             <Menu />
 
             <div
-              className="relative h-fit w-full lg:w-fit"
               ref={format === "svg" ? ref : undefined}
+              className="relative h-fit w-full lg:w-fit"
               style={
                 size.name === Constants.container.size[1]?.name
                   ? size.value
                   : undefined
               }
             >
-              {bg === Constants.container.bg.colors.light[0] ? (
+              {bg === Constants.container.bg.colors[0] ? (
                 <>
                   <div className="absolute inset-0 -z-20">
                     <div className="absolute left-0 top-0 h-60 w-60 rounded-3xl bg-lime-400"></div>
@@ -416,7 +391,7 @@ const Home = () => {
               <section
                 style={size.value}
                 ref={format !== "svg" ? ref : undefined}
-                className={`${styles.section}${
+                className={`home-section${
                   type.value !== "bg-gradient-to-tr" ? ` ${type.value}` : ""
                 }${
                   type.name === "linear" && bg !== "bg-transparent"

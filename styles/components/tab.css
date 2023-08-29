@@ -1,0 +1,23 @@
+.tab-container {
+  @apply relative flex items-center whitespace-nowrap rounded-lg dark:text-stone-200;
+}
+
+.tab-image {
+  @apply h-8 w-8 rounded bg-white/75 p-1 dark:bg-stone-900/75;
+}
+
+.tab-active {
+  @apply bg-white/60 ring-1 ring-white/95 dark:bg-stone-800/60 dark:ring-stone-900/95;
+}
+
+.tab-btn {
+  @apply h-full rounded-r-lg p-2 font-sans hover:rounded-none hover:bg-white/75 active:bg-white/80 dark:hover:bg-stone-800/75 dark:active:bg-stone-800/80;
+}
+
+.tab-tooltip {
+  @apply flex h-0 w-0 scale-0 items-center justify-center bg-white/50 p-0 backdrop-blur-3xl hover:h-auto hover:w-auto hover:scale-100 hover:p-2 focus:h-auto focus:w-auto focus:scale-100 focus:p-2 group-hover:h-auto group-hover:w-auto group-hover:scale-100 group-hover:p-2 peer-hover:h-auto peer-hover:w-auto peer-hover:scale-100 peer-hover:p-2 peer-focus:h-auto peer-focus:w-auto peer-focus:scale-100 peer-focus:p-2 dark:bg-stone-800/50;
+}
+
+.tab-input {
+  @apply block w-fit rounded-lg bg-transparent px-2 py-1 font-sans outline-none;
+}

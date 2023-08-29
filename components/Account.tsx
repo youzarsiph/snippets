@@ -3,22 +3,21 @@
  */
 
 import React from "react";
-import Styles from "../styles/components/Account.module.css";
+import "../styles/components/account.css";
 
 const Account = () => {
-  // Account details
   const [account, setAccount] = React.useState<{
     name: string;
     username: string;
   }>({ name: "Name", username: "github.com/username" });
 
   return (
-    <div className={Styles.container}>
+    <div className={"account-container"}>
       <h1>
         <input
           type="text"
           value={account.name}
-          className={Styles.input}
+          className={"account-input"}
           onChange={(event) =>
             setAccount({ ...account, name: event.target.value })
           }
@@ -27,10 +26,8 @@ const Account = () => {
       <small>
         <input
           type="text"
-          id="username"
-          name="username"
           value={account.username}
-          className={Styles.input}
+          className={"account-input"}
           onChange={(event) =>
             setAccount({ ...account, username: event.target.value })
           }

@@ -1,7 +1,7 @@
-.container {
+.account-container {
   @apply absolute bottom-0 left-0 flex items-center gap-4 rounded-3xl rounded-bl-lg bg-white/75 px-6 py-3 font-sans shadow-sm ring-1 ring-white/95 backdrop-blur-3xl dark:bg-stone-800/75 dark:text-stone-200 dark:ring-stone-900/80;
 }
 
-.input {
+.account-input {
   @apply block max-h-fit max-w-fit bg-transparent font-semibold outline-none;
 }

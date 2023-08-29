@@ -8,8 +8,8 @@ import {
   Square2StackIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import styles from "../styles/components/Snippet.module.css";
-import ButtonStyles from "../styles/components/Buttons.module.css";
+import "../styles/components/buttons.css";
+import "../styles/components/snippet.css";
 
 const Buttons = (props: {
   style: string;
@@ -20,24 +20,20 @@ const Buttons = (props: {
 }) =>
   props.style === "mac" ? (
     <div
-      className={`${ButtonStyles.container}${
+      className={`buttons-container${
         props.position === "right" ? " flex-row-reverse" : ""
       }`}
     >
-      <div className={ButtonStyles.btnContainer}>
+      <div className={"buttons-btn-container"}>
         <button
           onClick={() => props.toggleLineNumbers()}
-          className={`peer ${ButtonStyles.btn} ${ButtonStyles.red} focus:ring-opacity-60`}
+          className={"buttons-btn buttons-red peer"}
         ></button>
       </div>
 
-      <div className={ButtonStyles.btnContainer}>
-        <button
-          className={`peer ${ButtonStyles.btn} ${ButtonStyles.yellow} focus:ring-opacity-60`}
-        ></button>
-        <div
-          className={`grid gap-8 ${styles.actionTooltip} ${styles.menu} peer-hover:scale-100 peer-focus:scale-100`}
-        >
+      <div className={"buttons-btn-container"}>
+        <button className={"buttons-btn buttons-yellow peer"}></button>
+        <div className={"snippet-action-tooltip snippet-menu buttons-menu"}>
           <h2 className="text-lg">Style</h2>
 
           <div className="flex items-center gap-4">
@@ -55,13 +51,9 @@ const Buttons = (props: {
         </div>
       </div>
 
-      <div className={ButtonStyles.btnContainer}>
-        <button
-          className={`peer ${ButtonStyles.btn} ${ButtonStyles.green} focus:ring-opacity-60`}
-        ></button>
-        <div
-          className={`grid gap-8 ${styles.actionTooltip} ${styles.menu} peer-hover:scale-100 peer-focus:scale-100`}
-        >
+      <div className={"buttons-btn-container"}>
+        <button className={"buttons-btn buttons-green peer"}></button>
+        <div className={"snippet-action-tooltip snippet-menu buttons-menu"}>
           <h2 className="text-lg">Position</h2>
 
           <div className="flex items-center gap-4">
@@ -81,17 +73,15 @@ const Buttons = (props: {
     </div>
   ) : (
     <div
-      className={`${ButtonStyles.container}${
+      className={`buttons-container}${
         props.position === "left" ? " flex-row-reverse" : ""
       }`}
     >
-      <div className={ButtonStyles.btnContainer}>
-        <button className={`peer ${ButtonStyles.winBtn}`}>
+      <div className={"buttons-btn-container"}>
+        <button className={`buttons-win-btn peer`}>
           <MinusIcon className="h-4 w-4" />
         </button>
-        <div
-          className={`grid gap-8 ${styles.actionTooltip} ${styles.menu} peer-hover:scale-100 peer-focus:scale-100`}
-        >
+        <div className={"snippet-action-tooltip snippet-menu buttons-menu"}>
           <h2 className="text-lg">Style</h2>
 
           <div className="flex items-center gap-4">
@@ -109,13 +99,11 @@ const Buttons = (props: {
         </div>
       </div>
 
-      <div className={ButtonStyles.btnContainer}>
-        <button className={`peer ${ButtonStyles.winBtn}`}>
+      <div className={"buttons-btn-container"}>
+        <button className={`buttons-win-btn peer`}>
           <Square2StackIcon className="h-4 w-4" />
         </button>
-        <div
-          className={`grid gap-8 ${styles.actionTooltip} ${styles.menu} peer-hover:scale-100 peer-focus:scale-100`}
-        >
+        <div className={"snippet-action-tooltip snippet-menu buttons-menu"}>
           <h2 className="text-lg">Position</h2>
 
           <div className="flex items-center gap-4">
@@ -133,9 +121,9 @@ const Buttons = (props: {
         </div>
       </div>
 
-      <div className={ButtonStyles.btnContainer}>
+      <div className={"buttons-btn-container"}>
         <button
-          className={`peer ${ButtonStyles.winBtn}`}
+          className={`buttons-win-btn peer`}
           onClick={() => props.toggleLineNumbers()}
         >
           <XMarkIcon className="h-4 w-4" />

@@ -15,7 +15,7 @@ import Tab from "./Tab";
 import Logo from "./Logo";
 import Buttons from "./Buttons";
 import type { TabType } from "@/types";
-import Styles from "../styles/components/Snippet.module.css";
+import "../styles/components/snippet.css";
 
 const Snippet = (props: { tabs: TabType[] }) => {
   // Buttons
@@ -205,8 +205,8 @@ const Snippet = (props: { tabs: TabType[] }) => {
   };
 
   const Header = () => (
-    <header className={Styles.header}>
-      <div className={Styles.tabs}>
+    <header className={"snippet-header"}>
+      <div className={"snippet-tabs"}>
         {position === "left" ? (
           <Buttons
             style={style}
@@ -243,15 +243,11 @@ const Snippet = (props: { tabs: TabType[] }) => {
         <button
           type="button"
           onClick={() => Callbacks.newTab()}
-          className={`group ${Styles.actionBtn}`}
+          className={"snippet-action-btn group"}
         >
           <PlusIcon className="h-4 w-4" />
 
-          <span
-            className={`${Styles.actionTooltip} group-hover:scale-100 group-focus:scale-100`}
-          >
-            New tab
-          </span>
+          <span className={"snippet-action-tooltip"}>New tab</span>
         </button>
 
         {tabs.length !== 0 ? (
@@ -259,23 +255,19 @@ const Snippet = (props: { tabs: TabType[] }) => {
             <button
               type="button"
               onClick={() => Callbacks.prevTab()}
-              className={`group ${Styles.actionBtn}`}
+              className={"snippet-action-btn group"}
               disabled={
                 tabs.length === 0 || tabs.length === 1 || activeTab === tabs[0]
               }
             >
               <ChevronLeftIcon className="h-4 w-4" />
-              <span
-                className={`${Styles.actionTooltip} group-hover:scale-100 group-focus:scale-100`}
-              >
-                Prev
-              </span>
+              <span className={"snippet-action-tooltip"}>Prev</span>
             </button>
 
             <button
               type="button"
               onClick={() => Callbacks.nextTab()}
-              className={`group ${Styles.actionBtn}`}
+              className={`group ${"snippet-actionBtn"}`}
               disabled={
                 tabs.length === 0 ||
                 tabs.length === 1 ||
@@ -283,11 +275,7 @@ const Snippet = (props: { tabs: TabType[] }) => {
               }
             >
               <ChevronRightIcon className="h-4 w-4" />
-              <span
-                className={`${Styles.actionTooltip} group-hover:scale-100 group-focus:scale-100`}
-              >
-                Next
-              </span>
+              <span className={"snippet-action-tooltip"}>Next</span>
             </button>
           </>
         ) : undefined}
@@ -306,8 +294,8 @@ const Snippet = (props: { tabs: TabType[] }) => {
   );
 
   const Footer = () => (
-    <footer className={Styles.footer}>
-      <div className={Styles.tabs + " justify-between"}>
+    <footer className={"snippet-footer"}>
+      <div className={"snippet-tabs justify-between"}>
         {tabs.length !== 0 ? (
           <>
             <div className="flex items-center gap-4">
@@ -315,14 +303,14 @@ const Snippet = (props: { tabs: TabType[] }) => {
                 <Image
                   width={16}
                   height={16}
+                  className="snippet-image"
                   alt={`${getIconForFile(activeTab.title)}`}
                   src={`icons/${getIconForFile(activeTab.title)}`}
-                  className="z-10 h-6 w-6 cursor-pointer rounded bg-white/75 p-1 dark:bg-stone-800/75"
                 />
 
                 <select
                   id="lang"
-                  className="absolute inset-0 bg-transparent outline-none text-transparent"
+                  className="absolute inset-0 bg-transparent text-transparent outline-none"
                   value={activeTab.language}
                   onChange={(event) =>
                     Callbacks.updateTabLang(event.target.value)
@@ -355,15 +343,15 @@ const Snippet = (props: { tabs: TabType[] }) => {
   let count = 0;
 
   return (
-    <article className={Styles.container}>
+    <article className={"snippet-container"}>
       <Header />
 
-      <main className={Styles.main}>
-        <section className={Styles.mainSection}>
+      <main className={"snippet-main"}>
+        <section className={"snippet-main-section"}>
           {tabs.length !== 0 ? (
             <>
               {displayLN ? (
-                <div className={Styles.lineNumbers}>
+                <div className={"snippet-line-numbers"}>
                   {activeTab.code.split("\n").map(() => {
                     count += 1;
                     return <div key={count}>{count}</div>;
@@ -377,7 +365,7 @@ const Snippet = (props: { tabs: TabType[] }) => {
                   autoFocus
                   name="code"
                   value={activeTab.code}
-                  className={Styles.editor}
+                  className={"snippet-editor"}
                   onChange={(event) => {
                     let temp: TabType = {
                       active: true,
@@ -401,7 +389,7 @@ const Snippet = (props: { tabs: TabType[] }) => {
                   }}
                 ></textarea>
 
-                <pre className={Styles.codeContainer}>
+                <pre className={"snippet-code-container"}>
                   <code
                     className={`language-${activeTab.language}`}
                     style={{ padding: 0, background: "transparent" }}

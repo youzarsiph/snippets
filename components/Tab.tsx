@@ -7,7 +7,7 @@ import Image from "next/image";
 import { getIconForFile } from "vscode-icons-js";
 import { PencilSquareIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { TabType } from "@/types";
-import Styles from "../styles/components/Tab.module.css";
+import "../styles/components/tab.css";
 
 const Tab = (props: {
   tab: TabType;
@@ -20,17 +20,15 @@ const Tab = (props: {
 
   return (
     <div
-      className={`group ${Styles.container} ${
-        props.tab.active ? Styles.active : ""
-      }`}
+      className={`group tab-container${props.tab.active ? " tab-active" : ""}`}
     >
       <div className="peer p-1">
         <Image
           width={16}
           height={16}
+          className={"tab-image"}
           alt={`${getIconForFile(title)}`}
           src={`icons/${getIconForFile(props.tab.title)}`}
-          className="h-8 w-8 rounded bg-white/75 p-1 dark:bg-stone-900/75"
         />
       </div>
       {display ? (
@@ -38,7 +36,7 @@ const Tab = (props: {
           <button
             title="Select tab"
             onClick={() => props.switchTab()}
-            className={`peer ${Styles.btn} rounded-r-lg hover:rounded-none`}
+            className={`tab-btn peer`}
           >
             {title}
           </button>
@@ -46,7 +44,7 @@ const Tab = (props: {
           <button
             title="Edit title"
             onClick={() => setDisplay(false)}
-            className={`peer ${Styles.btn} ${Styles.tooltip} group-hover:h-auto group-hover:w-auto group-hover:scale-100 group-hover:p-2 peer-hover:h-auto peer-hover:w-auto peer-hover:scale-100 peer-hover:p-2 peer-focus:h-auto peer-focus:w-auto peer-focus:scale-100 peer-focus:p-2`}
+            className={"tab-btn tab-tooltip peer"}
           >
             <PencilSquareIcon className="h-6 w-6" />
           </button>
@@ -54,7 +52,7 @@ const Tab = (props: {
           <button
             title="Remove tab"
             onClick={() => props.removeTab()}
-            className={`${Styles.btn} ${Styles.tooltip} rounded-r-lg group-hover:h-auto group-hover:w-auto group-hover:scale-100 group-hover:p-2 peer-hover:h-auto peer-hover:w-auto peer-hover:scale-100 peer-hover:p-2 peer-focus:h-auto peer-focus:w-auto peer-focus:scale-100 peer-focus:p-2`}
+            className={"tab-btn tab-tooltip rounded-r-lg"}
           >
             <XMarkIcon className="h-6 w-6" />
           </button>
@@ -64,7 +62,7 @@ const Tab = (props: {
           autoFocus
           type="text"
           value={title}
-          className={Styles.input}
+          className={"tab-input"}
           style={{ width: `${title.length}rem` }}
           onChange={(event) => setTitle(event.target.value)}
           onBlur={(event) => {
