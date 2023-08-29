@@ -1,3 +1,7 @@
+/**
+ * Window control buttons
+ */
+
 import React from "react";
 import {
   MinusIcon,
@@ -7,12 +11,12 @@ import {
 import styles from "../styles/components/Snippet.module.css";
 import ButtonStyles from "../styles/components/Buttons.module.css";
 
-// Buttons mac or windows style
 const Buttons = (props: {
   style: string;
   setStyle: (value: string) => void;
   position: string;
   setPosition: (value: string) => void;
+  toggleLineNumbers: () => void;
 }) =>
   props.style === "mac" ? (
     <div
@@ -22,9 +26,11 @@ const Buttons = (props: {
     >
       <div className={ButtonStyles.btnContainer}>
         <button
+          onClick={() => props.toggleLineNumbers()}
           className={`peer ${ButtonStyles.btn} ${ButtonStyles.red} focus:ring-opacity-60`}
         ></button>
       </div>
+
       <div className={ButtonStyles.btnContainer}>
         <button
           className={`peer ${ButtonStyles.btn} ${ButtonStyles.yellow} focus:ring-opacity-60`}
@@ -48,6 +54,7 @@ const Buttons = (props: {
           </div>
         </div>
       </div>
+
       <div className={ButtonStyles.btnContainer}>
         <button
           className={`peer ${ButtonStyles.btn} ${ButtonStyles.green} focus:ring-opacity-60`}
@@ -82,11 +89,6 @@ const Buttons = (props: {
         <button className={`peer ${ButtonStyles.winBtn}`}>
           <MinusIcon className="h-4 w-4" />
         </button>
-      </div>
-      <div className={ButtonStyles.btnContainer}>
-        <button className={`peer ${ButtonStyles.winBtn}`}>
-          <Square2StackIcon className="h-4 w-4" />
-        </button>
         <div
           className={`grid gap-8 ${styles.actionTooltip} ${styles.menu} peer-hover:scale-100 peer-focus:scale-100`}
         >
@@ -106,9 +108,10 @@ const Buttons = (props: {
           </div>
         </div>
       </div>
+
       <div className={ButtonStyles.btnContainer}>
         <button className={`peer ${ButtonStyles.winBtn}`}>
-          <XMarkIcon className="h-4 w-4" />
+          <Square2StackIcon className="h-4 w-4" />
         </button>
         <div
           className={`grid gap-8 ${styles.actionTooltip} ${styles.menu} peer-hover:scale-100 peer-focus:scale-100`}
@@ -128,6 +131,15 @@ const Buttons = (props: {
             </select>
           </div>
         </div>
+      </div>
+
+      <div className={ButtonStyles.btnContainer}>
+        <button
+          className={`peer ${ButtonStyles.winBtn}`}
+          onClick={() => props.toggleLineNumbers()}
+        >
+          <XMarkIcon className="h-4 w-4" />
+        </button>
       </div>
     </div>
   );

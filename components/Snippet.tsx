@@ -1,3 +1,7 @@
+/**
+ * Snippets
+ */
+
 import React from "react";
 import Image from "next/image";
 import hljs from "highlight.js";
@@ -8,9 +12,10 @@ import {
   PlusIcon,
 } from "@heroicons/react/24/outline";
 import Tab from "./Tab";
+import Logo from "./Logo";
 import Buttons from "./Buttons";
 import type { TabType } from "@/types";
-import SnippetStyles from "../styles/components/Snippet.module.css";
+import Styles from "../styles/components/Snippet.module.css";
 
 const Snippet = (props: { tabs: TabType[] }) => {
   // Buttons
@@ -34,6 +39,9 @@ const Snippet = (props: { tabs: TabType[] }) => {
           code: "Type tour code here.\n",
         }
   );
+
+  // Display line numbers
+  const [displayLN, setDisplayLN] = React.useState<boolean>(true);
 
   React.useEffect(() => hljs.highlightAll(), [tabs, lang, activeTab]);
 
@@ -69,24 +77,25 @@ const Snippet = (props: { tabs: TabType[] }) => {
         })
         .filter((tab) => tab !== item);
 
-      if (updatedTabs.length !== 0) {
-        setTabs(updatedTabs);
+      setTabs(updatedTabs);
 
+      if (updatedTabs.length !== 0) {
         const newActiveTab = updatedTabs[updatedTabs.length - 1];
         newActiveTab.active = true;
 
         setActiveTab(newActiveTab);
-      } else {
-        const temp = {
-          active: true,
-          title: "Untitled",
-          code: "Type tour code here.\n",
-          language: "plaintext",
-        };
-
-        setTabs([temp]);
-        setActiveTab(temp);
       }
+      // else {
+      // const temp = {
+      //   active: true,
+      //   title: "Untitled",
+      //   code: "Type tour code here.\n",
+      //   language: "plaintext",
+      // };
+
+      // setTabs([temp]);
+      // setActiveTab(temp);
+      // }
     },
     renameTab: (tab: TabType, title: string) => {
       const temp = tabs.map((i) => {
@@ -196,80 +205,92 @@ const Snippet = (props: { tabs: TabType[] }) => {
   };
 
   const Header = () => (
-    <header className={SnippetStyles.header}>
-      <div className={SnippetStyles.tabs}>
+    <header className={Styles.header}>
+      <div className={Styles.tabs}>
         {position === "left" ? (
           <Buttons
             style={style}
             position={position}
             setStyle={(value) => setStyle(value)}
             setPosition={(value) => setPosition(value)}
+            toggleLineNumbers={() => setDisplayLN(!displayLN)}
           />
         ) : undefined}
 
-        {tabs.map((item, idx) => (
-          <Tab
-            tab={item}
-            isLast={tabs.length === 1}
-            key={`${item.title}-${idx}`}
-            switchTab={() => Callbacks.switchTab(item)}
-            removeTab={() => Callbacks.removeTab(item)}
-            updateTab={(tab: TabType, title: string) => {
-              const temp = tabs.map((i) => {
-                if (i === tab) {
-                  i.title = title;
-                }
+        {tabs.length !== 0
+          ? tabs.map((item, idx) => (
+              <Tab
+                tab={item}
+                key={`${item.title}-${idx}`}
+                switchTab={() => Callbacks.switchTab(item)}
+                removeTab={() => Callbacks.removeTab(item)}
+                updateTab={(tab: TabType, title: string) => {
+                  const temp = tabs.map((i) => {
+                    if (i === tab) {
+                      i.title = title;
+                    }
 
-                return i;
-              });
+                    return i;
+                  });
 
-              setTabs(temp);
-              setActiveTab(tab);
-            }}
-          />
-        ))}
+                  setTabs(temp);
+                  setActiveTab(tab);
+                }}
+              />
+            ))
+          : undefined}
 
         <button
           type="button"
           onClick={() => Callbacks.newTab()}
-          className={`group ${SnippetStyles.actionBtn}`}
+          className={`group ${Styles.actionBtn}`}
         >
           <PlusIcon className="h-4 w-4" />
 
           <span
-            className={`${SnippetStyles.actionTooltip} group-hover:scale-100 group-focus:scale-100`}
+            className={`${Styles.actionTooltip} group-hover:scale-100 group-focus:scale-100`}
           >
             New tab
           </span>
         </button>
 
-        <button
-          type="button"
-          onClick={() => Callbacks.prevTab()}
-          className={`group ${SnippetStyles.actionBtn}`}
-          disabled={tabs.length === 1 || activeTab === tabs[0]}
-        >
-          <ChevronLeftIcon className="h-4 w-4" />
-          <span
-            className={`${SnippetStyles.actionTooltip} group-hover:scale-100 group-focus:scale-100`}
-          >
-            Prev
-          </span>
-        </button>
+        {tabs.length !== 0 ? (
+          <>
+            <button
+              type="button"
+              onClick={() => Callbacks.prevTab()}
+              className={`group ${Styles.actionBtn}`}
+              disabled={
+                tabs.length === 0 || tabs.length === 1 || activeTab === tabs[0]
+              }
+            >
+              <ChevronLeftIcon className="h-4 w-4" />
+              <span
+                className={`${Styles.actionTooltip} group-hover:scale-100 group-focus:scale-100`}
+              >
+                Prev
+              </span>
+            </button>
 
-        <button
-          type="button"
-          onClick={() => Callbacks.nextTab()}
-          className={`group ${SnippetStyles.actionBtn}`}
-          disabled={tabs.length === 1 || activeTab === tabs[tabs.length - 1]}
-        >
-          <ChevronRightIcon className="h-4 w-4" />
-          <span
-            className={`${SnippetStyles.actionTooltip} group-hover:scale-100 group-focus:scale-100`}
-          >
-            Next
-          </span>
-        </button>
+            <button
+              type="button"
+              onClick={() => Callbacks.nextTab()}
+              className={`group ${Styles.actionBtn}`}
+              disabled={
+                tabs.length === 0 ||
+                tabs.length === 1 ||
+                activeTab === tabs[tabs.length - 1]
+              }
+            >
+              <ChevronRightIcon className="h-4 w-4" />
+              <span
+                className={`${Styles.actionTooltip} group-hover:scale-100 group-focus:scale-100`}
+              >
+                Next
+              </span>
+            </button>
+          </>
+        ) : undefined}
       </div>
 
       {position === "right" ? (
@@ -278,40 +299,54 @@ const Snippet = (props: { tabs: TabType[] }) => {
           position={position}
           setStyle={(value) => setStyle(value)}
           setPosition={(value) => setPosition(value)}
+          toggleLineNumbers={() => setDisplayLN(!displayLN)}
         />
       ) : undefined}
     </header>
   );
 
   const Footer = () => (
-    <footer className={SnippetStyles.footer}>
-      <div className={SnippetStyles.tabs + " justify-between"}>
-        <div className="flex items-center gap-4">
-          <Image
-            width={16}
-            height={16}
-            alt={`${getIconForFile(activeTab.title)}`}
-            className="h-7 w-7 rounded bg-white/75 p-1 dark:bg-stone-800/75"
-            src={`https://github.com/vscode-icons/vscode-icons/blob/master/icons/${getIconForFile(activeTab.title)}`}
-          />
+    <footer className={Styles.footer}>
+      <div className={Styles.tabs + " justify-between"}>
+        {tabs.length !== 0 ? (
+          <>
+            <div className="flex items-center gap-4">
+              <label className="relative bg-transparent">
+                <Image
+                  width={16}
+                  height={16}
+                  alt={`${getIconForFile(activeTab.title)}`}
+                  src={`icons/${getIconForFile(activeTab.title)}`}
+                  className="z-10 h-6 w-6 cursor-pointer rounded bg-white/75 p-1 dark:bg-stone-800/75"
+                />
 
-          <select
-            id="lang"
-            value={activeTab.language}
-            onChange={(event) => Callbacks.updateTabLang(event.target.value)}
-            className="block cursor-pointer appearance-none rounded bg-transparent px-2 py-1 font-sans outline-none hover:bg-white dark:hover:bg-stone-800"
-          >
-            {hljs.listLanguages().map((lang) => (
-              <option key={lang}>
-                {lang.replace(lang.charAt(0), lang.charAt(0).toUpperCase())}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="flex items-center gap-4">
-          <p>{Callbacks.countWords(activeTab.code)} words</p>
-          <p>{activeTab.code.length} chars</p>
-        </div>
+                <select
+                  id="lang"
+                  className="absolute inset-0 bg-transparent outline-none text-transparent"
+                  value={activeTab.language}
+                  onChange={(event) =>
+                    Callbacks.updateTabLang(event.target.value)
+                  }
+                >
+                  {hljs.listLanguages().map((lang) => (
+                    <option key={lang}>
+                      {lang.replace(
+                        lang.charAt(0),
+                        lang.charAt(0).toUpperCase()
+                      )}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <span>{activeTab.language}</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <p>{Callbacks.countWords(activeTab.code)} words</p>
+              <p>{activeTab.code.length} chars</p>
+            </div>
+          </>
+        ) : undefined}
       </div>
     </footer>
   );
@@ -320,57 +355,73 @@ const Snippet = (props: { tabs: TabType[] }) => {
   let count = 0;
 
   return (
-    <article className={SnippetStyles.container}>
+    <article className={Styles.container}>
       <Header />
 
-      <main className={SnippetStyles.main}>
-        <section className={SnippetStyles.mainSection}>
-          <div className={SnippetStyles.lineNumbers}>
-            {activeTab.code.split("\n").map(() => {
-              count += 1;
-              return <div key={count}>{count}</div>;
-            })}
-          </div>
+      <main className={Styles.main}>
+        <section className={Styles.mainSection}>
+          {tabs.length !== 0 ? (
+            <>
+              {displayLN ? (
+                <div className={Styles.lineNumbers}>
+                  {activeTab.code.split("\n").map(() => {
+                    count += 1;
+                    return <div key={count}>{count}</div>;
+                  })}
+                </div>
+              ) : undefined}
 
-          <div className="relative w-full">
-            <textarea
-              id="code"
-              autoFocus
-              name="code"
-              value={activeTab.code}
-              className={SnippetStyles.editor}
-              onChange={(event) => {
-                let temp: TabType = {
-                  active: true,
-                  title: "Untitled",
-                  code: "Type tour code here.\n",
-                  language: "plaintext",
-                };
+              <div className="relative w-full">
+                <textarea
+                  id="code"
+                  autoFocus
+                  name="code"
+                  value={activeTab.code}
+                  className={Styles.editor}
+                  onChange={(event) => {
+                    let temp: TabType = {
+                      active: true,
+                      title: "Untitled",
+                      code: "Type tour code here.\n",
+                      language: "plaintext",
+                    };
 
-                setTabs([
-                  ...tabs.map((item) => {
-                    if (item === activeTab) {
-                      item.code = event.target.value;
-                      temp = item;
-                    }
+                    setTabs([
+                      ...tabs.map((item) => {
+                        if (item === activeTab) {
+                          item.code = event.target.value;
+                          temp = item;
+                        }
 
-                    return item;
-                  }),
-                ]);
+                        return item;
+                      }),
+                    ]);
 
-                setActiveTab(temp);
-              }}
-            ></textarea>
+                    setActiveTab(temp);
+                  }}
+                ></textarea>
 
-            <pre className={SnippetStyles.codeContainer}>
-              <code
-                className={`language-${activeTab.language}`}
-                style={{ padding: 0, background: "transparent" }}
-              >
-                {activeTab.code}
-              </code>
-            </pre>
-          </div>
+                <pre className={Styles.codeContainer}>
+                  <code
+                    className={`language-${activeTab.language}`}
+                    style={{ padding: 0, background: "transparent" }}
+                  >
+                    {activeTab.code}
+                  </code>
+                </pre>
+              </div>
+            </>
+          ) : (
+            <div className="grid gap-4 px-20 py-12">
+              <div className="flex items-center gap-4">
+                <Logo />{" "}
+                <h1 className="font-sans text-2xl font-bold">Snippets</h1>
+              </div>
+              <p className="font-sans text-lg font-semibold tracking-wide">
+                Create beautiful images of your code snippets
+              </p>
+            </div>
+          )}
         </section>
       </main>
 

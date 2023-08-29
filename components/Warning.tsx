@@ -1,3 +1,7 @@
+/**
+ * Warning
+ */
+
 import React from "react";
 import Logo from "./Logo";
 

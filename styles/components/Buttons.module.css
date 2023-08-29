@@ -7,19 +7,19 @@
 }
 
 .btn {
-  @apply h-5 w-5 rounded-full focus:outline-none focus:ring-8 focus:ring-offset-4 active:scale-95;
+  @apply h-5 w-5 rounded-full ring-1 focus:outline-none focus:ring-8 focus:ring-offset-4 active:scale-95;
 }
 
 .red {
-  @apply bg-red-500 hover:bg-red-600 focus:ring-red-300;
+  @apply bg-red-500 ring-red-600 ring-opacity-50 hover:bg-red-600 focus:ring-red-400;
 }
 
 .yellow {
-  @apply bg-yellow-500 hover:bg-yellow-600 focus:ring-yellow-300;
+  @apply bg-yellow-500 ring-yellow-600 ring-opacity-50 hover:bg-yellow-600 focus:ring-yellow-400;
 }
 
 .green {
-  @apply bg-green-500 hover:bg-green-600 focus:ring-green-300;
+  @apply bg-green-500 ring-green-600 ring-opacity-50 hover:bg-green-600 focus:ring-green-400;
 }
 
 .winBtn {

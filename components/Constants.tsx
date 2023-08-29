@@ -387,6 +387,12 @@ const Constants = {
         { name: "To bottom right", value: "bg-gradient-to-br" },
       ],
     },
+    padding: [
+      { label: "16", value: "p-4" },
+      { label: "32", value: "p-8" },
+      { label: "64", value: "p-16" },
+      { label: "128", value: "p-32" },
+    ],
   },
   formats: ["svg", "png", "jpeg"],
 };

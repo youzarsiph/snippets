@@ -1,13 +1,16 @@
+/**
+ * Editor tabs
+ */
+
 import React from "react";
 import Image from "next/image";
 import { getIconForFile } from "vscode-icons-js";
 import { PencilSquareIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { TabType } from "@/types";
-import TabStyles from "../styles/components/Tab.module.css";
+import Styles from "../styles/components/Tab.module.css";
 
 const Tab = (props: {
   tab: TabType;
-  isLast: boolean;
   switchTab: () => void;
   removeTab: () => void;
   updateTab: (tab: TabType, title: string) => void;
@@ -17,8 +20,8 @@ const Tab = (props: {
 
   return (
     <div
-      className={`group ${TabStyles.container} ${
-        props.tab.active ? TabStyles.active : ""
+      className={`group ${Styles.container} ${
+        props.tab.active ? Styles.active : ""
       }`}
     >
       <div className="peer p-1">
@@ -26,8 +29,8 @@ const Tab = (props: {
           width={16}
           height={16}
           alt={`${getIconForFile(title)}`}
+          src={`icons/${getIconForFile(props.tab.title)}`}
           className="h-8 w-8 rounded bg-white/75 p-1 dark:bg-stone-900/75"
-          src={`https://github.com/vscode-icons/vscode-icons/blob/master/icons/${getIconForFile(title)}`}
         />
       </div>
       {display ? (
@@ -35,7 +38,7 @@ const Tab = (props: {
           <button
             title="Select tab"
             onClick={() => props.switchTab()}
-            className={`peer ${TabStyles.btn} rounded-r-lg hover:rounded-none`}
+            className={`peer ${Styles.btn} rounded-r-lg hover:rounded-none`}
           >
             {title}
           </button>
@@ -43,31 +46,25 @@ const Tab = (props: {
           <button
             title="Edit title"
             onClick={() => setDisplay(false)}
-            className={`peer ${TabStyles.btn} ${TabStyles.tooltip}${
-              props.isLast ? " rounded-r-lg " : " "
-            }group-hover:h-auto group-hover:w-auto group-hover:scale-100 group-hover:p-2 peer-hover:h-auto peer-hover:w-auto peer-hover:scale-100 peer-hover:p-2 peer-focus:h-auto peer-focus:w-auto peer-focus:scale-100 peer-focus:p-2`}
+            className={`peer ${Styles.btn} ${Styles.tooltip} group-hover:h-auto group-hover:w-auto group-hover:scale-100 group-hover:p-2 peer-hover:h-auto peer-hover:w-auto peer-hover:scale-100 peer-hover:p-2 peer-focus:h-auto peer-focus:w-auto peer-focus:scale-100 peer-focus:p-2`}
           >
             <PencilSquareIcon className="h-6 w-6" />
           </button>
 
-          {!props.isLast ? (
-            <button
-              title="Remove tab"
-              onClick={() => props.removeTab()}
-              className={`${TabStyles.btn} ${TabStyles.tooltip} rounded-r-lg group-hover:h-auto group-hover:w-auto group-hover:scale-100 group-hover:p-2 peer-hover:h-auto peer-hover:w-auto peer-hover:scale-100 peer-hover:p-2 peer-focus:h-auto peer-focus:w-auto peer-focus:scale-100 peer-focus:p-2`}
-            >
-              <XMarkIcon className="h-6 w-6" />
-            </button>
-          ) : undefined}
+          <button
+            title="Remove tab"
+            onClick={() => props.removeTab()}
+            className={`${Styles.btn} ${Styles.tooltip} rounded-r-lg group-hover:h-auto group-hover:w-auto group-hover:scale-100 group-hover:p-2 peer-hover:h-auto peer-hover:w-auto peer-hover:scale-100 peer-hover:p-2 peer-focus:h-auto peer-focus:w-auto peer-focus:scale-100 peer-focus:p-2`}
+          >
+            <XMarkIcon className="h-6 w-6" />
+          </button>
         </>
       ) : (
         <input
           autoFocus
-          id="title"
           type="text"
-          name="title"
           value={title}
-          className={TabStyles.input}
+          className={Styles.input}
           style={{ width: `${title.length}rem` }}
           onChange={(event) => setTitle(event.target.value)}
           onBlur={(event) => {

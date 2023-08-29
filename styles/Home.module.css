@@ -11,7 +11,7 @@
 }
 
 .section {
-  @apply relative flex h-full w-full flex-col items-center justify-center rounded-lg px-12 py-20 shadow-sm md:p-20;
+  @apply relative flex h-full w-full flex-col items-center justify-center overflow-auto rounded-lg shadow-sm;
 }
 
 .nav {
@@ -19,7 +19,7 @@
 }
 
 .bar {
-  @apply flex w-fit items-center gap-4 rounded-3xl bg-white/60 p-6 shadow-sm backdrop-blur-3xl dark:bg-stone-800/60 dark:text-stone-200;
+  @apply grid w-full gap-4 rounded-3xl bg-white/60 p-6 shadow-sm backdrop-blur-3xl dark:bg-stone-800/60 dark:text-stone-200 md:flex md:items-center;
 }
 
 .brand {
@@ -31,7 +31,7 @@
 }
 
 .list {
-  @apply absolute left-0 top-full z-10 grid scale-0 gap-4 rounded-3xl bg-white p-6 text-sm shadow hover:scale-100 dark:bg-stone-800;
+  @apply absolute -left-8 top-full z-10 grid w-screen scale-0 gap-4 rounded-3xl bg-white p-6 text-sm shadow hover:scale-100 dark:bg-stone-800 md:w-auto;
 }
 
 .listItem {

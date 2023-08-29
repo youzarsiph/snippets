@@ -3,5 +3,5 @@
 }
 
 .input {
-  @apply block h-fit w-fit bg-transparent outline-none;
+  @apply block max-h-fit max-w-fit bg-transparent font-semibold outline-none;
 }

@@ -47,5 +47,5 @@
 }
 
 .footer {
-  @apply flex items-center justify-between gap-4 rounded-b-xl bg-white/80 px-4 py-3 font-sans text-sm dark:bg-stone-900/80 dark:text-stone-200;
+  @apply flex items-center justify-between gap-4 rounded-b-xl bg-white/80 px-4 py-3 font-sans font-semibold text-xs dark:bg-stone-900/80 dark:text-stone-200;
 }
