@@ -15,7 +15,7 @@
 }
 
 .snippet-action-tooltip {
-  @apply absolute -top-12 scale-0 rounded-xl bg-white/80 px-4 py-2 text-sm shadow-lg group-hover:scale-100 group-focus:scale-100 dark:bg-stone-800/80;
+  @apply absolute -top-12 scale-0 rounded-xl bg-white px-4 py-2 text-sm shadow-lg group-hover:scale-100 group-focus:scale-100 dark:bg-stone-800;
 }
 
 .snippet-menu {

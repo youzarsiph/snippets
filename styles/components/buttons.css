@@ -27,5 +27,5 @@
 }
 
 .buttons-menu {
-  @apply grid gap-8 peer-hover:scale-100 peer-focus:scale-100;
+  @apply -top-14 peer-hover:scale-100 peer-focus:scale-100;
 }

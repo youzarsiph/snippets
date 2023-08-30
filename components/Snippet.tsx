@@ -19,8 +19,8 @@ import "../styles/components/snippet.css";
 
 const Snippet = (props: { tabs: TabType[] }) => {
   // Buttons
-  const [style, setStyle] = React.useState<string>("mac");
-  const [position, setPosition] = React.useState<string>("left");
+  const [style, setStyle] = React.useState<boolean>(true);
+  const [position, setPosition] = React.useState<boolean>(true);
 
   // Programming language
   const [lang, setLang] = React.useState<string>("plaintext");
@@ -207,12 +207,12 @@ const Snippet = (props: { tabs: TabType[] }) => {
   const Header = () => (
     <header className={"snippet-header"}>
       <div className={"snippet-tabs"}>
-        {position === "left" ? (
+        {position ? (
           <Buttons
             style={style}
             position={position}
-            setStyle={(value) => setStyle(value)}
-            setPosition={(value) => setPosition(value)}
+            toggleStyle={() => setStyle(!style)}
+            togglePosition={() => setPosition(!position)}
             toggleLineNumbers={() => setDisplayLN(!displayLN)}
           />
         ) : undefined}
@@ -250,7 +250,7 @@ const Snippet = (props: { tabs: TabType[] }) => {
           <span className={"snippet-action-tooltip"}>New tab</span>
         </button>
 
-        {tabs.length !== 0 ? (
+        {tabs.length >= 2 ? (
           <>
             <button
               type="button"
@@ -267,7 +267,7 @@ const Snippet = (props: { tabs: TabType[] }) => {
             <button
               type="button"
               onClick={() => Callbacks.nextTab()}
-              className={`group ${"snippet-actionBtn"}`}
+              className={"snippet-action-btn group"}
               disabled={
                 tabs.length === 0 ||
                 tabs.length === 1 ||
@@ -281,12 +281,12 @@ const Snippet = (props: { tabs: TabType[] }) => {
         ) : undefined}
       </div>
 
-      {position === "right" ? (
+      {!position ? (
         <Buttons
           style={style}
           position={position}
-          setStyle={(value) => setStyle(value)}
-          setPosition={(value) => setPosition(value)}
+          toggleStyle={() => setStyle(!style)}
+          togglePosition={() => setPosition(!position)}
           toggleLineNumbers={() => setDisplayLN(!displayLN)}
         />
       ) : undefined}

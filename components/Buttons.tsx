@@ -12,16 +12,16 @@ import "../styles/components/buttons.css";
 import "../styles/components/snippet.css";
 
 const Buttons = (props: {
-  style: string;
-  setStyle: (value: string) => void;
-  position: string;
-  setPosition: (value: string) => void;
+  style: boolean;
+  position: boolean;
+  toggleStyle: () => void;
+  togglePosition: () => void;
   toggleLineNumbers: () => void;
 }) =>
-  props.style === "mac" ? (
+  props.style ? (
     <div
       className={`buttons-container${
-        props.position === "right" ? " flex-row-reverse" : ""
+        !props.position ? " flex-row-reverse" : ""
       }`}
     >
       <div className={"buttons-btn-container"}>
@@ -29,95 +29,58 @@ const Buttons = (props: {
           onClick={() => props.toggleLineNumbers()}
           className={"buttons-btn buttons-red peer"}
         ></button>
-      </div>
-
-      <div className={"buttons-btn-container"}>
-        <button className={"buttons-btn buttons-yellow peer"}></button>
-        <div className={"snippet-action-tooltip snippet-menu buttons-menu"}>
-          <h2 className="text-lg">Style</h2>
-
-          <div className="flex items-center gap-4">
-            <label htmlFor="style">Style</label>
-            <select
-              id="style"
-              value={props.style}
-              className="bg-transparent"
-              onChange={(event) => props.setStyle(event.target.value)}
-            >
-              <option value="mac">Mac</option>
-              <option value="windows">Windows</option>
-            </select>
-          </div>
+        <div className={"snippet-action-tooltip buttons-menu"}>
+          <h2 className="text-sm">Line numbers</h2>
         </div>
       </div>
 
       <div className={"buttons-btn-container"}>
-        <button className={"buttons-btn buttons-green peer"}></button>
-        <div className={"snippet-action-tooltip snippet-menu buttons-menu"}>
-          <h2 className="text-lg">Position</h2>
+        <button
+          onClick={() => props.toggleStyle()}
+          className={"buttons-btn buttons-yellow peer"}
+        ></button>
+        <div className={"snippet-action-tooltip buttons-menu"}>
+          <h2 className="text-sm">Style</h2>
+        </div>
+      </div>
 
-          <div className="flex items-center gap-4">
-            <label htmlFor="position">Position</label>
-            <select
-              id="position"
-              value={props.position}
-              className="bg-transparent"
-              onChange={(event) => props.setPosition(event.target.value)}
-            >
-              <option value="left">Left</option>
-              <option value="right">Right</option>
-            </select>
-          </div>
+      <div className={"buttons-btn-container"}>
+        <button
+          onClick={() => props.togglePosition()}
+          className={"buttons-btn buttons-green peer"}
+        ></button>
+        <div className={"snippet-action-tooltip buttons-menu"}>
+          <h2 className="text-sm">Position</h2>
         </div>
       </div>
     </div>
   ) : (
     <div
-      className={`buttons-container}${
-        props.position === "left" ? " flex-row-reverse" : ""
+      className={`buttons-container${
+        props.position ? " flex-row-reverse" : ""
       }`}
     >
       <div className={"buttons-btn-container"}>
-        <button className={`buttons-win-btn peer`}>
+        <button
+          className={`buttons-win-btn peer`}
+          onClick={() => props.togglePosition()}
+        >
           <MinusIcon className="h-4 w-4" />
         </button>
-        <div className={"snippet-action-tooltip snippet-menu buttons-menu"}>
-          <h2 className="text-lg">Style</h2>
-
-          <div className="flex items-center gap-4">
-            <label htmlFor="style">Style</label>
-            <select
-              id="style"
-              value={props.style}
-              className="bg-transparent"
-              onChange={(event) => props.setStyle(event.target.value)}
-            >
-              <option value="mac">Mac</option>
-              <option value="windows">Windows</option>
-            </select>
-          </div>
+        <div className={"snippet-action-tooltip buttons-menu"}>
+          <h2 className="text-sm">Position</h2>
         </div>
       </div>
 
       <div className={"buttons-btn-container"}>
-        <button className={`buttons-win-btn peer`}>
+        <button
+          className={`buttons-win-btn peer`}
+          onClick={() => props.toggleStyle()}
+        >
           <Square2StackIcon className="h-4 w-4" />
         </button>
-        <div className={"snippet-action-tooltip snippet-menu buttons-menu"}>
-          <h2 className="text-lg">Position</h2>
-
-          <div className="flex items-center gap-4">
-            <label htmlFor="position">Position</label>
-            <select
-              id="position"
-              value={props.position}
-              className="bg-transparent"
-              onChange={(event) => props.setPosition(event.target.value)}
-            >
-              <option value="left">Left</option>
-              <option value="right">Right</option>
-            </select>
-          </div>
+        <div className={"snippet-action-tooltip buttons-menu"}>
+          <h2 className="text-sm">Style</h2>
         </div>
       </div>
 
@@ -128,6 +91,9 @@ const Buttons = (props: {
         >
           <XMarkIcon className="h-4 w-4" />
         </button>
+        <div className={"snippet-action-tooltip buttons-menu"}>
+          <h2 className="text-sm">Line numbers</h2>
+        </div>
       </div>
     </div>
   );
