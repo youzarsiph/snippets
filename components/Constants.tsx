@@ -3,7 +3,77 @@
  */
 
 const Constants = {
-  themes: [
+  fonts: [
+    {
+      label: "Fira Code",
+      link: "https://fonts.googleapis.com/css2?family=Fira+Code",
+    },
+    {
+      label: "Fira Mono",
+      link: "https://fonts.googleapis.com/css2?family=Fira+Mono",
+    },
+    {
+      label: "JetBrains Mono",
+      link: "https://fonts.googleapis.com/css2?family=JetBrains+Mono",
+    },
+    {
+      label: "IBM Plex Mono",
+      link: "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono",
+    },
+    {
+      label: "Red Hat Mono",
+      link: "https://fonts.googleapis.com/css2?family=Red+Hat+Mono",
+    },
+    {
+      label: "Ubuntu Mono",
+      link: "https://fonts.googleapis.com/css2?family=Ubuntu+Mono",
+    },
+    {
+      label: "Roboto Mono",
+      link: "https://fonts.googleapis.com/css2?family=Roboto+Mono",
+    },
+    {
+      label: "Source Code Pro",
+      link: "https://fonts.googleapis.com/css2?family=Source+Code+Pro",
+    },
+    {
+      label: "B612 Mono",
+      link: "https://fonts.googleapis.com/css2?family=B612+Mono",
+    },
+    {
+      label: "Fragment Mono",
+      link: "https://fonts.googleapis.com/css2?family=Fragment+Mono",
+    },
+    {
+      label: "Monomaniac One",
+      link: "https://fonts.googleapis.com/css2?family=Monomaniac+One",
+    },
+    {
+      label: "Noto Sans Mono",
+      link: "https://fonts.googleapis.com/css2?family=Noto+Sans+Mono",
+    },
+    {
+      label: "Nova Mono",
+      link: "https://fonts.googleapis.com/css2?family=Nova+Mono",
+    },
+    {
+      label: "Oxygen Mono",
+      link: "https://fonts.googleapis.com/css2?family=Oxygen+Mono",
+    },
+    {
+      label: "Share Tech Mono",
+      link: "https://fonts.googleapis.com/css2?family=Share+Tech+Mono",
+    },
+    {
+      label: "Spline Sans Mono",
+      link: "https://fonts.googleapis.com/css2?family=Spline+Sans+Mono",
+    },
+    {
+      label: "Victor Mono",
+      link: "https://fonts.googleapis.com/css2?family=Victor+Mono",
+    },
+  ],
+  highlights: [
     "a11y-dark",
     "a11y-light",
     "agate",

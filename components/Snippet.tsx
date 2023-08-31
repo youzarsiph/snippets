@@ -17,7 +17,7 @@ import Buttons from "./Buttons";
 import type { TabType } from "@/types";
 import "../styles/components/snippet.css";
 
-const Snippet = (props: { tabs: TabType[] }) => {
+const Snippet = (props: { tabs: TabType[]; font: string }) => {
   // Buttons
   const [style, setStyle] = React.useState<boolean>(true);
   const [position, setPosition] = React.useState<boolean>(true);
@@ -343,7 +343,7 @@ const Snippet = (props: { tabs: TabType[] }) => {
   let count = 0;
 
   return (
-    <article className={"snippet-container"}>
+    <article className={"snippet-container"} style={{ fontFamily: props.font }}>
       <Header />
 
       <main className={"snippet-main"}>

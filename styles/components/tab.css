@@ -11,7 +11,7 @@
 }
 
 .tab-btn {
-  @apply h-full rounded-r-lg p-2 font-sans hover:rounded-none hover:bg-white/75 active:bg-white/80 dark:hover:bg-stone-800/75 dark:active:bg-stone-800/80;
+  @apply h-full rounded-r-lg p-2 font-[inherit] hover:rounded-none hover:bg-white/75 active:bg-white/80 dark:hover:bg-stone-800/75 dark:active:bg-stone-800/80;
 }
 
 .tab-tooltip {
@@ -19,5 +19,5 @@
 }
 
 .tab-input {
-  @apply block w-fit rounded-lg bg-transparent px-2 py-1 font-sans outline-none;
+  @apply block w-fit rounded-lg bg-transparent px-2 py-1 font-[inherit] outline-none;
 }

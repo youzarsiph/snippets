@@ -9,7 +9,6 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import "../styles/components/buttons.css";
-import "../styles/components/snippet.css";
 
 const Buttons = (props: {
   style: boolean;

@@ -3,11 +3,11 @@
 }
 
 .snippet-header {
-  @apply flex w-full items-center justify-between gap-16 whitespace-nowrap rounded-t-xl bg-white/80 px-4 dark:bg-stone-900/80;
+  @apply flex w-full items-center justify-between gap-16 whitespace-nowrap rounded-t-xl bg-white/80 px-4 font-[inherit] dark:bg-stone-900/80;
 }
 
 .snippet-tabs {
-  @apply flex w-full items-center gap-8;
+  @apply flex w-full items-center gap-8 font-[inherit];
 }
 
 .snippet-action-btn {
@@ -15,39 +15,39 @@
 }
 
 .snippet-action-tooltip {
-  @apply absolute -top-12 scale-0 rounded-xl bg-white px-4 py-2 text-sm shadow-lg group-hover:scale-100 group-focus:scale-100 dark:bg-stone-800;
+  @apply absolute -top-12 scale-0 rounded-xl bg-white px-4 py-2 font-[inherit] text-sm shadow-lg group-hover:scale-100 group-focus:scale-100 dark:bg-stone-800;
 }
 
 .snippet-menu {
-  @apply -right-12 top-full z-10 rounded-3xl bg-white p-6 hover:scale-100 dark:bg-stone-800 dark:text-stone-200 md:-left-12 md:right-auto;
+  @apply -right-12 top-full z-10 rounded-3xl bg-white p-6 font-[inherit] hover:scale-100 dark:bg-stone-800 dark:text-stone-200 md:-left-12 md:right-auto;
 }
 
 .snippet-main {
-  @apply min-w-max bg-white/75 p-4 dark:bg-stone-800/75 dark:text-stone-200;
+  @apply min-w-max bg-white/75 p-4 font-[inherit] dark:bg-stone-800/75 dark:text-stone-200;
 }
 
 .snippet-main-section {
-  @apply flex gap-4 font-mono;
+  @apply flex gap-4 font-[inherit];
 }
 
 .snippet-line-numbers {
-  @apply grid w-4 text-center;
+  @apply grid w-4 text-center font-[inherit];
 }
 
 .snippet-code-container {
-  @apply w-full whitespace-pre-wrap bg-transparent outline-none;
+  @apply w-full whitespace-pre-wrap bg-transparent font-[inherit] outline-none;
 }
 
 .snippet-editor-container {
-  @apply w-full min-w-max;
+  @apply w-full min-w-max font-[inherit];
 }
 
 .snippet-editor {
-  @apply absolute inset-0 z-[1px] h-full min-h-full w-full min-w-full resize-none overflow-hidden whitespace-pre-wrap bg-transparent text-transparent caret-stone-800 outline-none dark:caret-white;
+  @apply absolute inset-0 z-[1px] h-full min-h-full w-full min-w-full resize-none overflow-hidden whitespace-pre-wrap bg-transparent font-[inherit] text-transparent caret-stone-800 outline-none dark:caret-white;
 }
 
 .snippet-footer {
-  @apply flex items-center justify-between gap-4 rounded-b-xl bg-white/80 px-4 py-3 font-sans text-xs font-semibold dark:bg-stone-900/80 dark:text-stone-200;
+  @apply flex items-center justify-between gap-4 rounded-b-xl bg-white/80 px-4 py-3 font-[inherit] text-xs font-semibold dark:bg-stone-900/80 dark:text-stone-200;
 }
 
 .snippet-image {

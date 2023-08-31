@@ -8,6 +8,7 @@ import {
   Bars2Icon,
   CubeTransparentIcon,
   DocumentArrowDownIcon,
+  LanguageIcon,
   MoonIcon,
   SunIcon,
   SwatchIcon,
@@ -30,6 +31,11 @@ const Home = () => {
   // Theme
   const [theme, setTheme] = React.useState<boolean>(false);
   const [codeTheme, setCodeTheme] = React.useState<string>("github-dark");
+
+  // Font
+  const [font, setFont] = React.useState<{ label: string; link: string }>(
+    Constants.fonts[0]
+  );
 
   // Container Size
   const [size, setSize] = React.useState<{
@@ -73,7 +79,10 @@ const Home = () => {
 
     switch (format) {
       case "svg":
-        toSvg(ref.current, { cacheBust: true, quality: 1 })
+        toSvg(ref.current, {
+          cacheBust: true,
+          quality: 1,
+        })
           .then((dataUrl) => {
             const link = document.createElement("a");
             link.download = "snippet.svg";
@@ -86,7 +95,10 @@ const Home = () => {
         break;
 
       case "jpeg":
-        toJpeg(ref.current, { cacheBust: true, quality: 1 })
+        toJpeg(ref.current, {
+          cacheBust: true,
+          quality: 1,
+        })
           .then((dataUrl: string) => {
             const link = document.createElement("a");
             link.download = "snippet.jpeg";
@@ -99,7 +111,10 @@ const Home = () => {
         break;
 
       default:
-        toPng(ref.current, { cacheBust: true, quality: 1 })
+        toPng(ref.current, {
+          cacheBust: true,
+          quality: 1,
+        })
           .then((dataUrl) => {
             const link = document.createElement("a");
             link.download = "snippet.png";
@@ -114,16 +129,6 @@ const Home = () => {
   }, []);
 
   React.useEffect(() => hljs.highlightAll(), []);
-
-  // Code snippets
-  const tabs: TabType[] = [
-    // {
-    //   active: true,
-    //   title: "Untitled",
-    //   language: "plaintext",
-    //   code: "Type your code here\n",
-    // },
-  ];
 
   const Menu = () => {
     const [displayMenu, setDisplayMenu] = React.useState<boolean>(false);
@@ -320,8 +325,28 @@ const Home = () => {
                   className="w-full bg-transparent outline-none"
                   onChange={(event) => setCodeTheme(event.target.value)}
                 >
-                  {Constants.themes.map((i) => (
-                    <option key={i}>{i}</option>
+                  {Constants.highlights.map((i) => (
+                    <option key={i} value={i}>
+                      {i}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="flex w-full items-center gap-4">
+                <label htmlFor="font">
+                  <LanguageIcon className="h-6 w-6" />
+                </label>
+                <select
+                  id="font"
+                  value={JSON.stringify(font)}
+                  className="w-full bg-transparent outline-none"
+                  onChange={(event) => setFont(JSON.parse(event.target.value))}
+                >
+                  {Constants.fonts.map((i) => (
+                    <option key={i.label} value={JSON.stringify(i)}>
+                      {i.label}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -354,12 +379,19 @@ const Home = () => {
 
   return (
     <>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link
+        rel="preconnect"
+        crossOrigin="anonymous"
+        href="https://fonts.gstatic.com"
+      />
+      <link rel="stylesheet" href={`${font.link}&display=swap`} />
       <link
         rel="stylesheet"
         href={`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/${codeTheme}.min.css`}
       />
 
-      <div className={`${theme ? "dark " : ""}${"home-container"}`}>
+      <div className={`home-container ${theme ? "dark " : ""}`}>
         <Background />
 
         <div className={"home-screen"}>
@@ -401,7 +433,7 @@ const Home = () => {
               >
                 {displayOwner ? <Account /> : undefined}
 
-                <Snippet tabs={tabs} />
+                <Snippet tabs={[]} font={font.label} />
               </section>
             </div>
 
