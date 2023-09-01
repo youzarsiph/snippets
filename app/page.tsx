@@ -30,7 +30,7 @@ import {
 const Home = () => {
   // Theme
   const [theme, setTheme] = React.useState<boolean>(false);
-  const [codeTheme, setCodeTheme] = React.useState<string>("github-dark");
+  const [codeTheme, setCodeTheme] = React.useState<string>("github");
 
   // Font
   const [font, setFont] = React.useState<{ label: string; link: string }>(
@@ -165,11 +165,7 @@ const Home = () => {
                   <XMarkIcon className="absolute h-6 w-6 scale-0 group-hover:scale-100 group-focus:scale-100" />
                 </button>
 
-                <ul
-                  className={
-                    "home-list peer-hover:scale-100 peer-focus:scale-100 md:min-w-[30rem]"
-                  }
-                >
+                <ul className={"home-list md:min-w-[30rem]"}>
                   <li className={"home-list-item"}>
                     <ArrowsPointingOutIcon className="h-6 w-6" />
                     <h2 className="text-lg">Size</h2>
@@ -263,11 +259,7 @@ const Home = () => {
                   <DocumentArrowDownIcon className="h-6 w-6" />
                 </button>
 
-                <ul
-                  className={
-                    "home-list peer-hover:scale-100 peer-focus:scale-100"
-                  }
-                >
+                <ul className={"home-list"}>
                   {Constants.formats.map((i) => (
                     <li key={i} className={"home-list-item"}>
                       <button
@@ -391,7 +383,7 @@ const Home = () => {
         href={`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/${codeTheme}.min.css`}
       />
 
-      <div className={`home-container ${theme ? "dark " : ""}`}>
+      <div className={`home-container${theme ? " dark " : ""}`}>
         <Background />
 
         <div className={"home-screen"}>
@@ -399,8 +391,8 @@ const Home = () => {
             <Menu />
 
             <div
+              className="relative h-fit w-fit"
               ref={format === "svg" ? ref : undefined}
-              className="relative h-fit w-full lg:w-fit"
               style={
                 size.name === Constants.container.size[1]?.name
                   ? size.value
@@ -433,11 +425,14 @@ const Home = () => {
               >
                 {displayOwner ? <Account /> : undefined}
 
-                <Snippet tabs={[]} font={font.label} />
+                <Snippet font={font.label} tabs={[]} />
               </section>
             </div>
 
-            <section className="fixed bottom-2">
+            <section
+              className="fixed bottom-2"
+              style={{ fontFamily: font.label }}
+            >
               <div className="relative h-full w-full px-8 py-4">
                 <div className="absolute inset-0 -z-10 rounded-b-lg rounded-t-xl bg-white/40 ring-1 ring-white/95 backdrop-blur-3xl dark:bg-stone-800/40 dark:ring-stone-800/95"></div>
 

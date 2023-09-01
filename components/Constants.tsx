@@ -45,10 +45,6 @@ const Constants = {
       link: "https://fonts.googleapis.com/css2?family=Fragment+Mono",
     },
     {
-      label: "Monomaniac One",
-      link: "https://fonts.googleapis.com/css2?family=Monomaniac+One",
-    },
-    {
       label: "Noto Sans Mono",
       link: "https://fonts.googleapis.com/css2?family=Noto+Sans+Mono",
     },
@@ -67,10 +63,6 @@ const Constants = {
     {
       label: "Spline Sans Mono",
       link: "https://fonts.googleapis.com/css2?family=Spline+Sans+Mono",
-    },
-    {
-      label: "Victor Mono",
-      link: "https://fonts.googleapis.com/css2?family=Victor+Mono",
     },
   ],
   highlights: [
@@ -425,6 +417,84 @@ const Constants = {
     ],
   },
   formats: ["svg", "png", "jpeg"],
+  samples: [
+    {
+      active: true,
+      title: "views.py",
+      language: "python",
+      code: `""" Views """
+
+
+from django.shortcuts import render
+from django.http import HttpRequest, HttpResponse
+
+
+# Create your views here.
+def snippets(request: HttpRequest) -> HttpResponse:
+  """Create beautiful images of your code snippets"""
+
+  return render(request, "snippets/index.html")
+`,
+    },
+    {
+      active: true,
+      title: "Snippets.tsx",
+      language: "typescript",
+      code: `import React from "react";
+      
+const Snippets = () => (
+  <section className="grid gap-4 rounded-xl bg-white/75 p-4 ring-1 ring-white/95">
+    <h1 className="text-4xl font-semibold">Snippets</h1>
+    <p className="text-xl font-thin">
+      Create beautiful images of your code snippets!
+    </p>
+  </section>
+);
+
+export default Snippets;
+`,
+    },
+    {
+      active: true,
+      title: "snippets.css",
+      language: "css",
+      code: `.snippet {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+`,
+    },
+    {
+      active: true,
+      title: "MainActivity.kt",
+      language: "kotlin",
+      code: `package com.youzarsiph.snippets
+
+import ...
+
+class MainActivity : ComponentActivity() {
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContent {
+      SnippetsTheme {
+        Column(modifier = Modifier.fillMaxSize()) {
+          Text(text = "Snippets", style = MaterialTheme.typography.displayLarge)
+          Text(
+            text = "Create beautiful images of your code snippets!",
+            style = MaterialTheme.typography.bodyLarge
+          )
+        }
+      }
+    }
+  }
+}
+`,
+    },
+  ],
 };
 
 export default Constants;
