@@ -1,0 +1,15 @@
+.author-container {
+  @apply fixed bottom-2;
+}
+
+.author-main {
+  @apply relative h-full w-full px-8 py-4;
+}
+
+.author-bg {
+  @apply absolute inset-0 -z-10 rounded-b-lg rounded-t-xl bg-white/75 ring-1 ring-white backdrop-blur-3xl dark:bg-stone-800/75 dark:ring-stone-800/95;
+}
+
+.author-link {
+  @apply font-semibold hover:text-stone-400;
+}

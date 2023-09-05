@@ -1,39 +1,39 @@
-.home-container {
+.editor-container {
   @apply block h-screen w-screen;
 }
 
-.home-screen {
+.editor-screen {
   @apply flex h-full w-full items-center justify-center overflow-auto p-2 lg:p-4;
 }
 
-.home-main {
+.editor-main {
   @apply relative flex h-full w-full items-center justify-center py-32;
 }
 
-.home-section {
+.editor-section {
   @apply relative flex h-full w-full flex-col items-center justify-center overflow-auto rounded-lg shadow-sm;
 }
 
-.home-nav {
+.editor-nav {
   @apply absolute inset-x-0 top-0 z-20;
 }
 
-.home-bar {
-  @apply grid w-full gap-4 rounded-3xl bg-white/60 p-6 shadow-sm backdrop-blur-3xl dark:bg-stone-800/60 dark:text-stone-200 md:flex md:items-center;
+.editor-bar {
+  @apply grid w-full gap-4 rounded-3xl bg-white/80 p-6 shadow-sm backdrop-blur-3xl dark:bg-stone-800/75 dark:text-stone-200 md:flex md:items-center;
 }
 
-.home-brand {
+.editor-brand {
   @apply text-2xl font-bold;
 }
 
-.home-menu {
-  @apply relative flex h-10 w-10 items-center justify-center rounded-3xl p-2 font-semibold hover:bg-white/75 dark:hover:bg-stone-800/75;
+.editor-menu {
+  @apply relative flex h-10 w-10 items-center justify-center rounded-3xl p-2 font-semibold hover:bg-white/80 dark:hover:bg-stone-800/75;
 }
 
-.home-list {
+.editor-list {
   @apply absolute -left-8 top-full z-10 grid w-screen scale-0 gap-4 rounded-3xl bg-white p-6 text-sm shadow hover:scale-100 peer-hover:scale-100 peer-focus:scale-100  dark:bg-stone-800 md:w-auto;
 }
 
-.home-list-item {
+.editor-list-item {
   @apply flex w-full items-center gap-4;
 }

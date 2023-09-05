@@ -19,7 +19,7 @@ import Buttons from "./Buttons";
 import type { TabType } from "@/types";
 import "../styles/components/snippet.css";
 
-const Snippet = (props: { tabs: TabType[]; font: string }) => {
+const Snippet = (props: { tabs: TabType[] }) => {
   // Buttons
   const [style, setStyle] = React.useState<boolean>(true);
   const [position, setPosition] = React.useState<boolean>(true);
@@ -39,7 +39,7 @@ const Snippet = (props: { tabs: TabType[]; font: string }) => {
           title: "Untitled",
           language: "plaintext",
           code: "Type tour code here.\n",
-        }
+        },
   );
 
   // Display line numbers
@@ -322,7 +322,7 @@ const Snippet = (props: { tabs: TabType[]; font: string }) => {
                     <option key={lang}>
                       {lang.replace(
                         lang.charAt(0),
-                        lang.charAt(0).toUpperCase()
+                        lang.charAt(0).toUpperCase(),
                       )}
                     </option>
                   ))}
@@ -345,7 +345,7 @@ const Snippet = (props: { tabs: TabType[]; font: string }) => {
   let count = 0;
 
   return (
-    <article className={"snippet-container"} style={{ fontFamily: props.font }}>
+    <article className={"snippet-container"}>
       <Header />
 
       <main className={"snippet-main"}>

@@ -4,66 +4,21 @@
 
 const Constants = {
   fonts: [
-    {
-      label: "Fira Code",
-      link: "https://fonts.googleapis.com/css2?family=Fira+Code",
-    },
-    {
-      label: "Fira Mono",
-      link: "https://fonts.googleapis.com/css2?family=Fira+Mono",
-    },
-    {
-      label: "JetBrains Mono",
-      link: "https://fonts.googleapis.com/css2?family=JetBrains+Mono",
-    },
-    {
-      label: "IBM Plex Mono",
-      link: "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono",
-    },
-    {
-      label: "Red Hat Mono",
-      link: "https://fonts.googleapis.com/css2?family=Red+Hat+Mono",
-    },
-    {
-      label: "Ubuntu Mono",
-      link: "https://fonts.googleapis.com/css2?family=Ubuntu+Mono",
-    },
-    {
-      label: "Roboto Mono",
-      link: "https://fonts.googleapis.com/css2?family=Roboto+Mono",
-    },
-    {
-      label: "Source Code Pro",
-      link: "https://fonts.googleapis.com/css2?family=Source+Code+Pro",
-    },
-    {
-      label: "B612 Mono",
-      link: "https://fonts.googleapis.com/css2?family=B612+Mono",
-    },
-    {
-      label: "Fragment Mono",
-      link: "https://fonts.googleapis.com/css2?family=Fragment+Mono",
-    },
-    {
-      label: "Noto Sans Mono",
-      link: "https://fonts.googleapis.com/css2?family=Noto+Sans+Mono",
-    },
-    {
-      label: "Nova Mono",
-      link: "https://fonts.googleapis.com/css2?family=Nova+Mono",
-    },
-    {
-      label: "Oxygen Mono",
-      link: "https://fonts.googleapis.com/css2?family=Oxygen+Mono",
-    },
-    {
-      label: "Share Tech Mono",
-      link: "https://fonts.googleapis.com/css2?family=Share+Tech+Mono",
-    },
-    {
-      label: "Spline Sans Mono",
-      link: "https://fonts.googleapis.com/css2?family=Spline+Sans+Mono",
-    },
+    "Fira+Code",
+    "Fira+Mono",
+    "JetBrains+Mono",
+    "IBM+Plex+Mono",
+    "Red+Hat+Mono",
+    "Ubuntu+Mono",
+    "Roboto+Mono",
+    "Source+Code+Pro",
+    "B612+Mono",
+    "Fragment+Mono",
+    "Noto+Sans+Mono",
+    "Nova+Mono",
+    "Oxygen+Mono",
+    "Share+Tech+Mono",
+    "Spline+Sans+Mono",
   ],
   highlights: [
     "a11y-dark",
@@ -443,7 +398,7 @@ def snippets(request: HttpRequest) -> HttpResponse:
       code: `import React from "react";
       
 const Snippets = () => (
-  <section className="grid gap-4 rounded-xl bg-white/75 p-4 ring-1 ring-white/95">
+  <section className="grid gap-4 rounded-xl bg-white/80 p-4 ring-1 ring-white">
     <h1 className="text-4xl font-semibold">Snippets</h1>
     <p className="text-xl font-thin">
       Create beautiful images of your code snippets!

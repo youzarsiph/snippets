@@ -1,5 +1,5 @@
 .snippet-container {
-  @apply grid min-w-max rounded-xl shadow-lg ring-1 ring-white/95 backdrop-blur-3xl dark:ring-stone-900/95;
+  @apply grid min-w-max rounded-xl shadow-lg ring-1 font-[inherit] ring-white backdrop-blur-3xl dark:ring-stone-900/95;
 }
 
 .snippet-header {
@@ -11,15 +11,11 @@
 }
 
 .snippet-action-btn {
-  @apply relative flex h-8 w-8 items-center justify-center rounded-xl hover:bg-white/80 active:bg-white/95 disabled:opacity-50 disabled:hover:bg-transparent disabled:active:bg-transparent dark:text-stone-200 dark:hover:bg-stone-800/80 dark:active:bg-stone-800/95;
+  @apply relative flex h-8 w-8 items-center hover:ring-1 hover:ring-white dark:hover:ring-stone-900/95 justify-center rounded-lg hover:bg-white/80 active:bg-white/95 disabled:opacity-50 disabled:hover:bg-transparent disabled:active:bg-transparent dark:text-stone-200 dark:hover:bg-stone-800/80 dark:active:bg-stone-800/95;
 }
 
 .snippet-action-tooltip {
   @apply absolute -top-12 scale-0 rounded-xl bg-white px-4 py-2 font-[inherit] text-sm shadow-lg group-hover:scale-100 group-focus:scale-100 dark:bg-stone-800;
-}
-
-.snippet-menu {
-  @apply -right-12 top-full z-10 rounded-3xl bg-white p-6 font-[inherit] hover:scale-100 dark:bg-stone-800 dark:text-stone-200 md:-left-12 md:right-auto;
 }
 
 .snippet-main {
@@ -51,5 +47,5 @@
 }
 
 .snippet-image {
-  @apply z-10 h-6 w-6 cursor-pointer rounded bg-white/75 p-1 dark:bg-stone-800/75;
+  @apply z-10 h-6 w-6 cursor-pointer rounded bg-white/80 p-1 dark:bg-stone-800/75;
 }

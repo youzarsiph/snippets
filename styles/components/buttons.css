@@ -23,7 +23,7 @@
 }
 
 .buttons-win-btn {
-  @apply flex h-8 w-8 items-center justify-center rounded-lg hover:bg-white/75 active:scale-95 active:bg-white/80 dark:text-stone-200 dark:hover:bg-stone-700/75 dark:active:bg-stone-700/80;
+  @apply flex h-8 w-8 items-center justify-center rounded-lg hover:bg-white/80 active:scale-95 active:bg-white/80 dark:text-stone-200 dark:hover:bg-stone-700/75 dark:active:bg-stone-700/80;
 }
 
 .buttons-menu {

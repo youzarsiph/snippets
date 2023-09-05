@@ -3,15 +3,15 @@
 }
 
 .tab-image {
-  @apply h-8 w-8 rounded bg-white/75 p-1 dark:bg-stone-900/75;
+  @apply h-8 w-8 rounded bg-white/80 p-1 dark:bg-stone-900/75;
 }
 
 .tab-active {
-  @apply bg-white/60 ring-1 ring-white/95 dark:bg-stone-800/60 dark:ring-stone-900/95;
+  @apply bg-white/80 ring-1 ring-white dark:bg-stone-800/75 dark:ring-stone-900/95;
 }
 
 .tab-btn {
-  @apply h-full rounded-r-lg p-2 font-[inherit] hover:rounded-none hover:bg-white/75 active:bg-white/80 dark:hover:bg-stone-800/75 dark:active:bg-stone-800/80;
+  @apply h-full rounded-r-lg p-2 font-[inherit] hover:rounded-none hover:bg-white/80 active:bg-white/80 dark:hover:bg-stone-800/75 dark:active:bg-stone-800/80;
 }
 
 .tab-tooltip {
