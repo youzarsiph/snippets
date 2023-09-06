@@ -126,8 +126,6 @@ const Editor = () => {
     }
   }, []);
 
-  React.useEffect(() => hljs.highlightAll(), []);
-
   const Menu = () => {
     const [displayMenu, setDisplayMenu] = React.useState<boolean>(false);
 
@@ -207,7 +205,7 @@ const Editor = () => {
                       </div>
 
                       <div className="grid gap-4">
-                        <h2 className="text-lg">Dark Colors</h2>
+                        <h2 className="text-lg">Background Colors</h2>
                         <div className="flex flex-wrap items-center gap-4">
                           {Constants.container.bg.colors.map((item, index) => (
                             <button
@@ -222,9 +220,7 @@ const Editor = () => {
                               } ${
                                 type.name === "linear" ? direction : ""
                               } ${item}${
-                                bg === item
-                                  ? " ring-4 ring-stone-800/95 ring-offset-2 dark:ring-white"
-                                  : ""
+                                bg === item ? " ring-4 ring-offset-2" : ""
                               }`}
                             ></button>
                           ))}
@@ -394,7 +390,7 @@ const Editor = () => {
             <Menu />
 
             <div
-              className="relative h-fit w-fit"
+              className="relative h-fit w-fit p-1"
               ref={format === "svg" ? ref : undefined}
               style={
                 size.name === Constants.container.size[1]?.name
@@ -415,21 +411,22 @@ const Editor = () => {
                 </>
               ) : undefined}
 
-              <section
-                style={size.value}
-                ref={format !== "svg" ? ref : undefined}
-                className={`editor-section${
-                  type.value !== "bg-gradient-to-tr" ? ` ${type.value}` : ""
-                }${
-                  type.name === "linear" && bg !== "bg-transparent"
-                    ? ` ${direction}`
-                    : ""
-                } ${bg} ${padding}`}
-              >
-                {displayOwner ? <Account /> : undefined}
+              <div className="p-1" ref={format !== "svg" ? ref : undefined}>
+                <section
+                  style={size.value}
+                  className={`editor-section${
+                    type.value !== "bg-gradient-to-tr" ? ` ${type.value}` : ""
+                  }${
+                    type.name === "linear" && bg !== "bg-transparent"
+                      ? ` ${direction}`
+                      : ""
+                  } ${bg} ${padding}`}
+                >
+                  {displayOwner ? <Account /> : undefined}
 
-                <Snippet tabs={[]} />
-              </section>
+                  <Snippet tabs={[]} />
+                </section>
+              </div>
             </div>
 
             <Author />

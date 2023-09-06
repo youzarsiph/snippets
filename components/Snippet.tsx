@@ -402,7 +402,7 @@ const Snippet = (props: { tabs: TabType[] }) => {
               </div>
             </>
           ) : (
-            <div className="grid gap-4 px-20 py-12">
+            <div className="grid gap-4 p-4 md:px-24 md:py-16 lg:px-32 lg:py-24">
               <div className="flex items-center gap-4">
                 <Logo />{" "}
                 <h1 className="font-sans text-2xl font-bold">Snippets</h1>
