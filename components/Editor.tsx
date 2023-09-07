@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import hljs from "highlight.js";
 import { toSvg, toPng, toJpeg } from "html-to-image";
 import {
   ArrowsPointingOutIcon,
@@ -33,7 +32,7 @@ const Editor = () => {
   const [codeTheme, setCodeTheme] = React.useState<string>("github");
 
   // Font
-  const [font, setFont] = React.useState<string>(Constants.fonts[0]);
+  const [font, setFont] = React.useState(Constants.fonts[0]);
 
   // Container Size
   const [size, setSize] = React.useState<{
@@ -325,13 +324,13 @@ const Editor = () => {
                 </label>
                 <select
                   id="font"
-                  value={font}
+                  value={JSON.stringify(font)}
                   className="w-full bg-transparent outline-none"
-                  onChange={(event) => setFont(event.target.value)}
+                  onChange={(event) => setFont(JSON.parse(event.target.value))}
                 >
                   {Constants.fonts.map((i) => (
-                    <option key={i} value={i}>
-                      {i.replaceAll("+", " ")}
+                    <option key={i.label} value={JSON.stringify(i)}>
+                      {i.label}
                     </option>
                   ))}
                 </select>
@@ -365,22 +364,10 @@ const Editor = () => {
 
   return (
     <>
-      <>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          crossOrigin="anonymous"
-          href="https://fonts.gstatic.com"
-        />
-        <link
-          rel="stylesheet"
-          href={`https://fonts.googleapis.com/css2?family=${font}&display=swap`}
-        />
-        <link
-          rel="stylesheet"
-          href={`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/${codeTheme}.min.css`}
-        />
-      </>
+      <link
+        rel="stylesheet"
+        href={`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/${codeTheme}.min.css`}
+      />
 
       <div className={`editor-container${theme ? " dark " : ""}`}>
         <Background />
@@ -390,12 +377,12 @@ const Editor = () => {
             <Menu />
 
             <div
-              className="relative h-fit w-fit p-1"
+              className={`relative h-fit w-fit p-1 ${font.value.className}`}
               ref={format === "svg" ? ref : undefined}
               style={
                 size.name === Constants.container.size[1]?.name
-                  ? { ...size.value, fontFamily: font.replaceAll("+", " ") }
-                  : { fontFamily: font.replaceAll("+", " ") }
+                  ? size.value
+                  : undefined
               }
             >
               {bg === Constants.container.bg.colors[0] ? (

@@ -2,23 +2,50 @@
  * Constants
  */
 
+import * as Fonts from "../app/fonts";
+
 const Constants = {
   fonts: [
-    "Fira+Code",
-    "Fira+Mono",
-    "JetBrains+Mono",
-    "IBM+Plex+Mono",
-    "Red+Hat+Mono",
-    "Ubuntu+Mono",
-    "Roboto+Mono",
-    "Source+Code+Pro",
-    "B612+Mono",
-    "Fragment+Mono",
-    "Noto+Sans+Mono",
-    "Nova+Mono",
-    "Oxygen+Mono",
-    "Share+Tech+Mono",
-    "Spline+Sans+Mono",
+    {
+      label: "Fira Code",
+      value: Fonts.fira_code,
+    },
+    {
+      label: "Fira Mono",
+      value: Fonts.fira_mono,
+    },
+    {
+      label: "JetBrains Mono",
+      value: Fonts.jet_brains_mono,
+    },
+    {
+      label: "Source Code Pro",
+      value: Fonts.source_code_pro,
+    },
+    {
+      label: "IBM Plex Mono",
+      value: Fonts.ibm_plex_mono,
+    },
+    {
+      label: "Red Hat Mono",
+      value: Fonts.red_hat_mono,
+    },
+    {
+      label: "Ubuntu Mono",
+      value: Fonts.ubuntu_mono,
+    },
+    {
+      label: "Nova Mono",
+      value: Fonts.nova_mono,
+    },
+    {
+      label: "Roboto Mono",
+      value: Fonts.roboto_mono,
+    },
+    {
+      label: "Share Tech Mono",
+      value: Fonts.share_tech_mono,
+    },
   ],
   highlights: [
     "a11y-dark",
