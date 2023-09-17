@@ -236,7 +236,6 @@ const Constants = {
     "base16/xcode-dusk",
     "base16/zenburn",
     "brown-paper",
-    "brown-papersq.png",
     "codepen-embed",
     "color-brewer",
     "dark",
