@@ -416,7 +416,7 @@ const Editor = () => {
               </div>
             </div>
 
-            <Author />
+            <Author font={font.value.className} />
           </main>
         </div>
 

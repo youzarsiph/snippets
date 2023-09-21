@@ -5,12 +5,12 @@
 import React from "react";
 import "../styles/components/author.css";
 
-const Author = () => (
+const Author = (props: { font: string }) => (
   <section className="author-container">
     <div className="author-main">
       <div className="author-bg"></div>
 
-      <p>
+      <p className={props.font}>
         Made by{" "}
         <a className="author-link" href="https://github.com/youzarsiph">
           @youzarsiph

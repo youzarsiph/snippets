@@ -277,7 +277,6 @@ const Constants = {
     "paraiso-dark",
     "paraiso-light",
     "pojoaque",
-    "pojoaque.jpg",
     "purebasic",
     "qtcreator-dark",
     "qtcreator-light",

@@ -11,5 +11,5 @@
 }
 
 .author-link {
-  @apply font-semibold hover:text-stone-400;
+  @apply font-[inherit] font-semibold hover:text-stone-400;
 }
