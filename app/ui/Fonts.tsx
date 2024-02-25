@@ -1,7 +1,3 @@
-/**
- * Fonts functions
- */
-
 import {
   Fira_Code,
   Fira_Mono,
@@ -17,8 +13,8 @@ import {
 
 const fira_code = Fira_Code({
   weight: "400",
-  subsets: ["latin"],
   display: "swap",
+  subsets: ["latin"],
   fallback: [
     "ui-monospace",
     "SFMono-Regular",
@@ -32,8 +28,8 @@ const fira_code = Fira_Code({
 });
 const fira_mono = Fira_Mono({
   weight: "400",
-  subsets: ["latin"],
   display: "swap",
+  subsets: ["latin"],
   fallback: [
     "ui-monospace",
     "SFMono-Regular",
@@ -45,10 +41,10 @@ const fira_mono = Fira_Mono({
     "monospace",
   ],
 });
-const jet_brains_mono = JetBrains_Mono({
+const jetbrains_mono = JetBrains_Mono({
   weight: "400",
-  subsets: ["latin"],
   display: "swap",
+  subsets: ["latin"],
   fallback: [
     "ui-monospace",
     "SFMono-Regular",
@@ -62,8 +58,8 @@ const jet_brains_mono = JetBrains_Mono({
 });
 const source_code_pro = Source_Code_Pro({
   weight: "400",
-  subsets: ["latin"],
   display: "swap",
+  subsets: ["latin"],
   fallback: [
     "ui-monospace",
     "SFMono-Regular",
@@ -77,8 +73,8 @@ const source_code_pro = Source_Code_Pro({
 });
 const ibm_plex_mono = IBM_Plex_Mono({
   weight: "400",
-  subsets: ["latin"],
   display: "swap",
+  subsets: ["latin"],
   fallback: [
     "ui-monospace",
     "SFMono-Regular",
@@ -92,8 +88,8 @@ const ibm_plex_mono = IBM_Plex_Mono({
 });
 const red_hat_mono = Red_Hat_Mono({
   weight: "400",
-  subsets: ["latin"],
   display: "swap",
+  subsets: ["latin"],
   fallback: [
     "ui-monospace",
     "SFMono-Regular",
@@ -107,8 +103,8 @@ const red_hat_mono = Red_Hat_Mono({
 });
 const ubuntu_mono = Ubuntu_Mono({
   weight: "400",
-  subsets: ["latin"],
   display: "swap",
+  subsets: ["latin"],
   fallback: [
     "ui-monospace",
     "SFMono-Regular",
@@ -122,8 +118,8 @@ const ubuntu_mono = Ubuntu_Mono({
 });
 const nova_mono = Nova_Mono({
   weight: "400",
-  subsets: ["latin"],
   display: "swap",
+  subsets: ["latin"],
   fallback: [
     "ui-monospace",
     "SFMono-Regular",
@@ -137,8 +133,8 @@ const nova_mono = Nova_Mono({
 });
 const roboto_mono = Roboto_Mono({
   weight: "400",
-  subsets: ["latin"],
   display: "swap",
+  subsets: ["latin"],
   fallback: [
     "ui-monospace",
     "SFMono-Regular",
@@ -152,8 +148,8 @@ const roboto_mono = Roboto_Mono({
 });
 const share_tech_mono = Share_Tech_Mono({
   weight: "400",
-  subsets: ["latin"],
   display: "swap",
+  subsets: ["latin"],
   fallback: [
     "ui-monospace",
     "SFMono-Regular",
@@ -166,15 +162,17 @@ const share_tech_mono = Share_Tech_Mono({
   ],
 });
 
-export {
-  fira_code,
-  fira_mono,
-  jet_brains_mono,
-  source_code_pro,
-  ibm_plex_mono,
-  red_hat_mono,
-  ubuntu_mono,
-  nova_mono,
-  roboto_mono,
-  share_tech_mono,
+const Fonts = {
+  "Fira Code": fira_code,
+  "Fira Mono": fira_mono,
+  "JetBrains Mono": jetbrains_mono,
+  "Source Code Pro": source_code_pro,
+  "IBM Plex Mono": ibm_plex_mono,
+  "Red Hat Mono": red_hat_mono,
+  "Ubuntu Mono": ubuntu_mono,
+  "Nova Mono": nova_mono,
+  "Roboto Mono": roboto_mono,
+  "Share Tech Mono": share_tech_mono,
 };
+
+export default Fonts;
