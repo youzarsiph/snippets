@@ -1,7 +1,3 @@
-/**
- * Logo in background
- */
-
 import React from "react";
 
 const Background = () => (

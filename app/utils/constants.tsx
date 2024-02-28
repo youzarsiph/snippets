@@ -1,8 +1,7 @@
-/**
- * Constants
- */
+import hljs from "highlight.js";
 
 const Constants = {
+  languages: hljs.listLanguages(),
   formats: ["svg", "png", "jpeg"],
   types: ["conic", "linear", "radial"],
   paddings: {
@@ -318,10 +317,10 @@ const Constants = {
   ],
   samples: [
     {
-      active: true,
-      title: "views.py",
+      isActive: true,
+      name: "views.py",
       language: "python",
-      code: `""" Views """
+      content: `""" Views """
 
 
 from django.shortcuts import render
@@ -336,10 +335,10 @@ def snippets(request: HttpRequest) -> HttpResponse:
 `,
     },
     {
-      active: true,
-      title: "Snippets.tsx",
+      isActive: true,
+      name: "Snippets.tsx",
       language: "typescript",
-      code: `import React from "react";
+      content: `import React from "react";
       
 const Snippets = () => (
   <section className="grid gap-4 rounded-xl bg-white/80 p-4 ring-1 ring-white">
@@ -354,10 +353,10 @@ export default Snippets;
 `,
     },
     {
-      active: true,
-      title: "snippets.css",
+      isActive: true,
+      name: "snippets.css",
       language: "css",
-      code: `.snippet {
+      content: `.snippet {
   width: 100%;
   height: 100%;
   display: flex;
@@ -368,10 +367,10 @@ export default Snippets;
 `,
     },
     {
-      active: true,
-      title: "MainActivity.kt",
+      isActive: true,
+      name: "MainActivity.kt",
       language: "kotlin",
-      code: `package com.youzarsiph.snippets
+      content: `package com.youzarsiph.snippets
 
 import ...
 

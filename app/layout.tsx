@@ -4,10 +4,12 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  viewport: "width=device-width, initial-scale=1.0",
-  title: "Sippets: Create beautiful images of your code snippets",
-  description:
-    "An app that allows users to create beautiful images of their code snippets",
+  metadataBase: new URL("https://snippets-gamma.vercel.app"),
+  title: "Sippets",
+  description: " Create beautiful images of your code snippets",
+  openGraph: {
+    images: "/og-image.png",
+  },
 };
 
 export default function RootLayout({
