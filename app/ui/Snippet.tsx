@@ -11,7 +11,7 @@ const Snippet = (props: {
   code: CodeSettings;
   buttons: { style: boolean; position: boolean };
   createTab: () => void;
-  editTab: (index: number) => void;
+  editTab: (index: number, name: string) => void;
   switchTab: (index: number) => void;
   deleteTab: (index: number) => void;
   onContentChange: (code: string) => void;
@@ -76,9 +76,9 @@ const Snippet = (props: {
                 <Tab
                   code={item}
                   key={`${item.name}-${idx}`}
-                  onTabUpdate={() => props.editTab(idx)}
                   onTabSwitch={() => props.switchTab(idx)}
                   onTabRemove={() => props.deleteTab(idx)}
+                  onTabUpdate={(n) => props.editTab(idx, n)}
                 />
               ))
             : undefined}

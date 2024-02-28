@@ -38,19 +38,19 @@ const Callbacks = {
   },
   renameTab: (
     tabs: Code[],
-    target: Code,
+    targetIndex: number,
     newName: string,
-    onChange: (result: Code[], active: Code) => void,
+    onChange: (result: Code[]) => void,
   ) => {
-    const temp = tabs.map((i) => {
-      if (i === target) {
+    const result = tabs.map((i, idx) => {
+      if (idx === targetIndex) {
         i.name = newName;
       }
 
       return i;
     });
 
-    onChange(temp, target);
+    onChange(result);
   },
   switchTab: (
     tabs: Code[],
@@ -58,7 +58,7 @@ const Callbacks = {
     onChange: (result: Code[]) => void,
   ) => {
     // Deactivate all tabs
-    const temp = tabs.map((i) => {
+    const result = tabs.map((i) => {
       if (i === target) {
         i.isActive = true;
       } else {
@@ -68,7 +68,7 @@ const Callbacks = {
       return i;
     });
 
-    onChange(temp);
+    onChange(result);
   },
 };
 

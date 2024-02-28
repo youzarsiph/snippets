@@ -9,7 +9,7 @@ const Tab = (props: {
   code: Code;
   onTabSwitch: () => void;
   onTabRemove: () => void;
-  onTabUpdate: (tab: Code, title: string) => void;
+  onTabUpdate: (name: string) => void;
 }) => {
   const [display, setDisplay] = React.useState<boolean>(true);
   const [title, setTitle] = React.useState<string>(props.code.name);
@@ -37,7 +37,9 @@ const Tab = (props: {
         <>
           <button
             title="Select tab"
+            onBlur={() => setDisplay(true)}
             onClick={() => props.onTabSwitch()}
+            onDoubleClick={() => setDisplay(false)}
             className="peer h-full rounded-r-lg p-2 hover:rounded-none hover:bg-white/80 active:bg-white/80 dark:hover:bg-stone-800/75 dark:active:bg-stone-800/80"
           >
             {title}
@@ -60,7 +62,7 @@ const Tab = (props: {
           onChange={(event) => setTitle(event.target.value)}
           onBlur={(event) => {
             setDisplay(true);
-            props.onTabUpdate(props.code, event.target.value);
+            props.onTabUpdate(event.target.value);
           }}
           className="block w-fit rounded-lg bg-transparent px-2 py-1 font-[inherit] outline-none"
         />

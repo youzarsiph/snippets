@@ -10,6 +10,18 @@ const Home = () => {
   // Target element
   const target = React.useRef(null);
 
+  // Container Settings
+  const [container, setContainer] = React.useState<ContainerSettings>({
+    theme: true,
+    size: "auto",
+    type: "linear",
+    padding: "64px",
+    isGradient: true,
+    direction: "top-right",
+    color: Constants.colors[0],
+    buttons: { style: true, position: true },
+  });
+
   // Code Settings
   const [code, setCode] = React.useState<CodeSettings>({
     active: 0,
@@ -22,7 +34,6 @@ const Home = () => {
         name: "views.py",
         language: "python",
         content: `""" Views """
-
 
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
@@ -43,18 +54,6 @@ def snippets(request: HttpRequest) -> HttpResponse:
     isVisible: false,
     name: "Your Name",
     username: "github.com/username",
-  });
-
-  // Container Settings
-  const [container, setContainer] = React.useState<ContainerSettings>({
-    theme: true,
-    size: "auto",
-    type: "linear",
-    padding: "64px",
-    isGradient: true,
-    direction: "top-right",
-    color: Constants.colors[0],
-    buttons: { style: true, position: true },
   });
 
   return (
@@ -150,7 +149,11 @@ def snippets(request: HttpRequest) -> HttpResponse:
                         }),
                       )
                     }
-                    editTab={() => {}}
+                    editTab={(idx, n) =>
+                      Callbacks.renameTab(code.tabs, idx, n, (c) =>
+                        setCode({ ...code, tabs: c }),
+                      )
+                    }
                     switchTab={(idx) => setCode({ ...code, active: idx })}
                     deleteTab={(idx) =>
                       Callbacks.removeTab(code.tabs, code.tabs[idx], (res) =>
