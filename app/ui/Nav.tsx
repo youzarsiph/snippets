@@ -46,8 +46,8 @@ const Nav = (props: {
     <nav className="relative z-20 order-last w-full lg:static lg:-order-none lg:h-full lg:w-auto">
       {/* Container Drawer */}
       <Drawer
+        title="Container"
         isVisible={display.container}
-        title="Container Settings"
         onDisplayChange={() =>
           setDisplay({
             account: false,
@@ -294,8 +294,8 @@ const Nav = (props: {
 
       {/* Code Drawer */}
       <Drawer
+        title="Code"
         isVisible={display.code}
-        title="Container Settings"
         onDisplayChange={() =>
           setDisplay({
             account: false,
@@ -386,8 +386,8 @@ const Nav = (props: {
 
       {/* Account Drawer */}
       <Drawer
+        title="Account"
         isVisible={display.account}
-        title="Container Settings"
         onDisplayChange={() =>
           setDisplay({
             account: false,
