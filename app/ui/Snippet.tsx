@@ -1,8 +1,6 @@
 import clsx from "clsx";
 import React from "react";
-import Image from "next/image";
 import hljs from "highlight.js";
-import { getIconForFile } from "vscode-icons-js";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { Buttons, Logo, Tab } from "@/app/ui";
 import type { CodeSettings } from "@/app/types";
@@ -18,59 +16,36 @@ const Snippet = (props: {
 }) => {
   React.useEffect(() => hljs.highlightAll(), [props.code]);
 
-  const Header = () => (
-    <header
-      className={clsx(
-        "relative flex w-full items-center gap-8 rounded-t-xl bg-white/85 px-4 dark:bg-stone-900/80",
-        {
-          "justify-between": !props.buttons.position,
-        },
-      )}
-    >
-      <div className="absolute inset-0 -z-10 rounded-3xl backdrop-blur-3xl"></div>
-
-      {!props.buttons.position ? (
-        <div className="-translate-x-6 scale-[60%]">
-          <Logo />
-        </div>
-      ) : undefined}
-
-      {props.buttons.position ? (
-        <Buttons
-          style={props.buttons.style}
-          position={props.buttons.position}
-        />
-      ) : undefined}
-
-      <div className="flex items-center gap-2">
-        <Image
-          width={16}
-          height={16}
-          className="h-6 w-6"
-          alt={`${getIconForFile(props.code.tabs[props.code.active].name)}`}
-          src={`icons/${getIconForFile(props.code.tabs[props.code.active].name)}`}
-        />
-        <p>{props.code.tabs[props.code.active].name}</p>
-      </div>
-
-      {!props.buttons.position ? (
-        <Buttons
-          style={props.buttons.style}
-          position={props.buttons.position}
-        />
-      ) : undefined}
-    </header>
-  );
-
   // Line number count
   let count = 0;
 
   return (
-    <article className="grid rounded-xl shadow-lg ring-1 ring-white backdrop-blur-3xl dark:ring-stone-900/95">
-      <Header />
+    <article className="relative  grid rounded-xl shadow-lg ring-1 ring-white backdrop-blur-3xl dark:ring-stone-900/95">
+      <div className="absolute inset-0 -z-10 rounded-3xl backdrop-blur-3xl"></div>
 
-      <div className="flex items-center gap-4 bg-white/85 shadow-xl ring-1 ring-white dark:bg-stone-900/80 dark:ring-stone-900">
-        <div className="flex items-center">
+      {/* Header */}
+      <header
+        className={clsx(
+          "flex w-full items-center gap-4 rounded-t-xl bg-white/85 px-4 dark:bg-stone-900/80",
+          {
+            "justify-between": !props.buttons.position,
+          },
+        )}
+      >
+        {!props.buttons.position ? (
+          <div className="-translate-x-6 scale-[60%]">
+            <Logo />
+          </div>
+        ) : undefined}
+
+        {props.buttons.position ? (
+          <Buttons
+            style={props.buttons.style}
+            position={props.buttons.position}
+          />
+        ) : undefined}
+
+        <div className="flex items-center gap-2">
           {props.code.tabs.length !== 0
             ? props.code.tabs.map((item, idx) => (
                 <Tab
@@ -82,20 +57,26 @@ const Snippet = (props: {
                 />
               ))
             : undefined}
+
+          <button
+            type="button"
+            onClick={() => props.createTab()}
+            className="flex h-8 w-8 items-center justify-center rounded-lg ring-1 ring-white hover:bg-white/80 active:bg-white/95 dark:ring-stone-900/95 dark:hover:bg-stone-800/80 dark:active:bg-stone-800/95"
+          >
+            <PlusIcon className="h-4 w-4" />
+          </button>
         </div>
 
-        <button
-          type="button"
-          onClick={() => props.createTab()}
-          className="flex h-8 w-8 items-center justify-center rounded-lg ring-1 ring-white hover:bg-white/80 active:bg-white/95 dark:ring-stone-900/95 dark:hover:bg-stone-800/80 dark:active:bg-stone-800/95"
-        >
-          <PlusIcon className="h-4 w-4" />
-        </button>
-      </div>
+        {!props.buttons.position ? (
+          <Buttons
+            style={props.buttons.style}
+            position={props.buttons.position}
+          />
+        ) : undefined}
+      </header>
 
-      <main className="relative rounded-b-xl bg-white/75 p-4 dark:bg-stone-800/75 dark:text-stone-200">
-        <div className="absolute inset-0 -z-10 rounded-3xl backdrop-blur-3xl"></div>
-
+      {/* Main */}
+      <main className="rounded-b-xl bg-white/75 p-4 dark:bg-stone-800/75 dark:text-stone-200">
         <section className="flex gap-4">
           {props.code.tabs.length !== 0 ? (
             <>

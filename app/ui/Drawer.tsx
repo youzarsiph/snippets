@@ -13,7 +13,7 @@ const Drawer = (
 ) => (
   <aside
     className={clsx(
-      "absolute inset-x-0 overflow-auto rounded-t-3xl bg-white/80 ring-1 ring-white dark:bg-stone-800/75 dark:ring-stone-900 lg:inset-x-auto lg:top-4 lg:max-w-md lg:rounded-3xl",
+      "absolute inset-x-0 max-h-[30rem] overflow-auto rounded-t-3xl bg-white/80 ring-1 ring-white lg:inset-x-auto lg:top-4 lg:max-h-full lg:max-w-md lg:rounded-3xl dark:bg-stone-800/75 dark:ring-stone-900",
       {
         "bottom-full lg:bottom-4 lg:left-28": props.isVisible,
         "-bottom-[1000%] lg:-left-[200%] lg:bottom-4": !props.isVisible,

@@ -17,7 +17,7 @@ const Tab = (props: {
   return (
     <div
       className={clsx(
-        "group relative flex items-center gap-2 px-2 dark:text-stone-200",
+        "group relative flex items-center gap-2 rounded px-2 dark:text-stone-200",
         {
           "bg-white/80 ring-1 ring-white dark:bg-stone-800/75 dark:ring-stone-900/95":
             props.code.isActive,
