@@ -2,9 +2,9 @@
 
 import clsx from "clsx";
 import React from "react";
-import { CodeSettings, ContainerSettings } from "@/app/types";
 import { Callbacks, Constants, exportImage } from "@/app/utils";
 import { Account, Background, Fonts, Nav, Snippet } from "@/app/ui";
+import { CodeSettings, ContainerSettings, ExportSettings } from "@/app/types";
 
 const Home = () => {
   // Target element
@@ -20,6 +20,12 @@ const Home = () => {
     direction: "top-right",
     color: Constants.colors[0],
     buttons: { style: true, position: true },
+  });
+
+  // Export settings
+  const [exportSettings, setExport] = React.useState<ExportSettings>({
+    quality: 1,
+    format: "png",
   });
 
   // Code Settings
@@ -66,7 +72,7 @@ def snippets(request: HttpRequest) -> HttpResponse:
     >
       <link
         rel="stylesheet"
-        href={`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/${code.highlight}.min.css`}
+        href={`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/${code.highlight}.css`}
       />
 
       <Background />
@@ -77,10 +83,19 @@ def snippets(request: HttpRequest) -> HttpResponse:
             code={code}
             account={account}
             container={container}
+            export={exportSettings}
             onCodeChange={(c) => setCode(c)}
             onAccountChange={(a) => setAccount(a)}
             onContainerChange={(c) => setContainer(c)}
-            exportCallback={(f) => exportImage(target, f)}
+            onExportChange={(e) => setExport(e)}
+            exportCallback={() =>
+              exportImage(
+                target,
+                exportSettings.format,
+                code.tabs[code.active].name,
+                exportSettings.quality,
+              )
+            }
           />
 
           <div className="flex h-full w-full items-center justify-center">

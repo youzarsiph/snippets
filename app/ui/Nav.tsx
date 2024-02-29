@@ -2,38 +2,47 @@ import clsx from "clsx";
 import React from "react";
 import hljs from "highlight.js";
 import {
+  ArrowPathIcon,
   Bars2Icon,
+  ChevronDoubleDownIcon,
+  ChevronDoubleUpIcon,
   CodeBracketIcon,
   CodeBracketSquareIcon,
   DocumentArrowDownIcon,
   EyeIcon,
   EyeSlashIcon,
   MoonIcon,
+  Squares2X2Icon,
+  SquaresPlusIcon,
   SunIcon,
   UserCircleIcon,
   UserIcon,
+  ViewfinderCircleIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { Constants } from "@/app/utils";
-import { Drawer, Fonts, Input, Logo, Select } from "@/app/ui";
+import { Button, Drawer, Fonts, Input, Logo, Select } from "@/app/ui";
 import {
   Font,
   Language,
   Padding,
   Size,
-  Account,
+  AccountSettings,
   CodeSettings,
   ContainerSettings,
+  ExportSettings,
 } from "@/app/types";
 
 const Nav = (props: {
-  account: Account;
+  account: AccountSettings;
   code: CodeSettings;
   container: ContainerSettings;
-  exportCallback: (format: string) => void;
+  export: ExportSettings;
+  exportCallback: () => void;
   onCodeChange: (code: CodeSettings) => void;
-  onAccountChange: (account: Account) => void;
+  onAccountChange: (account: AccountSettings) => void;
   onContainerChange: (container: ContainerSettings) => void;
+  onExportChange: (exportSettings: ExportSettings) => void;
 }) => {
   const [display, setDisplay] = React.useState({
     account: false,
@@ -48,20 +57,11 @@ const Nav = (props: {
       <Drawer
         title="Container"
         isVisible={display.container}
-        onDisplayChange={() =>
-          setDisplay({
-            account: false,
-            code: false,
-            export: false,
-            container: false,
-          })
-        }
+        onDisplayChange={() => setDisplay({ ...display, container: false })}
       >
         <div className="flex items-center justify-between gap-4">
           <p>Theme</p>
-          <button
-            type="button"
-            className="relative flex items-center gap-4 rounded-3xl px-4 py-2 ring-1 ring-white hover:bg-white/80 dark:ring-stone-900 dark:hover:bg-stone-800/75"
+          <Button
             onClick={() =>
               props.onContainerChange({
                 ...props.container,
@@ -75,7 +75,7 @@ const Nav = (props: {
               <SunIcon className="h-6 w-6" />
             )}
             <span>{props.container.theme ? "Dark" : "Light"}</span>
-          </button>
+          </Button>
         </div>
 
         <Select
@@ -114,9 +114,7 @@ const Nav = (props: {
 
         <div className="flex items-center justify-between gap-4">
           <p>Window Style</p>
-          <button
-            type="button"
-            className="relative rounded-3xl px-4 py-2 ring-1 ring-white hover:bg-white/80 dark:ring-stone-900 dark:hover:bg-stone-800/75"
+          <Button
             onClick={() =>
               props.onContainerChange({
                 ...props.container,
@@ -128,14 +126,12 @@ const Nav = (props: {
             }
           >
             {props.container.buttons.style ? "Mac" : "Windows"}
-          </button>
+          </Button>
         </div>
 
         <div className="flex items-center justify-between gap-4">
           <p>Window Position</p>
-          <button
-            type="button"
-            className="relative rounded-3xl px-4 py-2 ring-1 ring-white hover:bg-white/80 dark:ring-stone-900 dark:hover:bg-stone-800/75"
+          <Button
             onClick={() =>
               props.onContainerChange({
                 ...props.container,
@@ -147,14 +143,12 @@ const Nav = (props: {
             }
           >
             {props.container.buttons.position ? "Left" : "Right"}
-          </button>
+          </Button>
         </div>
 
         <div className="flex items-center justify-between gap-4">
           <p>Gradient Background</p>
-          <button
-            type="button"
-            className="relative rounded-3xl px-4 py-2 ring-1 ring-white hover:bg-white/80 dark:ring-stone-900 dark:hover:bg-stone-800/75"
+          <Button
             onClick={() =>
               props.onContainerChange({
                 ...props.container,
@@ -163,7 +157,7 @@ const Nav = (props: {
             }
           >
             {props.container.isGradient ? "Yes" : "No"}
-          </button>
+          </Button>
         </div>
 
         <Select
@@ -213,7 +207,7 @@ const Nav = (props: {
                   })
                 }
                 className={clsx(
-                  "h-5 w-5 rounded-sm shadow-lg hover:-translate-y-8 hover:scale-[600%] hover:shadow-xl",
+                  "h-8 w-8 rounded-sm shadow-lg hover:-translate-y-8 hover:scale-[400%] hover:shadow-xl",
                   clr,
                   {
                     "ring-4 ring-opacity-75 ring-offset-1":
@@ -266,44 +260,50 @@ const Nav = (props: {
 
       {/* Export Drawer */}
       <Drawer
-        isVisible={display.export}
         title="Export"
-        onDisplayChange={() =>
-          setDisplay({
-            account: false,
-            code: false,
-            export: false,
-            container: false,
-          })
-        }
+        isVisible={display.export}
+        onDisplayChange={() => setDisplay({ ...display, export: false })}
       >
-        <ul className="grid gap-2">
+        <Select
+          label="Format"
+          value={props.export.format}
+          onChange={(event) =>
+            props.onExportChange({
+              ...props.export,
+              format: event.target.value,
+            })
+          }
+        >
           {Constants.formats.map((format) => (
-            <li key={format}>
-              <button
-                type="button"
-                onClick={() => props.exportCallback(format)}
-                className="flex items-center gap-4"
-              >
-                {format.toUpperCase()}
-              </button>
-            </li>
+            <option key={format} value={format}>
+              {format.toUpperCase()}
+            </option>
           ))}
-        </ul>
+        </Select>
+
+        <Select
+          label="Quality"
+          value={props.export.quality}
+          onChange={(event) =>
+            props.onExportChange({
+              ...props.export,
+              quality: parseFloat(event.target.value),
+            })
+          }
+        >
+          <option value={0.5}>50 %</option>
+          <option value={0.75}>75 %</option>
+          <option value={1}>100 %</option>
+        </Select>
+
+        <Button onClick={() => props.exportCallback()}>Export</Button>
       </Drawer>
 
       {/* Code Drawer */}
       <Drawer
         title="Code"
         isVisible={display.code}
-        onDisplayChange={() =>
-          setDisplay({
-            account: false,
-            code: false,
-            export: false,
-            container: false,
-          })
-        }
+        onDisplayChange={() => setDisplay({ ...display, code: false })}
       >
         <Select
           label="Language"
@@ -364,9 +364,7 @@ const Nav = (props: {
 
         <div className="flex items-center justify-between gap-4">
           <p>Line Numbers</p>
-          <button
-            type="button"
-            className="relative flex items-center gap-4 rounded-3xl px-4 py-2 ring-1 ring-white hover:bg-white/80 dark:ring-stone-900 dark:hover:bg-stone-800/75"
+          <Button
             onClick={() =>
               props.onCodeChange({
                 ...props.code,
@@ -380,7 +378,7 @@ const Nav = (props: {
               <EyeIcon className="h-6 w-6" />
             )}
             <span>{props.code.displayLineNumbers ? "Hide" : "Show"}</span>
-          </button>
+          </Button>
         </div>
       </Drawer>
 
@@ -388,36 +386,8 @@ const Nav = (props: {
       <Drawer
         title="Account"
         isVisible={display.account}
-        onDisplayChange={() =>
-          setDisplay({
-            account: false,
-            code: false,
-            export: false,
-            container: false,
-          })
-        }
+        onDisplayChange={() => setDisplay({ ...display, account: false })}
       >
-        <div className="flex items-center justify-between gap-4">
-          <p>Visibility</p>
-          <button
-            type="button"
-            className="flex items-center  gap-4 rounded-3xl px-4 py-2 ring-1 ring-white hover:bg-white/80 dark:ring-stone-900 dark:hover:bg-stone-800/75"
-            onClick={() =>
-              props.onAccountChange({
-                ...props.account,
-                isVisible: !props.account.isVisible,
-              })
-            }
-          >
-            {props.account.isVisible ? (
-              <EyeSlashIcon className="h-6 w-6" />
-            ) : (
-              <EyeIcon className="h-6 w-6" />
-            )}
-            <span>{props.account.isVisible ? "Hide" : "Show"}</span>
-          </button>
-        </div>
-
         <Input
           label="Name"
           value={props.account.name}
@@ -439,46 +409,61 @@ const Nav = (props: {
             })
           }
         />
+
+        <div className="flex items-center justify-between gap-4">
+          <p>Visibility</p>
+          <Button
+            onClick={() =>
+              props.onAccountChange({
+                ...props.account,
+                isVisible: !props.account.isVisible,
+              })
+            }
+          >
+            {props.account.isVisible ? (
+              <EyeSlashIcon className="h-6 w-6" />
+            ) : (
+              <EyeIcon className="h-6 w-6" />
+            )}
+            <span>{props.account.isVisible ? "Hide" : "Show"}</span>
+          </Button>
+        </div>
       </Drawer>
 
-      <div className="relative flex w-full flex-row justify-evenly gap-4 bg-white/80 p-2 backdrop-blur-3xl dark:bg-stone-800/75 dark:text-stone-200 lg:h-full lg:flex-col lg:justify-start lg:py-8">
+      <div className="relative flex w-full flex-row justify-evenly gap-4 bg-white/80 p-2 backdrop-blur-3xl lg:h-full lg:flex-col lg:justify-start lg:py-8 dark:bg-stone-800/75 dark:text-stone-200">
         <div className="flex flex-col items-center gap-2">
-          <button
-            type="button"
+          <Button
             onClick={() =>
               setDisplay({
                 account: false,
                 code: false,
-                export: false,
                 container: !display.container,
+                export: false,
               })
             }
-            className="flex h-10 w-10 items-center justify-center rounded-3xl p-2 hover:bg-white/80 dark:hover:bg-stone-800/75"
           >
             {display.container ? (
-              <XMarkIcon className="h-8 w-8" />
+              <Squares2X2Icon className="h-6 w-6" />
             ) : (
-              <Bars2Icon className="h-8 w-8" />
+              <SquaresPlusIcon className="h-6 w-6" />
             )}
-          </button>
+          </Button>
           <p className="text-xs">Menu</p>
         </div>
 
         <div className="flex flex-col items-center gap-2">
-          <button
-            type="button"
+          <Button
             onClick={() =>
               setDisplay({
                 account: false,
                 code: false,
-                export: !display.export,
                 container: false,
+                export: !display.export,
               })
             }
-            className="relative flex h-10 w-10 items-center justify-center rounded-3xl p-2 hover:bg-white/80 dark:hover:bg-stone-800/75"
           >
-            <DocumentArrowDownIcon className="h-8 w-8" />
-          </button>
+            <ViewfinderCircleIcon className="h-6 w-6" />
+          </Button>
           <p className="text-xs">Export</p>
         </div>
 
@@ -488,8 +473,7 @@ const Nav = (props: {
         </div>
 
         <div className="flex flex-col items-center gap-2">
-          <button
-            type="button"
+          <Button
             onClick={() =>
               setDisplay({
                 account: false,
@@ -498,21 +482,14 @@ const Nav = (props: {
                 container: false,
               })
             }
-            className="relative flex h-10 w-10 items-center justify-center rounded-3xl p-2 hover:bg-white/80 dark:hover:bg-stone-800/75"
           >
-            {display.code ? (
-              <CodeBracketIcon className="h-8 w-8" />
-            ) : (
-              <CodeBracketSquareIcon className="h-8 w-8" />
-            )}
-          </button>
+            <CodeBracketSquareIcon className="h-6 w-6" />
+          </Button>
           <p className="text-xs">Code</p>
         </div>
 
         <div className="flex flex-col items-center gap-2">
-          <button
-            type="button"
-            className="relative flex h-10 w-10 items-center justify-center rounded-3xl p-2 hover:bg-white/80 dark:hover:bg-stone-800/75"
+          <Button
             onClick={() =>
               setDisplay({
                 account: !display.account,
@@ -522,12 +499,8 @@ const Nav = (props: {
               })
             }
           >
-            {display.account ? (
-              <UserIcon className="h-8 w-8" />
-            ) : (
-              <UserCircleIcon className="h-8 w-8" />
-            )}
-          </button>
+            <UserCircleIcon className="h-6 w-6" />
+          </Button>
           <p className="text-xs">Account</p>
         </div>
       </div>

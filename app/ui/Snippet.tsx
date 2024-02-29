@@ -59,7 +59,6 @@ const Snippet = (props: {
             : undefined}
 
           <button
-            type="button"
             onClick={() => props.createTab()}
             className="flex h-8 w-8 items-center justify-center rounded-lg ring-1 ring-white hover:bg-white/80 active:bg-white/95 dark:ring-stone-900/95 dark:hover:bg-stone-800/80 dark:active:bg-stone-800/95"
           >

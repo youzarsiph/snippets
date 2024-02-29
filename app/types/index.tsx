@@ -1,9 +1,15 @@
-import Account from "@/app/types/Account";
+import {
+  AccountSettings,
+  CodeSettings,
+  ContainerSettings,
+  ExportSettings,
+} from "@/app/types/settings";
 import Code from "@/app/types/Code";
 import {
   Color,
   Direction,
   Font,
+  Format,
   GradientType,
   Highlight,
   Language,
@@ -11,33 +17,16 @@ import {
   Size,
 } from "@/app/types/common";
 
-type CodeSettings = {
-  font: Font;
-  tabs: Code[];
-  active: number;
-  highlight: Highlight;
-  displayLineNumbers: boolean;
-};
-
-type ContainerSettings = {
-  size: Size;
-  theme: boolean;
-  color: Color;
-  padding: Padding;
-  isGradient: boolean;
-  type: GradientType;
-  direction: Direction;
-  buttons: { style: boolean; position: boolean };
-};
-
 export type {
-  Account,
+  AccountSettings,
   Code,
   CodeSettings,
   ContainerSettings,
+  ExportSettings,
   Color,
   Direction,
   Font,
+  Format,
   GradientType,
   Highlight,
   Language,

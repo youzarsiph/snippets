@@ -7,6 +7,8 @@ type Direction = (typeof Constants.directions)[number];
 
 type Font = keyof typeof Fonts;
 
+type Format = (typeof Constants.formats)[number];
+
 type GradientType = (typeof Constants.types)[number];
 
 type Highlight = (typeof Constants.highlights)[number];
@@ -21,6 +23,7 @@ export type {
   Color,
   Direction,
   Font,
+  Format,
   GradientType,
   Highlight,
   Language,
