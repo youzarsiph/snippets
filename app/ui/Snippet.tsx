@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import React from "react";
-import hljs from "highlight.js";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { Buttons, Logo, Tab } from "@/app/ui";
 import type { CodeSettings } from "@/app/types";
@@ -14,8 +13,6 @@ const Snippet = (props: {
   deleteTab: (index: number) => void;
   onContentChange: (code: string) => void;
 }) => {
-  React.useEffect(() => hljs.highlightAll(), [props.code]);
-
   // Line number count
   let count = 0;
 
@@ -92,7 +89,6 @@ const Snippet = (props: {
 
               <div className="relative w-full">
                 <textarea
-                  id="code"
                   autoFocus
                   name="code"
                   value={props.code.tabs[props.code.active].content}
@@ -104,6 +100,7 @@ const Snippet = (props: {
 
                 <pre className="w-full whitespace-pre-wrap bg-transparent outline-none">
                   <code
+                    id="code"
                     style={{ padding: 0, background: "transparent" }}
                     className={`hljs language-${props.code.tabs[props.code.active].language}`}
                   >

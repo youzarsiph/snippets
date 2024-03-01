@@ -2,6 +2,7 @@
 
 import clsx from "clsx";
 import React from "react";
+import hljs from "highlight.js";
 import { Callbacks, Constants, exportImage } from "@/app/utils";
 import { Account, Background, Fonts, Nav, Snippet } from "@/app/ui";
 import { CodeSettings, ContainerSettings, ExportSettings } from "@/app/types";
@@ -31,7 +32,7 @@ const Home = () => {
   // Code Settings
   const [code, setCode] = React.useState<CodeSettings>({
     active: 0,
-    font: "Fira Code",
+    font: "JetBrains Mono",
     highlight: "github-dark",
     displayLineNumbers: true,
     tabs: [
@@ -61,6 +62,12 @@ def snippets(request: HttpRequest) -> HttpResponse:
     name: "Your Name",
     username: "github.com/username",
   });
+
+  React.useEffect(() => {
+    document.getElementById("code")?.removeAttribute("data-highlighted");
+
+    hljs.highlightAll();
+  }, [code]);
 
   return (
     <div
@@ -100,7 +107,7 @@ def snippets(request: HttpRequest) -> HttpResponse:
 
           <div className="flex h-full w-full items-center justify-center">
             <div className={`relative h-fit w-fit p-1`}>
-              <div className="p-1" ref={target}>
+              <div className="p-1" id="target" ref={target}>
                 <section
                   style={Constants.sizes[container.size]}
                   className={clsx(
