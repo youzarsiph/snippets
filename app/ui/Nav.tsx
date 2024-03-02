@@ -55,6 +55,7 @@ const Nav = (props: {
     <nav className="relative z-20 order-last w-full lg:static lg:-order-none lg:h-full lg:w-auto">
       {/* Container Drawer */}
       <Drawer
+        tabIndex={-1}
         title="Container"
         isVisible={display.container}
         onDisplayChange={() => setDisplay({ ...display, container: false })}
@@ -260,6 +261,7 @@ const Nav = (props: {
 
       {/* Export Drawer */}
       <Drawer
+        tabIndex={-1}
         title="Export"
         isVisible={display.export}
         onDisplayChange={() => setDisplay({ ...display, export: false })}
@@ -301,13 +303,14 @@ const Nav = (props: {
 
       {/* Code Drawer */}
       <Drawer
+        tabIndex={-1}
         title="Code"
         isVisible={display.code}
         onDisplayChange={() => setDisplay({ ...display, code: false })}
       >
         <Select
           label="Language"
-          value={props.code.tabs[props.code.active].language}
+          value={props.code.tabs[props.code.active]?.language}
           onChange={(event) =>
             props.onCodeChange({
               ...props.code,
@@ -384,6 +387,7 @@ const Nav = (props: {
 
       {/* Account Drawer */}
       <Drawer
+        tabIndex={-1}
         title="Account"
         isVisible={display.account}
         onDisplayChange={() => setDisplay({ ...display, account: false })}

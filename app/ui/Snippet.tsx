@@ -78,7 +78,7 @@ const Snippet = (props: {
             <>
               {props.code.displayLineNumbers ? (
                 <div className="grid text-center">
-                  {props.code.tabs[props.code.active].content
+                  {props.code.tabs[props.code.active]?.content
                     .split("\n")
                     .map(() => {
                       count += 1;
@@ -91,7 +91,7 @@ const Snippet = (props: {
                 <textarea
                   autoFocus
                   name="code"
-                  value={props.code.tabs[props.code.active].content}
+                  value={props.code.tabs[props.code.active]?.content}
                   className="absolute inset-0 z-[1px] h-full min-h-full w-full min-w-full resize-none overflow-hidden whitespace-pre-wrap bg-transparent text-transparent caret-stone-800 outline-none dark:caret-white"
                   onChange={(event) =>
                     props.onContentChange(event.target.value)
@@ -102,9 +102,9 @@ const Snippet = (props: {
                   <code
                     id="code"
                     style={{ padding: 0, background: "transparent" }}
-                    className={`hljs language-${props.code.tabs[props.code.active].language}`}
+                    className={`hljs language-${props.code.tabs[props.code.active]?.language}`}
                   >
-                    {props.code.tabs[props.code.active].content}
+                    {props.code.tabs[props.code.active]?.content}
                   </code>
                 </pre>
               </div>

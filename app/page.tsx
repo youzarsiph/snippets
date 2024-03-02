@@ -35,25 +35,7 @@ const Home = () => {
     font: "JetBrains Mono",
     highlight: "github-dark",
     displayLineNumbers: true,
-    tabs: [
-      {
-        isActive: true,
-        name: "views.py",
-        language: "python",
-        content: `""" Views """
-
-from django.shortcuts import render
-from django.http import HttpRequest, HttpResponse
-
-
-# Create your views here.
-def snippets(request: HttpRequest) -> HttpResponse:
-  """Create beautiful images of your code snippets"""
-
-  return render(request, "snippets/index.html")
-`,
-      },
-    ],
+    tabs: [],
   });
 
   // Account Settings
@@ -63,9 +45,24 @@ def snippets(request: HttpRequest) -> HttpResponse:
     username: "github.com/username",
   });
 
+  React.useEffect(
+    () =>
+      setCode({
+        ...code,
+        tabs: [
+          Constants.samples[
+            parseInt(`${Math.random() * 100}`) % Constants.samples.length
+          ],
+        ],
+      }),
+    [],
+  );
+
   React.useEffect(() => {
+    // Remove attribute to re-highlight code
     document.getElementById("code")?.removeAttribute("data-highlighted");
 
+    // Highlight code
     hljs.highlightAll();
   }, [code]);
 
@@ -105,7 +102,7 @@ def snippets(request: HttpRequest) -> HttpResponse:
             }
           />
 
-          <div className="flex h-full w-full items-center justify-center">
+          <div className="flex h-full w-full items-center justify-center overflow-auto">
             <div className={`relative h-fit w-fit p-1`}>
               <div className="p-1" id="target" ref={target}>
                 <section

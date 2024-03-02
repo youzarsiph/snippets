@@ -566,78 +566,57 @@ const Constants = {
   samples: [
     {
       isActive: true,
-      name: "views.py",
+      name: "hello.py",
       language: "python",
-      content: `""" Views """
+      content: `""" Hello, Python """
 
+def say_hello(name: str) -> str:
+    """Say Hello, name!"""
 
-from django.shortcuts import render
-from django.http import HttpRequest, HttpResponse
-
-
-# Create your views here.
-def snippets(request: HttpRequest) -> HttpResponse:
-  """Create beautiful images of your code snippets"""
-
-  return render(request, "snippets/index.html")
+    return f"Hello, {name}!"
 `,
     },
     {
       isActive: true,
-      name: "Snippets.tsx",
+      name: "hello.js",
+      language: "javascript",
+      content: `/**
+ * Hello, JavaScript
+ */
+
+const sayHello = (name) => {
+  return "Hello, " + name + "!";
+}
+`,
+    },
+    {
+      isActive: true,
+      name: "hello.ts",
       language: "typescript",
-      content: `import React from "react";
-      
-const Snippets = () => (
-  <section className="grid gap-4 rounded-xl bg-white/80 p-4 ring-1 ring-white">
-    <h1 className="text-4xl font-semibold">Snippets</h1>
-    <p className="text-xl font-thin">
-      Create beautiful images of your code snippets!
-    </p>
-  </section>
-);
+      content: `/**
+ * Hello, TypeScript
+ */
 
-export default Snippets;
+const sayHello = (name: string): string => {
+  return "Hello, " + name + "!"
+};
 `,
     },
     {
       isActive: true,
-      name: "snippets.css",
-      language: "css",
-      content: `.snippet {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
-`,
-    },
-    {
-      isActive: true,
-      name: "MainActivity.kt",
-      language: "kotlin",
-      content: `package com.youzarsiph.snippets
-
-import ...
-
-class MainActivity : ComponentActivity() {
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContent {
-      SnippetsTheme {
-        Column(modifier = Modifier.fillMaxSize()) {
-          Text(text = "Snippets", style = MaterialTheme.typography.displayLarge)
-          Text(
-            text = "Create beautiful images of your code snippets!",
-            style = MaterialTheme.typography.bodyLarge
-          )
-        }
-      }
-    }
-  }
-}
+      name: "hello.html",
+      language: "html",
+      content: `<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Hello, HTML</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <h1>Hello, HTML</h1>
+  </body>
+</html>
 `,
     },
   ],
