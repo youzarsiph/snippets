@@ -26,7 +26,7 @@ const Drawer = (
       <div className="absolute inset-0 -z-10 rounded-3xl backdrop-blur-3xl"></div>
 
       <div className="grid gap-6 p-6">
-        <div className="item-center flex justify-between gap-8">
+        <div className="flex items-center justify-between gap-8">
           <h2 className="text-xl">{props.title}</h2>
 
           <Button onClick={() => props.onDisplayChange()}>

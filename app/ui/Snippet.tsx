@@ -113,9 +113,9 @@ const Snippet = (props: {
             <div className="grid gap-4 p-4 md:px-24 md:py-16 lg:px-32 lg:py-24">
               <div className="flex items-center gap-4">
                 <Logo />
-                <h1 className="font-sans text-2xl font-bold">Snippets</h1>
+                <h1 className="text-3xl font-bold">Snippets</h1>
               </div>
-              <p className="font-sans text-lg font-semibold tracking-wide">
+              <p className="text-xl font-semibold">
                 Create beautiful images of your code snippets
               </p>
             </div>
