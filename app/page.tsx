@@ -3,8 +3,9 @@
 import clsx from "clsx";
 import React from "react";
 import hljs from "highlight.js";
+import { Fonts } from "@/app/styles";
+import { Account, Background, Nav, Snippet } from "@/app/ui";
 import { Callbacks, Constants, exportImage } from "@/app/utils";
-import { Account, Background, Fonts, Nav, Snippet } from "@/app/ui";
 import { CodeSettings, ContainerSettings, ExportSettings } from "@/app/types";
 
 const Home = () => {
@@ -67,13 +68,7 @@ const Home = () => {
   }, [code]);
 
   return (
-    <div
-      className={clsx(
-        { dark: container.theme },
-        "block h-screen w-screen",
-        Fonts[code.font].className,
-      )}
-    >
+    <div className={clsx({ dark: container.theme }, "block h-screen w-screen")}>
       <link
         rel="stylesheet"
         href={`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/${code.highlight}.css`}
@@ -104,7 +99,10 @@ const Home = () => {
 
           <div className="flex h-full w-full items-center justify-center overflow-auto">
             <div className={`relative h-fit w-fit p-1`}>
-              <div className="p-1" id="target" ref={target}>
+              <div
+                ref={target}
+                className={clsx("p-4", Fonts[code.font].className)}
+              >
                 <section
                   style={Constants.sizes[container.size]}
                   className={clsx(

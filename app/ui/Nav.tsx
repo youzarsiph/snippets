@@ -2,13 +2,7 @@ import clsx from "clsx";
 import React from "react";
 import hljs from "highlight.js";
 import {
-  ArrowPathIcon,
-  Bars2Icon,
-  ChevronDoubleDownIcon,
-  ChevronDoubleUpIcon,
-  CodeBracketIcon,
   CodeBracketSquareIcon,
-  DocumentArrowDownIcon,
   EyeIcon,
   EyeSlashIcon,
   MoonIcon,
@@ -16,12 +10,11 @@ import {
   SquaresPlusIcon,
   SunIcon,
   UserCircleIcon,
-  UserIcon,
   ViewfinderCircleIcon,
-  XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { Fonts } from "@/app/styles";
 import { Constants } from "@/app/utils";
-import { Button, Drawer, Fonts, Input, Logo, Select } from "@/app/ui";
+import { Button, Drawer, Input, Logo, Select } from "@/app/ui";
 import {
   Font,
   Language,

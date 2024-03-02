@@ -1,4 +1,4 @@
-import { Fonts } from "@/app/ui";
+import { Fonts } from "@/app/styles";
 import { Constants } from "@/app/utils";
 
 type Color = (typeof Constants.colors)[number];

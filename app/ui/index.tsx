@@ -3,7 +3,6 @@ import Background from "@/app/ui/Background";
 import Buttons from "@/app/ui/Buttons";
 import Button from "@/app/ui/Button";
 import Drawer from "@/app/ui/Drawer";
-import Fonts from "@/app/ui/Fonts";
 import Input from "@/app/ui/Input";
 import Logo from "@/app/ui/Logo";
 import Nav from "@/app/ui/Nav";
@@ -17,7 +16,6 @@ export {
   Button,
   Buttons,
   Drawer,
-  Fonts,
   Input,
   Logo,
   Nav,
