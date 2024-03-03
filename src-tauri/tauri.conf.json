@@ -1,8 +1,27 @@
 {
+  "tauri": {
+    "bundle": {
+      "identifier": "youzarsiph.snippets",
+      "icon": ["public/next.svg"]
+    },
+    "windows": [
+      {
+        "width": 800,
+        "height": 600,
+        "resizable": true,
+        "fullscreen": false,
+        "title": "Snippets"
+      }
+    ]
+  },
   "build": {
     "beforeBuildCommand": "npm run build",
     "beforeDevCommand": "npm run dev",
     "devPath": "http://localhost:3000",
     "distDir": "../out"
+  },
+  "package": {
+    "productName": "snippets",
+    "version": "0.1.0"
   }
 }
