@@ -98,10 +98,10 @@ const Home = () => {
           />
 
           <div className="flex h-full w-full items-center justify-center overflow-auto">
-            <div className={`relative h-fit w-fit p-1`}>
+            <div className={`relative h-fit w-fit`}>
               <div
                 ref={target}
-                className={clsx("p-4", Fonts[code.font].className)}
+                className={clsx("p-1", Fonts[code.font].className)}
               >
                 <section
                   style={Constants.sizes[container.size]}
