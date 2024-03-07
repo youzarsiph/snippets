@@ -1,8 +1,7 @@
-type Code = {
+type File = {
   name: string;
   content: string;
-  isActive: boolean;
   language: string;
 };
 
-export default Code;
+export default File;

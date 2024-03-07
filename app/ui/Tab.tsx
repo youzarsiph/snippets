@@ -2,17 +2,10 @@ import clsx from "clsx";
 import React from "react";
 import Image from "next/image";
 import { getIconForFile } from "vscode-icons-js";
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import { Code } from "@/app/types";
 
-const Tab = (props: {
-  code: Code;
-  onTabSwitch: () => void;
-  onTabRemove: () => void;
-  onTabUpdate: (name: string) => void;
-}) => {
+const Tab = (props: { title: string; onTabUpdate: (name: string) => void }) => {
   const [display, setDisplay] = React.useState<boolean>(true);
-  const [title, setTitle] = React.useState<string>(props.code.name);
+  const [title, setTitle] = React.useState<string>(props.title);
 
   return (
     <div
@@ -20,7 +13,7 @@ const Tab = (props: {
         "group relative flex items-center gap-2 rounded px-2 dark:text-stone-200",
         {
           "bg-white/80 ring-1 ring-white dark:bg-stone-800/75 dark:ring-stone-900/95":
-            props.code.isActive,
+            false,
         },
       )}
     >
@@ -30,29 +23,18 @@ const Tab = (props: {
           height={16}
           className="h-8 w-8"
           alt={`${getIconForFile(title)}`}
-          src={`icons/${getIconForFile(props.code.name)}`}
+          src={`icons/${getIconForFile(props.title)}`}
         />
       </div>
       {display ? (
-        <>
-          <button
-            title="Select tab"
-            onBlur={() => setDisplay(true)}
-            onClick={() => props.onTabSwitch()}
-            onDoubleClick={() => setDisplay(false)}
-            className="peer h-full rounded-r-lg p-2 hover:rounded-none hover:bg-white/80 active:bg-white/80 dark:hover:bg-stone-800/75 dark:active:bg-stone-800/80"
-          >
-            {title}
-          </button>
-
-          <button
-            title="Remove tab"
-            onClick={() => props.onTabRemove()}
-            className="flex h-6 w-6 items-center justify-center rounded hover:bg-white/50 dark:hover:bg-stone-800/50 dark:active:bg-stone-800/80"
-          >
-            <XMarkIcon className="h-4 w-4" />
-          </button>
-        </>
+        <button
+          title="Select tab"
+          onBlur={() => setDisplay(true)}
+          onDoubleClick={() => setDisplay(false)}
+          className="peer h-full rounded-r-lg p-2 hover:rounded-none hover:bg-white/80 active:bg-white/80 dark:hover:bg-stone-800/75 dark:active:bg-stone-800/80"
+        >
+          {title}
+        </button>
       ) : (
         <input
           autoFocus

@@ -1,10 +1,11 @@
 import {
-  AccountSettings,
-  CodeSettings,
-  ContainerSettings,
+  AuthorSettings,
+  FileSettings,
+  Slide,
   ExportSettings,
+  Settings,
 } from "@/app/types/settings";
-import Code from "@/app/types/Code";
+import File from "@/app/types/File";
 import {
   Color,
   Direction,
@@ -18,10 +19,10 @@ import {
 } from "@/app/types/common";
 
 export type {
-  AccountSettings,
-  Code,
-  CodeSettings,
-  ContainerSettings,
+  AuthorSettings,
+  File,
+  FileSettings,
+  Slide,
   ExportSettings,
   Color,
   Direction,
@@ -32,4 +33,5 @@ export type {
   Language,
   Padding,
   Size,
+  Settings,
 };

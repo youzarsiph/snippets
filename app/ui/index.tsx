@@ -1,4 +1,4 @@
-import Account from "@/app/ui/Account";
+import Author from "@/app/ui/Author";
 import Background from "@/app/ui/Background";
 import Buttons from "@/app/ui/Buttons";
 import Button from "@/app/ui/Button";
@@ -8,10 +8,11 @@ import Logo from "@/app/ui/Logo";
 import Nav from "@/app/ui/Nav";
 import Select from "@/app/ui/Select";
 import Snippet from "@/app/ui/Snippet";
+import Slide from "@/app/ui/Slide";
 import Tab from "@/app/ui/Tab";
 
 export {
-  Account,
+  Author,
   Background,
   Button,
   Buttons,
@@ -21,5 +22,6 @@ export {
   Nav,
   Select,
   Snippet,
+  Slide,
   Tab,
 };

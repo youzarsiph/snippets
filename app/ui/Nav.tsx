@@ -20,22 +20,26 @@ import {
   Language,
   Padding,
   Size,
-  AccountSettings,
-  CodeSettings,
-  ContainerSettings,
+  AuthorSettings,
+  FileSettings,
+  Slide,
   ExportSettings,
+  Settings,
 } from "@/app/types";
 
 const Nav = (props: {
-  account: AccountSettings;
-  code: CodeSettings;
-  container: ContainerSettings;
+  settings: Settings;
+  account: AuthorSettings;
+  code: FileSettings;
+  slides: Slide[];
+  activeSlide: Slide;
   export: ExportSettings;
   exportCallback: () => void;
-  onCodeChange: (code: CodeSettings) => void;
-  onAccountChange: (account: AccountSettings) => void;
-  onContainerChange: (container: ContainerSettings) => void;
+  onCodeChange: (code: FileSettings) => void;
+  onAccountChange: (account: AuthorSettings) => void;
+  onSlidesChange: (slides: Slide[]) => void;
   onExportChange: (exportSettings: ExportSettings) => void;
+  onSettingsChange: (settings: Settings) => void;
 }) => {
   const [display, setDisplay] = React.useState({
     account: false,
@@ -46,10 +50,10 @@ const Nav = (props: {
 
   return (
     <nav className="relative z-20 order-last w-full lg:static lg:-order-none lg:h-full lg:w-auto">
-      {/* Container Drawer */}
+      {/* Slide Drawer */}
       <Drawer
         tabIndex={-1}
-        title="Container"
+        title="Slide"
         isVisible={display.container}
         onDisplayChange={() => setDisplay({ ...display, container: false })}
       >
@@ -57,27 +61,27 @@ const Nav = (props: {
           <p>Theme</p>
           <Button
             onClick={() =>
-              props.onContainerChange({
-                ...props.container,
-                theme: !props.container.theme,
+              props.onSettingsChange({
+                ...props.settings,
+                theme: !props.settings.theme,
               })
             }
           >
-            {props.container.theme ? (
+            {props.settings.theme ? (
               <MoonIcon className="h-6 w-6" />
             ) : (
               <SunIcon className="h-6 w-6" />
             )}
-            <span>{props.container.theme ? "Dark" : "Light"}</span>
+            <span>{props.settings.theme ? "Dark" : "Light"}</span>
           </Button>
         </div>
 
         <Select
-          label="Container Size"
-          value={props.container.size}
+          label="Slide Size"
+          value={props.settings.size}
           onChange={(event) =>
-            props.onContainerChange({
-              ...props.container,
+            props.onSettingsChange({
+              ...props.settings,
               size: event.target.value as Size,
             })
           }
@@ -90,11 +94,11 @@ const Nav = (props: {
         </Select>
 
         <Select
-          label="Container Padding"
-          value={props.container.padding}
+          label="Slide Padding"
+          value={props.settings.padding}
           onChange={(event) =>
-            props.onContainerChange({
-              ...props.container,
+            props.onSettingsChange({
+              ...props.settings,
               padding: event.target.value as Padding,
             })
           }
@@ -107,61 +111,37 @@ const Nav = (props: {
         </Select>
 
         <div className="flex items-center justify-between gap-4">
-          <p>Window Style</p>
-          <Button
-            onClick={() =>
-              props.onContainerChange({
-                ...props.container,
-                buttons: {
-                  ...props.container.buttons,
-                  style: !props.container.buttons.style,
-                },
-              })
-            }
-          >
-            {props.container.buttons.style ? "Mac" : "Windows"}
-          </Button>
-        </div>
-
-        <div className="flex items-center justify-between gap-4">
-          <p>Window Position</p>
-          <Button
-            onClick={() =>
-              props.onContainerChange({
-                ...props.container,
-                buttons: {
-                  ...props.container.buttons,
-                  position: !props.container.buttons.position,
-                },
-              })
-            }
-          >
-            {props.container.buttons.position ? "Left" : "Right"}
-          </Button>
-        </div>
-
-        <div className="flex items-center justify-between gap-4">
           <p>Gradient Background</p>
           <Button
             onClick={() =>
-              props.onContainerChange({
-                ...props.container,
-                isGradient: !props.container.isGradient,
-              })
+              props.onSlidesChange(
+                props.slides.map((slide) => {
+                  if (slide === props.activeSlide) {
+                    slide.isGradient = !props.activeSlide.isGradient;
+                  }
+
+                  return slide;
+                }),
+              )
             }
           >
-            {props.container.isGradient ? "Yes" : "No"}
+            {props.activeSlide.isGradient ? "Yes" : "No"}
           </Button>
         </div>
 
         <Select
           label="Gradient Type"
-          value={props.container.type}
+          value={props.activeSlide.type}
           onChange={(event) =>
-            props.onContainerChange({
-              ...props.container,
-              type: event.target.value,
-            })
+            props.onSlidesChange(
+              props.slides.map((slide) => {
+                if (slide === props.activeSlide) {
+                  slide.type = event.target.value;
+                }
+
+                return slide;
+              }),
+            )
           }
         >
           {Constants.types.map((type) => (
@@ -173,12 +153,17 @@ const Nav = (props: {
 
         <Select
           label="Gradient Direction"
-          value={props.container.direction}
+          value={props.activeSlide.direction}
           onChange={(event) =>
-            props.onContainerChange({
-              ...props.container,
-              direction: event.target.value,
-            })
+            props.onSlidesChange(
+              props.slides.map((slide) => {
+                if (slide === props.activeSlide) {
+                  slide.direction = event.target.value;
+                }
+
+                return slide;
+              }),
+            )
           }
         >
           {Constants.directions.map((direction) => (
@@ -195,55 +180,60 @@ const Nav = (props: {
               <button
                 key={clr}
                 onClick={() =>
-                  props.onContainerChange({
-                    ...props.container,
-                    color: clr,
-                  })
+                  props.onSlidesChange(
+                    props.slides.map((slide) => {
+                      if (slide === props.activeSlide) {
+                        slide.color = clr;
+                      }
+
+                      return slide;
+                    }),
+                  )
                 }
                 className={clsx(
-                  "h-8 w-8 rounded-sm shadow-lg hover:-translate-y-8 hover:scale-[400%] hover:shadow-xl",
+                  "h-8 w-8 rounded-sm shadow-lg ring-1 hover:-translate-y-8 hover:scale-[400%] hover:shadow-xl",
                   clr,
                   {
                     "ring-4 ring-opacity-75 ring-offset-1":
-                      clr === props.container.color,
+                      clr === props.activeSlide.color,
                     "bg-gradient-to-t":
-                      props.container.isGradient &&
-                      props.container.type === "linear" &&
-                      props.container.direction === "top",
+                      props.activeSlide.isGradient &&
+                      props.activeSlide.type === "linear" &&
+                      props.activeSlide.direction === "top",
                     "bg-gradient-to-tr":
-                      props.container.isGradient &&
-                      props.container.type === "linear" &&
-                      props.container.direction === "top-right",
+                      props.activeSlide.isGradient &&
+                      props.activeSlide.type === "linear" &&
+                      props.activeSlide.direction === "top-right",
                     "bg-gradient-to-r":
-                      props.container.isGradient &&
-                      props.container.type === "linear" &&
-                      props.container.direction === "right",
+                      props.activeSlide.isGradient &&
+                      props.activeSlide.type === "linear" &&
+                      props.activeSlide.direction === "right",
                     "bg-gradient-to-br":
-                      props.container.isGradient &&
-                      props.container.type === "linear" &&
-                      props.container.direction === "bottom-right",
+                      props.activeSlide.isGradient &&
+                      props.activeSlide.type === "linear" &&
+                      props.activeSlide.direction === "bottom-right",
                     "bg-gradient-to-b":
-                      props.container.isGradient &&
-                      props.container.type === "linear" &&
-                      props.container.direction === "bottom",
+                      props.activeSlide.isGradient &&
+                      props.activeSlide.type === "linear" &&
+                      props.activeSlide.direction === "bottom",
                     "bg-gradient-to-bl":
-                      props.container.isGradient &&
-                      props.container.type === "linear" &&
-                      props.container.direction === "bottom-left",
+                      props.activeSlide.isGradient &&
+                      props.activeSlide.type === "linear" &&
+                      props.activeSlide.direction === "bottom-left",
                     "bg-gradient-to-l":
-                      props.container.isGradient &&
-                      props.container.type === "linear" &&
-                      props.container.direction === "left",
+                      props.activeSlide.isGradient &&
+                      props.activeSlide.type === "linear" &&
+                      props.activeSlide.direction === "left",
                     "bg-gradient-to-tl":
-                      props.container.isGradient &&
-                      props.container.type === "linear" &&
-                      props.container.direction === "top-left",
+                      props.activeSlide.isGradient &&
+                      props.activeSlide.type === "linear" &&
+                      props.activeSlide.direction === "top-left",
                     "bg-gradient-conic":
-                      props.container.isGradient &&
-                      props.container.type === "conic",
+                      props.activeSlide.isGradient &&
+                      props.activeSlide.type === "conic",
                     "bg-gradient-radial":
-                      props.container.isGradient &&
-                      props.container.type === "radial",
+                      props.activeSlide.isGradient &&
+                      props.activeSlide.type === "radial",
                   },
                 )}
               ></button>
@@ -294,26 +284,67 @@ const Nav = (props: {
         <Button onClick={() => props.exportCallback()}>Export</Button>
       </Drawer>
 
-      {/* Code Drawer */}
+      {/* File Drawer */}
       <Drawer
         tabIndex={-1}
-        title="Code"
+        title="File"
         isVisible={display.code}
         onDisplayChange={() => setDisplay({ ...display, code: false })}
       >
+        <div className="flex items-center justify-between gap-4">
+          <p>Window Style</p>
+          <Button
+            onClick={() =>
+              props.onSlidesChange(
+                props.slides.map((slide) => {
+                  if (slide === props.activeSlide) {
+                    slide.buttons = {
+                      ...props.activeSlide.buttons,
+                      style: !props.activeSlide.buttons.style,
+                    };
+                  }
+
+                  return slide;
+                }),
+              )
+            }
+          >
+            {props.activeSlide.buttons.style ? "Mac" : "Windows"}
+          </Button>
+        </div>
+
+        <div className="flex items-center justify-between gap-4">
+          <p>Window Position</p>
+          <Button
+            onClick={() =>
+              props.onSlidesChange(
+                props.slides.map((slide) => {
+                  if (slide === props.activeSlide) {
+                    slide.buttons = {
+                      ...props.activeSlide.buttons,
+                      position: !props.activeSlide.buttons.position,
+                    };
+                  }
+
+                  return slide;
+                }),
+              )
+            }
+          >
+            {props.activeSlide.buttons.position ? "Left" : "Right"}
+          </Button>
+        </div>
+
         <Select
           label="Language"
-          value={props.code.tabs[props.code.active]?.language}
+          value={props.code.file.language}
           onChange={(event) =>
             props.onCodeChange({
               ...props.code,
-              tabs: props.code.tabs.map((i, idx) => {
-                if (idx === props.code.active) {
-                  i.language = event.target.value as Language;
-                }
-
-                return i;
-              }),
+              file: {
+                ...props.code.file,
+                language: event.target.value as Language,
+              },
             })
           }
         >
@@ -378,10 +409,10 @@ const Nav = (props: {
         </div>
       </Drawer>
 
-      {/* Account Drawer */}
+      {/* Author Drawer */}
       <Drawer
         tabIndex={-1}
-        title="Account"
+        title="Author"
         isVisible={display.account}
         onDisplayChange={() => setDisplay({ ...display, account: false })}
       >
@@ -482,7 +513,7 @@ const Nav = (props: {
           >
             <CodeBracketSquareIcon className="h-6 w-6" />
           </Button>
-          <p className="text-xs">Code</p>
+          <p className="text-xs">File</p>
         </div>
 
         <div className="flex flex-col items-center gap-2">
@@ -498,7 +529,7 @@ const Nav = (props: {
           >
             <UserCircleIcon className="h-6 w-6" />
           </Button>
-          <p className="text-xs">Account</p>
+          <p className="text-xs">Author</p>
         </div>
       </div>
     </nav>

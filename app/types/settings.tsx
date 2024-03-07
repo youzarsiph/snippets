@@ -1,5 +1,5 @@
 import {
-  Code,
+  File,
   Color,
   Direction,
   Font,
@@ -10,25 +10,25 @@ import {
   Size,
 } from "@/app/types";
 
-type AccountSettings = {
+type AuthorSettings = {
   name: string;
   username: string;
   isVisible: boolean;
 };
 
-type CodeSettings = {
+type FileSettings = {
   font: Font;
-  tabs: Code[];
-  active: number;
+  file: File;
   highlight: Highlight;
   displayLineNumbers: boolean;
 };
 
-type ContainerSettings = {
-  size: Size;
-  theme: boolean;
+type Slide = {
+  title: string;
+  subtitle: string;
+  isTitleSlide: boolean;
+  description: string;
   color: Color;
-  padding: Padding;
   isGradient: boolean;
   type: GradientType;
   direction: Direction;
@@ -40,9 +40,10 @@ type ExportSettings = {
   quality: number;
 };
 
-export type {
-  AccountSettings,
-  CodeSettings,
-  ContainerSettings,
-  ExportSettings,
+type Settings = {
+  size: Size;
+  theme: boolean;
+  padding: Padding;
 };
+
+export type { AuthorSettings, FileSettings, Slide, ExportSettings, Settings };
