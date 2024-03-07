@@ -3,16 +3,11 @@
 import clsx from "clsx";
 import React from "react";
 import hljs from "highlight.js";
-import { PlusIcon } from "@heroicons/react/24/outline";
+import { PlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Fonts } from "@/app/styles";
 import { Constants, exportImage } from "@/app/utils";
+import { Slide as TSlide, Settings } from "@/app/types";
 import { Author, Background, Nav, Slide, Snippet } from "@/app/ui";
-import {
-  FileSettings,
-  Slide as TSlide,
-  ExportSettings,
-  Settings,
-} from "@/app/types";
 
 const Home = () => {
   // Target element
@@ -25,70 +20,83 @@ const Home = () => {
     username: "github.com/username",
   });
 
-  // Settings
+  // General Settings
   const [settings, setSettings] = React.useState<Settings>({
+    quality: 1,
     theme: true,
+    format: "png",
     padding: "64px",
     size: "widescreen",
+    font: "JetBrains Mono",
+    highlight: "github-dark",
+    displayLineNumbers: true,
   });
 
   // Slide Settings
   const [slides, setSlides] = React.useState<TSlide[]>([
     {
-      title: "Title Slide",
-      subtitle: "Subtitle",
+      id: parseInt(`${Math.random() * 100}`),
+      title: "Slides",
+      subtitle: "Modern, Elegant & Code oriented",
       isTitleSlide: true,
-      description: "Slide description",
+      description: "Let's learn about Slides",
       type: "linear",
       isGradient: true,
       direction: "top-right",
-      color: Constants.colors[0],
+      color:
+        Constants.colors[
+          parseInt(`${(Math.random() * 100) % Constants.colors.length}`)
+        ],
       buttons: { style: true, position: true },
+      file: {
+        name: "Untitled",
+        language: "plaintext",
+        content: "Type your code here...",
+      },
     },
     {
-      title: "Untitled Slide",
-      subtitle: "Subtitle",
+      id: parseInt(`${Math.random() * 100}`),
+      title: "Intro",
+      subtitle: "",
       isTitleSlide: false,
-      description: "Slide description",
+      description: "Modern\nElegant\nProfessional\nCode Oriented",
       type: "linear",
       isGradient: true,
       direction: "top-right",
-      color: Constants.colors[0],
+      color:
+        Constants.colors[
+          parseInt(`${(Math.random() * 100) % Constants.colors.length}`)
+        ],
       buttons: { style: true, position: true },
+      file: {
+        name: "hello.py",
+        language: "python",
+        content: "print('Hello, World!')\n",
+      },
+    },
+    {
+      id: parseInt(`${Math.random() * 100}`),
+      title: "Thanks",
+      subtitle: "",
+      isTitleSlide: true,
+      description: "",
+      type: "linear",
+      isGradient: true,
+      direction: "top-right",
+      color:
+        Constants.colors[
+          parseInt(`${(Math.random() * 100) % Constants.colors.length}`)
+        ],
+      buttons: { style: true, position: true },
+      file: {
+        name: "Untitled",
+        language: "plaintext",
+        content: "Type your code here...",
+      },
     },
   ]);
 
   const [activeSlide, setActiveSlide] = React.useState<TSlide>(slides[0]);
-
-  // Export settings
-  const [exportSettings, setExport] = React.useState<ExportSettings>({
-    quality: 1,
-    format: "png",
-  });
-
-  // File Settings
-  const [code, setCode] = React.useState<FileSettings>({
-    font: "JetBrains Mono",
-    highlight: "github-dark",
-    displayLineNumbers: true,
-    file: {
-      name: "Untitled",
-      language: "plaintext",
-      content: "Type your code here...",
-    },
-  });
-
-  React.useEffect(
-    () =>
-      setCode({
-        ...code,
-        file: Constants.samples[
-          parseInt(`${Math.random() * 100}`) % Constants.samples.length
-        ],
-      }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  );
 
   React.useEffect(() => {
     // Remove attribute to re-highlight code
@@ -96,13 +104,13 @@ const Home = () => {
 
     // Highlight code
     hljs.highlightAll();
-  }, [code]);
+  }, [activeSlide.file]);
 
   return (
     <div className={clsx({ dark: settings.theme }, "block h-screen w-screen")}>
       <link
         rel="stylesheet"
-        href={`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/${code.highlight}.css`}
+        href={`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/${settings.highlight}.css`}
       />
 
       <Background />
@@ -110,101 +118,128 @@ const Home = () => {
       <div className="flex h-full w-full overflow-hidden">
         <main className="relative flex h-full w-full flex-col items-center lg:flex-row">
           <Nav
-            code={code}
+            file={activeSlide.file}
             slides={slides}
             account={author}
             settings={settings}
             activeSlide={activeSlide}
-            onSettingsChange={(s) => setSettings(s)}
-            export={exportSettings}
-            onCodeChange={(c) => setCode(c)}
-            onAccountChange={(a) => setAuthor(a)}
             onSlidesChange={(c) => setSlides(c)}
-            onExportChange={(e) => setExport(e)}
+            onAuthorChange={(a) => setAuthor(a)}
+            onSettingsChange={(s) => setSettings(s)}
             exportCallback={() =>
               exportImage(
                 target,
-                exportSettings.format,
-                code.file.name,
-                exportSettings.quality,
+                settings.format,
+                activeSlide.file.name,
+                settings.quality,
               )
             }
           />
 
           <div className="relative flex h-full w-full items-center justify-center overflow-auto">
-            <div
-              className={clsx(
-                "absolute left-0 top-0 z-10 flex items-center gap-4 rounded p-4 shadow-xl backdrop-blur-3xl",
-              )}
-            >
+            {/* Slides */}
+            <div className="absolute right-4 top-4 z-10 flex items-center gap-4 rounded p-4 shadow-xl backdrop-blur-3xl">
               {slides.map((slide, i) => (
                 <button
                   key={slide.title}
                   onClick={() => setActiveSlide(slide)}
                   className={clsx(
-                    "flex h-16 w-32 items-center justify-center rounded bg-gradient-to-t",
+                    "relative flex h-12 w-24 items-center justify-center rounded bg-gradient-to-t ring-1",
                     slide.color,
+                    { "ring-4 ring-offset-1": activeSlide === slide },
                   )}
                 >
+                  {activeSlide === slide ? (
+                    <span className="group absolute -right-2 -top-2 flex h-4 w-4">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/75"></span>
+                      <span className="relative inline-flex h-4 w-4 rounded-full bg-white dark:bg-stone-900">
+                        <span
+                          className="flex h-4 w-4 scale-0 items-center justify-center  group-hover:scale-100"
+                          onClick={() =>
+                            setSlides(
+                              slides.filter((slide) => slide !== activeSlide),
+                            )
+                          }
+                        >
+                          <XMarkIcon className="h-4 w-4" />
+                        </span>
+                      </span>
+                    </span>
+                  ) : undefined}
                   {slide.title}
                 </button>
               ))}
 
               <button
-                onClick={() => {
-                  let res = slides;
-
-                  res.push({
-                    title: "Untitled",
-                    subtitle: "Subtitle",
-                    isTitleSlide: false,
-                    description: "Slide description",
-                    type: "linear",
-                    isGradient: true,
-                    direction: "top-right",
-                    color: Constants.colors[0],
-                    buttons: { style: true, position: true },
-                  });
-
-                  setSlides(res);
-                }}
-                className="flex h-16 w-32 items-center justify-center gap-4 rounded ring-1 ring-white hover:bg-white/75 dark:ring-stone-900 dark:hover:bg-stone-800/75"
+                onClick={() =>
+                  setSlides([
+                    ...slides,
+                    {
+                      id: parseInt(`${Math.random() * 100}`),
+                      title: "Untitled",
+                      subtitle: "Subtitle",
+                      isTitleSlide: false,
+                      description: "Slide description",
+                      type: "linear",
+                      isGradient: true,
+                      direction: "top-right",
+                      color: Constants.colors[0],
+                      buttons: { style: true, position: true },
+                      file: {
+                        name: "Untitled",
+                        language: "plaintext",
+                        content: "Type your code here...",
+                      },
+                    },
+                  ])
+                }
+                className="flex h-12 w-24 items-center justify-center gap-4 rounded ring-1 ring-white hover:bg-white/75 focus:ring-8 focus:ring-offset-2 active:scale-90 dark:ring-stone-900 dark:hover:bg-stone-800/75"
               >
-                <PlusIcon className="h-6 w-6" />
-                <span>Add Slide</span>
+                <PlusIcon className="h-4 w-4" />
+                <span>Add</span>
               </button>
             </div>
 
             <div className="relative grid h-fit w-fit gap-4">
               <Slide
+                pageNum={1}
                 slides={slides}
-                onSlidesChange={(c) => setSlides(c)}
+                data={activeSlide}
+                settings={settings}
                 key={activeSlide.title}
+                onSlidesChange={(c) => setSlides(c)}
+                font={Fonts[settings.font].className}
                 author={() =>
                   author.isVisible ? (
                     <Author name={author.name} username={author.username} />
                   ) : undefined
                 }
-                code={code.file}
-                data={activeSlide}
-                font={Fonts[code.font].className}
-                pageNum={1}
-                settings={settings}
                 snippet={() => (
                   <Snippet
-                    code={code}
+                    file={activeSlide.file}
                     buttons={activeSlide.buttons}
+                    displayLineNumbers={settings.displayLineNumbers}
                     editTab={(n) =>
-                      setCode({
-                        ...code,
-                        file: { ...code.file, name: n },
-                      })
+                      setSlides(
+                        slides.map((slide) => {
+                          if (slide === activeSlide) {
+                            slide.file.name = n;
+                          }
+
+                          return slide;
+                        }),
+                      )
                     }
                     onContentChange={(c) =>
-                      setCode({
-                        ...code,
-                        file: { ...code.file, content: c },
-                      })
+                      setSlides(
+                        slides.map((slide) => {
+                          if (slide === activeSlide) {
+                            slide.file.content = c;
+                          }
+
+                          return slide;
+                        }),
+                      )
                     }
                   />
                 )}

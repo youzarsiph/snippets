@@ -1,13 +1,14 @@
 import clsx from "clsx";
 import React from "react";
 import { Buttons, Logo, Tab } from "@/app/ui";
-import type { FileSettings } from "@/app/types";
+import type { File } from "@/app/types";
 
 const Snippet = (props: {
-  code: FileSettings;
-  buttons: { style: boolean; position: boolean };
+  file: File;
+  displayLineNumbers: boolean;
   editTab: (name: string) => void;
   onContentChange: (code: string) => void;
+  buttons: { style: boolean; position: boolean };
 }) => {
   // Line number count
   let count = 0;
@@ -38,10 +39,7 @@ const Snippet = (props: {
           />
         ) : undefined}
 
-        <Tab
-          title={props.code.file.name}
-          onTabUpdate={(n) => props.editTab(n)}
-        />
+        <Tab title={props.file.name} onTabUpdate={(n) => props.editTab(n)} />
 
         {!props.buttons.position ? (
           <Buttons
@@ -54,9 +52,9 @@ const Snippet = (props: {
       {/* Main */}
       <main className="rounded-b-xl bg-white/75 p-4 dark:bg-stone-800/75 dark:text-stone-200">
         <section className="flex gap-4">
-          {props.code.displayLineNumbers ? (
+          {props.displayLineNumbers ? (
             <div className="grid text-center">
-              {props.code.file.content.split("\n").map(() => {
+              {props.file.content.split("\n").map(() => {
                 count += 1;
                 return <div key={count}>{count}</div>;
               })}
@@ -66,7 +64,7 @@ const Snippet = (props: {
           <div className="relative w-full">
             <textarea
               name="code"
-              value={props.code.file.content}
+              value={props.file.content}
               className="absolute inset-0 z-[1px] h-full min-h-full w-full min-w-full resize-none overflow-hidden whitespace-pre-wrap text-nowrap bg-transparent text-transparent caret-stone-800 outline-none dark:caret-white"
               onChange={(event) => props.onContentChange(event.target.value)}
             ></textarea>
@@ -75,9 +73,9 @@ const Snippet = (props: {
               <code
                 id="code"
                 style={{ padding: 0, background: "transparent" }}
-                className={`hljs language-${props.code.file.language}`}
+                className={`hljs language-${props.file.language}`}
               >
-                {props.code.file.content}
+                {props.file.content}
               </code>
             </pre>
           </div>

@@ -561,63 +561,7 @@ const Constants = {
     "xt256",
     "xt256.min",
   ],
-  samples: [
-    {
-      isActive: true,
-      name: "hello.py",
-      language: "python",
-      content: `""" Hello, Python """
-
-def say_hello(name: str) -> str:
-    """Say Hello, name!"""
-
-    return f"Hello, {name}!"
-`,
-    },
-    {
-      isActive: true,
-      name: "hello.js",
-      language: "javascript",
-      content: `/**
- * Hello, JavaScript
- */
-
-const sayHello = (name) => {
-  return "Hello, " + name + "!";
-}
-`,
-    },
-    {
-      isActive: true,
-      name: "hello.ts",
-      language: "typescript",
-      content: `/**
- * Hello, TypeScript
- */
-
-const sayHello = (name: string): string => {
-  return "Hello, " + name + "!"
-};
-`,
-    },
-    {
-      isActive: true,
-      name: "hello.html",
-      language: "html",
-      content: `<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Hello, HTML</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-  </head>
-  <body>
-    <h1>Hello, HTML</h1>
-  </body>
-</html>
-`,
-    },
-  ],
+  samples: [],
 };
 
 export default Constants;

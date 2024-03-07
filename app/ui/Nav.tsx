@@ -20,95 +20,216 @@ import {
   Language,
   Padding,
   Size,
-  AuthorSettings,
-  FileSettings,
+  Author,
   Slide,
-  ExportSettings,
   Settings,
+  File,
+  Highlight,
 } from "@/app/types";
 
 const Nav = (props: {
-  settings: Settings;
-  account: AuthorSettings;
-  code: FileSettings;
+  file: File;
   slides: Slide[];
   activeSlide: Slide;
-  export: ExportSettings;
+  settings: Settings;
+  account: Author;
   exportCallback: () => void;
-  onCodeChange: (code: FileSettings) => void;
-  onAccountChange: (account: AuthorSettings) => void;
   onSlidesChange: (slides: Slide[]) => void;
-  onExportChange: (exportSettings: ExportSettings) => void;
   onSettingsChange: (settings: Settings) => void;
+  onAuthorChange: (account: Author) => void;
 }) => {
   const [display, setDisplay] = React.useState({
-    account: false,
+    author: false,
     code: false,
-    container: false,
-    export: false,
+    settings: false,
+    slide: false,
   });
 
   return (
     <nav className="relative z-20 order-last w-full lg:static lg:-order-none lg:h-full lg:w-auto">
+      {/* Settings Drawer */}
+      <Drawer
+        tabIndex={-1}
+        title="Settings"
+        isVisible={display.settings}
+        onDisplayChange={() => setDisplay({ ...display, settings: false })}
+      >
+        <section className="grid gap-4">
+          <div className="flex items-center justify-between gap-4 lg:hidden">
+            <p>Theme</p>
+            <Button
+              onClick={() =>
+                props.onSettingsChange({
+                  ...props.settings,
+                  theme: !props.settings.theme,
+                })
+              }
+            >
+              {props.settings.theme ? (
+                <SunIcon className="h-6 w-6" />
+              ) : (
+                <MoonIcon className="h-6 w-6" />
+              )}
+              <span>{props.settings.theme ? "Dark" : "Light"}</span>
+            </Button>
+          </div>
+
+          <Select
+            label="Slide Size"
+            value={props.settings.size}
+            onChange={(event) =>
+              props.onSettingsChange({
+                ...props.settings,
+                size: event.target.value as Size,
+              })
+            }
+          >
+            {Object.keys(Constants.sizes).map((size) => (
+              <option key={size} value={size}>
+                {size}
+              </option>
+            ))}
+          </Select>
+
+          <Select
+            label="Slide Padding"
+            value={props.settings.padding}
+            onChange={(event) =>
+              props.onSettingsChange({
+                ...props.settings,
+                padding: event.target.value as Padding,
+              })
+            }
+          >
+            {Object.keys(Constants.paddings).map((padding) => (
+              <option key={padding} value={padding}>
+                {padding}
+              </option>
+            ))}
+          </Select>
+        </section>
+
+        <section className="grid gap-4">
+          <h3 className="text-lg font-thin">Editor settings</h3>
+
+          <Select
+            label="Font Family"
+            value={props.settings.font}
+            onChange={(event) =>
+              props.onSettingsChange({
+                ...props.settings,
+                font: event.target.value as Font,
+              })
+            }
+          >
+            {Object.keys(Fonts).map((font) => (
+              <option key={font} value={font}>
+                {font}
+              </option>
+            ))}
+          </Select>
+
+          <Select
+            label="Highlight Theme"
+            value={props.settings.highlight}
+            onChange={(event) =>
+              props.onSettingsChange({
+                ...props.settings,
+                highlight: event.target.value as Highlight,
+              })
+            }
+          >
+            {Constants.highlights.map((highlight) => (
+              <option key={highlight} value={highlight}>
+                {highlight}
+              </option>
+            ))}
+          </Select>
+
+          <div className="flex items-center justify-between gap-4">
+            <p>Line Numbers</p>
+            <Button
+              onClick={() =>
+                props.onSettingsChange({
+                  ...props.settings,
+                  displayLineNumbers: !props.settings.displayLineNumbers,
+                })
+              }
+            >
+              {props.settings.displayLineNumbers ? (
+                <EyeSlashIcon className="h-6 w-6" />
+              ) : (
+                <EyeIcon className="h-6 w-6" />
+              )}
+              <span>{props.settings.displayLineNumbers ? "Hide" : "Show"}</span>
+            </Button>
+          </div>
+        </section>
+
+        <section className="grid gap-4">
+          <h3 className="text-lg font-thin">Export</h3>
+
+          <Select
+            label="Format"
+            value={props.settings.format}
+            onChange={(event) =>
+              props.onSettingsChange({
+                ...props.settings,
+                format: event.target.value,
+              })
+            }
+          >
+            {Constants.formats.map((format) => (
+              <option key={format} value={format}>
+                {format.toUpperCase()}
+              </option>
+            ))}
+          </Select>
+
+          <Select
+            label="Quality"
+            value={props.settings.quality}
+            onChange={(event) =>
+              props.onSettingsChange({
+                ...props.settings,
+                quality: parseFloat(event.target.value),
+              })
+            }
+          >
+            <option value={0.5}>50 %</option>
+            <option value={0.75}>75 %</option>
+            <option value={1}>100 %</option>
+          </Select>
+
+          <Button onClick={() => props.exportCallback()}>Export</Button>
+        </section>
+      </Drawer>
+
       {/* Slide Drawer */}
       <Drawer
         tabIndex={-1}
         title="Slide"
-        isVisible={display.container}
-        onDisplayChange={() => setDisplay({ ...display, container: false })}
+        isVisible={display.slide}
+        onDisplayChange={() => setDisplay({ ...display, slide: false })}
       >
         <div className="flex items-center justify-between gap-4">
-          <p>Theme</p>
+          <p>Is title slide?</p>
           <Button
             onClick={() =>
-              props.onSettingsChange({
-                ...props.settings,
-                theme: !props.settings.theme,
-              })
+              props.onSlidesChange(
+                props.slides.map((slide) => {
+                  if (slide === props.activeSlide) {
+                    slide.isTitleSlide = !props.activeSlide.isTitleSlide;
+                  }
+
+                  return slide;
+                }),
+              )
             }
           >
-            {props.settings.theme ? (
-              <MoonIcon className="h-6 w-6" />
-            ) : (
-              <SunIcon className="h-6 w-6" />
-            )}
-            <span>{props.settings.theme ? "Dark" : "Light"}</span>
+            {props.activeSlide.isTitleSlide ? "Yes" : "No"}
           </Button>
         </div>
-
-        <Select
-          label="Slide Size"
-          value={props.settings.size}
-          onChange={(event) =>
-            props.onSettingsChange({
-              ...props.settings,
-              size: event.target.value as Size,
-            })
-          }
-        >
-          {Object.keys(Constants.sizes).map((size) => (
-            <option key={size} value={size}>
-              {size}
-            </option>
-          ))}
-        </Select>
-
-        <Select
-          label="Slide Padding"
-          value={props.settings.padding}
-          onChange={(event) =>
-            props.onSettingsChange({
-              ...props.settings,
-              padding: event.target.value as Padding,
-            })
-          }
-        >
-          {Object.keys(Constants.paddings).map((padding) => (
-            <option key={padding} value={padding}>
-              {padding}
-            </option>
-          ))}
-        </Select>
 
         <div className="flex items-center justify-between gap-4">
           <p>Gradient Background</p>
@@ -242,48 +363,6 @@ const Nav = (props: {
         </div>
       </Drawer>
 
-      {/* Export Drawer */}
-      <Drawer
-        tabIndex={-1}
-        title="Export"
-        isVisible={display.export}
-        onDisplayChange={() => setDisplay({ ...display, export: false })}
-      >
-        <Select
-          label="Format"
-          value={props.export.format}
-          onChange={(event) =>
-            props.onExportChange({
-              ...props.export,
-              format: event.target.value,
-            })
-          }
-        >
-          {Constants.formats.map((format) => (
-            <option key={format} value={format}>
-              {format.toUpperCase()}
-            </option>
-          ))}
-        </Select>
-
-        <Select
-          label="Quality"
-          value={props.export.quality}
-          onChange={(event) =>
-            props.onExportChange({
-              ...props.export,
-              quality: parseFloat(event.target.value),
-            })
-          }
-        >
-          <option value={0.5}>50 %</option>
-          <option value={0.75}>75 %</option>
-          <option value={1}>100 %</option>
-        </Select>
-
-        <Button onClick={() => props.exportCallback()}>Export</Button>
-      </Drawer>
-
       {/* File Drawer */}
       <Drawer
         tabIndex={-1}
@@ -337,15 +416,17 @@ const Nav = (props: {
 
         <Select
           label="Language"
-          value={props.code.file.language}
+          value={props.file.language}
           onChange={(event) =>
-            props.onCodeChange({
-              ...props.code,
-              file: {
-                ...props.code.file,
-                language: event.target.value as Language,
-              },
-            })
+            props.onSlidesChange(
+              props.slides.map((slide) => {
+                if (slide === props.activeSlide) {
+                  slide.file.language = event.target.value as Language;
+                }
+
+                return slide;
+              }),
+            )
           }
         >
           {hljs.listLanguages().map((language) => (
@@ -354,73 +435,20 @@ const Nav = (props: {
             </option>
           ))}
         </Select>
-
-        <Select
-          label="Font Family"
-          value={props.code.font}
-          onChange={(event) =>
-            props.onCodeChange({
-              ...props.code,
-              font: event.target.value as Font,
-            })
-          }
-        >
-          {Object.keys(Fonts).map((font) => (
-            <option key={font} value={font}>
-              {font}
-            </option>
-          ))}
-        </Select>
-
-        <Select
-          label="Highlight Theme"
-          value={props.code.highlight}
-          onChange={(event) =>
-            props.onCodeChange({
-              ...props.code,
-              highlight: event.target.value,
-            })
-          }
-        >
-          {Constants.highlights.map((highlight) => (
-            <option key={highlight} value={highlight}>
-              {highlight}
-            </option>
-          ))}
-        </Select>
-
-        <div className="flex items-center justify-between gap-4">
-          <p>Line Numbers</p>
-          <Button
-            onClick={() =>
-              props.onCodeChange({
-                ...props.code,
-                displayLineNumbers: !props.code.displayLineNumbers,
-              })
-            }
-          >
-            {props.code.displayLineNumbers ? (
-              <EyeSlashIcon className="h-6 w-6" />
-            ) : (
-              <EyeIcon className="h-6 w-6" />
-            )}
-            <span>{props.code.displayLineNumbers ? "Hide" : "Show"}</span>
-          </Button>
-        </div>
       </Drawer>
 
       {/* Author Drawer */}
       <Drawer
         tabIndex={-1}
         title="Author"
-        isVisible={display.account}
-        onDisplayChange={() => setDisplay({ ...display, account: false })}
+        isVisible={display.author}
+        onDisplayChange={() => setDisplay({ ...display, author: false })}
       >
         <Input
           label="Name"
           value={props.account.name}
           onChange={(event) =>
-            props.onAccountChange({
+            props.onAuthorChange({
               ...props.account,
               name: event.target.value,
             })
@@ -431,7 +459,7 @@ const Nav = (props: {
           label="Username"
           value={props.account.username}
           onChange={(event) =>
-            props.onAccountChange({
+            props.onAuthorChange({
               ...props.account,
               username: event.target.value,
             })
@@ -442,7 +470,7 @@ const Nav = (props: {
           <p>Visibility</p>
           <Button
             onClick={() =>
-              props.onAccountChange({
+              props.onAuthorChange({
                 ...props.account,
                 isVisible: !props.account.isVisible,
               })
@@ -458,78 +486,97 @@ const Nav = (props: {
         </div>
       </Drawer>
 
-      <div className="relative flex w-full flex-row justify-evenly gap-4 bg-white/80 p-2 backdrop-blur-3xl lg:h-full lg:flex-col lg:justify-start lg:py-8 dark:bg-stone-800/75 dark:text-stone-200">
-        <div className="flex flex-col items-center gap-2">
+      <div className="relative flex w-full flex-row items-center justify-evenly gap-4 bg-white/80 p-2 backdrop-blur-3xl lg:h-full lg:flex-col lg:justify-between lg:py-8 dark:bg-stone-800/75 dark:text-stone-200">
+        <div className="flex gap-4 lg:flex-col lg:justify-start">
+          <div className="flex flex-col items-center gap-2">
+            <Button
+              onClick={() =>
+                setDisplay({
+                  author: false,
+                  code: false,
+                  settings: !display.settings,
+                  slide: false,
+                })
+              }
+            >
+              {display.settings ? (
+                <Squares2X2Icon className="h-6 w-6" />
+              ) : (
+                <SquaresPlusIcon className="h-6 w-6" />
+              )}
+            </Button>
+            <p className="text-xs">Settings</p>
+          </div>
+
+          <div className="flex flex-col items-center gap-2">
+            <Button
+              onClick={() =>
+                setDisplay({
+                  author: false,
+                  code: false,
+                  settings: false,
+                  slide: !display.slide,
+                })
+              }
+            >
+              <ViewfinderCircleIcon className="h-6 w-6" />
+            </Button>
+            <p className="text-xs">Slide</p>
+          </div>
+
+          <div className="flex flex-col items-center gap-1 lg:order-first">
+            <Logo />
+            <p className="text-xs font-semibold">Slides</p>
+          </div>
+
+          <div className="flex flex-col items-center gap-2">
+            <Button
+              onClick={() =>
+                setDisplay({
+                  author: false,
+                  code: !display.code,
+                  slide: false,
+                  settings: false,
+                })
+              }
+            >
+              <CodeBracketSquareIcon className="h-6 w-6" />
+            </Button>
+            <p className="text-xs">Code</p>
+          </div>
+
+          <div className="flex flex-col items-center gap-2">
+            <Button
+              onClick={() =>
+                setDisplay({
+                  author: !display.author,
+                  code: false,
+                  slide: false,
+                  settings: false,
+                })
+              }
+            >
+              <UserCircleIcon className="h-6 w-6" />
+            </Button>
+            <p className="text-xs">Author</p>
+          </div>
+        </div>
+
+        <div className="hidden lg:block">
           <Button
             onClick={() =>
-              setDisplay({
-                account: false,
-                code: false,
-                container: !display.container,
-                export: false,
+              props.onSettingsChange({
+                ...props.settings,
+                theme: !props.settings.theme,
               })
             }
           >
-            {display.container ? (
-              <Squares2X2Icon className="h-6 w-6" />
+            {props.settings.theme ? (
+              <SunIcon className="h-6 w-6" />
             ) : (
-              <SquaresPlusIcon className="h-6 w-6" />
+              <MoonIcon className="h-6 w-6" />
             )}
           </Button>
-          <p className="text-xs">Menu</p>
-        </div>
-
-        <div className="flex flex-col items-center gap-2">
-          <Button
-            onClick={() =>
-              setDisplay({
-                account: false,
-                code: false,
-                container: false,
-                export: !display.export,
-              })
-            }
-          >
-            <ViewfinderCircleIcon className="h-6 w-6" />
-          </Button>
-          <p className="text-xs">Export</p>
-        </div>
-
-        <div className="flex flex-col items-center gap-1 lg:order-first">
-          <Logo />
-          <p className="text-xs font-semibold">Snippets</p>
-        </div>
-
-        <div className="flex flex-col items-center gap-2">
-          <Button
-            onClick={() =>
-              setDisplay({
-                account: false,
-                code: !display.code,
-                export: false,
-                container: false,
-              })
-            }
-          >
-            <CodeBracketSquareIcon className="h-6 w-6" />
-          </Button>
-          <p className="text-xs">File</p>
-        </div>
-
-        <div className="flex flex-col items-center gap-2">
-          <Button
-            onClick={() =>
-              setDisplay({
-                account: !display.account,
-                code: false,
-                export: false,
-                container: false,
-              })
-            }
-          >
-            <UserCircleIcon className="h-6 w-6" />
-          </Button>
-          <p className="text-xs">Author</p>
         </div>
       </div>
     </nav>

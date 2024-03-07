@@ -1,10 +1,9 @@
 import clsx from "clsx";
 import React from "react";
 import { Constants } from "@/app/utils";
-import { File, Settings, Slide } from "@/app/types";
+import { Settings, Slide } from "@/app/types";
 
 const Slide = (props: {
-  code: File;
   data: Slide;
   font: string;
   pageNum: number;
@@ -156,10 +155,10 @@ const Slide = (props: {
         </div>
 
         {!props.data.isTitleSlide ? (
-          <div className="flex grid-cols-12">
+          <div className="flex">
             {display.description ? (
               <p
-                className="col-span-9 whitespace-pre-wrap text-xl font-thin"
+                className="w-full whitespace-pre-wrap text-xl font-thin"
                 onDoubleClick={() =>
                   setDisplay({ ...display, description: false })
                 }
@@ -173,7 +172,7 @@ const Slide = (props: {
                 onChange={(event) =>
                   setValues({ ...values, description: event.target.value })
                 }
-                className="col-span-9 w-full resize-none border-none bg-transparent text-xl outline-none"
+                className="w-full resize-none border-none bg-transparent text-xl outline-none"
                 onBlur={() => {
                   setDisplay({ ...display, description: true });
                   props.onSlidesChange(
@@ -189,15 +188,13 @@ const Slide = (props: {
               />
             )}
 
-            <div className={clsx("col-span-3", props.font)}>
-              {props.snippet()}
-            </div>
+            <div className={props.font}>{props.snippet()}</div>
           </div>
         ) : undefined}
 
         <div
           className={clsx(
-            "absolute bottom-0 right-0 flex h-8 w-8 items-center justify-center rounded-tl ring-8",
+            "absolute bottom-0 right-0 flex h-8 w-8 items-center justify-center rounded-tl ring-2 ring-offset-1",
             props.data.color,
           )}
         >

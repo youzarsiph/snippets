@@ -10,20 +10,14 @@ import {
   Size,
 } from "@/app/types";
 
-type AuthorSettings = {
+type Author = {
   name: string;
   username: string;
   isVisible: boolean;
 };
 
-type FileSettings = {
-  font: Font;
-  file: File;
-  highlight: Highlight;
-  displayLineNumbers: boolean;
-};
-
 type Slide = {
+  id: number;
   title: string;
   subtitle: string;
   isTitleSlide: boolean;
@@ -32,18 +26,19 @@ type Slide = {
   isGradient: boolean;
   type: GradientType;
   direction: Direction;
+  file: File;
   buttons: { style: boolean; position: boolean };
 };
 
-type ExportSettings = {
-  format: Format;
-  quality: number;
-};
-
 type Settings = {
+  font: Font;
   size: Size;
+  format: Format;
   theme: boolean;
+  quality: number;
   padding: Padding;
+  highlight: Highlight;
+  displayLineNumbers: boolean;
 };
 
-export type { AuthorSettings, FileSettings, Slide, ExportSettings, Settings };
+export type { Author, Slide, Settings };

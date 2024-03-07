@@ -1,10 +1,4 @@
-import {
-  AuthorSettings,
-  FileSettings,
-  Slide,
-  ExportSettings,
-  Settings,
-} from "@/app/types/settings";
+import { Author, Slide, Settings } from "@/app/types/settings";
 import File from "@/app/types/File";
 import {
   Color,
@@ -19,11 +13,9 @@ import {
 } from "@/app/types/common";
 
 export type {
-  AuthorSettings,
+  Author,
   File,
-  FileSettings,
   Slide,
-  ExportSettings,
   Color,
   Direction,
   Font,
