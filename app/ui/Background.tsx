@@ -3,7 +3,7 @@ import React from "react";
 const Background = () => (
   <>
     <div className="fixed inset-0 -z-10 backdrop-blur-3xl"></div>
-    <div className="fixed inset-0 -z-20 dark:bg-stone-950">
+    <div className="fixed inset-0 -z-20 dark:bg-slate-950">
       <div className="absolute -top-36 right-[43.15%] h-52 w-52 animate-spin rounded-full border-[4rem] border-b-sky-400 border-l-lime-400 border-r-rose-500 border-t-fuchsia-500"></div>
 
       <div className="relative h-full w-full animate-pulse">

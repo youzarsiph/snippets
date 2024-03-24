@@ -16,9 +16,9 @@ const Tab = (props: {
   return (
     <div
       className={clsx(
-        "group relative flex items-center gap-2 rounded px-2 dark:text-stone-200",
+        "group relative flex items-center gap-2 rounded px-2 dark:text-slate-200",
         {
-          "bg-white/80 ring-1 ring-white dark:bg-stone-800/75 dark:ring-stone-900/95":
+          "bg-white/80 ring-1 ring-white dark:bg-slate-800/75 dark:ring-slate-900/95":
             props.code.isActive,
         },
       )}
@@ -39,7 +39,7 @@ const Tab = (props: {
             onBlur={() => setDisplay(true)}
             onClick={() => props.onTabSwitch()}
             onDoubleClick={() => setDisplay(false)}
-            className="peer h-full rounded-r-lg p-2 hover:rounded-none hover:bg-white/80 active:bg-white/80 dark:hover:bg-stone-800/75 dark:active:bg-stone-800/80"
+            className="peer h-full rounded-r-lg p-2 hover:rounded-none hover:bg-white/80 active:bg-white/80 dark:hover:bg-slate-800/75 dark:active:bg-slate-800/80"
           >
             {title}
           </button>
@@ -47,7 +47,7 @@ const Tab = (props: {
           <button
             title="Remove tab"
             onClick={() => props.onTabRemove()}
-            className="flex h-6 w-6 items-center justify-center rounded hover:bg-white/50 dark:hover:bg-stone-800/50 dark:active:bg-stone-800/80"
+            className="flex h-6 w-6 items-center justify-center rounded hover:bg-white/50 dark:hover:bg-slate-800/50 dark:active:bg-slate-800/80"
           >
             <i className="bi bi-x-lg" />
           </button>

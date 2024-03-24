@@ -3,7 +3,7 @@ import React from "react";
 import hljs from "highlight.js";
 import { Fonts } from "@/app/styles";
 import { Constants } from "@/app/utils";
-import { Button, Combobox, Drawer, Input, Logo, Select } from "@/app/ui";
+import { Button, Combobox, Modal, Input, Logo, Select } from "@/app/ui";
 import {
   Font,
   Language,
@@ -26,7 +26,7 @@ const Nav = (props: {
   onContainerChange: (container: ContainerSettings) => void;
   onExportChange: (exportSettings: ExportSettings) => void;
 }) => {
-  const [display, setDisplay] = React.useState({
+  const [show, setShow] = React.useState({
     author: false,
     code: false,
     menu: false,
@@ -35,12 +35,12 @@ const Nav = (props: {
 
   return (
     <nav className="relative z-20 order-last w-full lg:static lg:-order-none lg:h-full lg:w-auto">
-      {/* Menu Drawer */}
-      <Drawer
-        tabIndex={-1}
+      {/* Menu Modal */}
+      <Modal
         title="Menu"
-        isVisible={display.menu}
-        onDisplayChange={() => setDisplay({ ...display, menu: false })}
+        show={show.menu}
+        theme={props.container.theme}
+        onClose={() => setShow({ ...show, menu: false })}
       >
         <div className="flex items-center justify-between gap-4">
           <p>Theme</p>
@@ -219,14 +219,14 @@ const Nav = (props: {
             ))}
           </div>
         </div>
-      </Drawer>
+      </Modal>
 
-      {/* Export Drawer */}
-      <Drawer
-        tabIndex={-1}
+      {/* Export Modal */}
+      <Modal
         title="Export"
-        isVisible={display.export}
-        onDisplayChange={() => setDisplay({ ...display, export: false })}
+        show={show.export}
+        theme={props.container.theme}
+        onClose={() => setShow({ ...show, export: false })}
       >
         <Select
           label="Format"
@@ -253,14 +253,14 @@ const Nav = (props: {
         />
 
         <Button onClick={() => props.exportCallback()}>Export</Button>
-      </Drawer>
+      </Modal>
 
-      {/* Code Drawer */}
-      <Drawer
-        tabIndex={-1}
+      {/* Code Modal */}
+      <Modal
         title="Code"
-        isVisible={display.code}
-        onDisplayChange={() => setDisplay({ ...display, code: false })}
+        show={show.code}
+        theme={props.container.theme}
+        onClose={() => setShow({ ...show, code: false })}
       >
         <Combobox
           label="Language"
@@ -322,14 +322,14 @@ const Nav = (props: {
             <span>{props.code.displayLineNumbers ? "Hide" : "Show"}</span>
           </Button>
         </div>
-      </Drawer>
+      </Modal>
 
-      {/* Author Drawer */}
-      <Drawer
-        tabIndex={-1}
+      {/* Author Modal */}
+      <Modal
         title="Author"
-        isVisible={display.author}
-        onDisplayChange={() => setDisplay({ ...display, author: false })}
+        show={show.author}
+        theme={props.container.theme}
+        onClose={() => setShow({ ...show, author: false })}
       >
         <Input
           label="Name"
@@ -371,22 +371,22 @@ const Nav = (props: {
             <span>{props.author.isVisible ? "Hide" : "Show"}</span>
           </Button>
         </div>
-      </Drawer>
+      </Modal>
 
-      <div className="relative flex w-full items-center justify-evenly gap-4 bg-white/80 p-2 backdrop-blur-3xl lg:h-full lg:flex-col lg:justify-between lg:py-8 dark:bg-stone-800/75 dark:text-stone-200">
+      <div className="relative flex w-full items-center justify-evenly gap-4 bg-white/80 p-2 backdrop-blur-3xl lg:h-full lg:flex-col lg:justify-between lg:py-8 dark:bg-slate-800/75 dark:text-slate-200">
         <div className="flex w-full items-center justify-evenly gap-4 lg:flex-col lg:justify-start">
           <div className="flex flex-col items-center gap-2">
             <Button
               onClick={() =>
-                setDisplay({
+                setShow({
                   author: false,
                   code: false,
-                  menu: !display.menu,
+                  menu: !show.menu,
                   export: false,
                 })
               }
             >
-              {display.menu ? (
+              {show.menu ? (
                 <i className="bi bi-x-lg text-xl" />
               ) : (
                 <i className="bi bi-list text-xl" />
@@ -398,11 +398,11 @@ const Nav = (props: {
           <div className="flex flex-col items-center gap-2">
             <Button
               onClick={() =>
-                setDisplay({
+                setShow({
                   author: false,
                   code: false,
                   menu: false,
-                  export: !display.export,
+                  export: !show.export,
                 })
               }
             >
@@ -419,9 +419,9 @@ const Nav = (props: {
           <div className="flex flex-col items-center gap-2">
             <Button
               onClick={() =>
-                setDisplay({
+                setShow({
                   author: false,
-                  code: !display.code,
+                  code: !show.code,
                   export: false,
                   menu: false,
                 })
@@ -435,8 +435,8 @@ const Nav = (props: {
           <div className="flex flex-col items-center gap-2">
             <Button
               onClick={() =>
-                setDisplay({
-                  author: !display.author,
+                setShow({
+                  author: !show.author,
                   code: false,
                   export: false,
                   menu: false,
