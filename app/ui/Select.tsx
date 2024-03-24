@@ -12,7 +12,7 @@ const Select = (props: {
     <span>{props.label}</span>
     <Listbox value={props.value} onChange={(v) => props.onChange(v)}>
       <div className="relative mt-1">
-        <Listbox.Button className="flex w-full cursor-pointer items-center justify-between gap-4 rounded-lg border border-white bg-transparent px-4 py-2 ring-1 ring-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500 focus:ring-offset-2 dark:border-slate-900 dark:ring-slate-900">
+        <Listbox.Button className="flex w-full cursor-pointer items-center justify-between gap-4 rounded-lg border border-white bg-transparent px-4 py-2 ring-1 ring-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-400 focus:ring-offset-2 dark:border-slate-900 dark:ring-slate-900">
           <span className="block truncate">{props.value}</span>
           <i className="bi bi-chevron-expand text-xl" />
         </Listbox.Button>

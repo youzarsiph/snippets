@@ -1,16 +1,13 @@
 import clsx from "clsx";
 import React from "react";
-import { Buttons, Logo, Tab } from "@/app/ui";
+import { Buttons, Tab } from "@/app/ui";
 import type { CodeSettings } from "@/app/types";
 
 const Snippet = (props: {
   code: CodeSettings;
-  buttons: { style: boolean; position: boolean };
-  createTab: () => void;
-  editTab: (index: number, name: string) => void;
-  switchTab: (index: number) => void;
-  deleteTab: (index: number) => void;
+  editTab: (name: string) => void;
   onContentChange: (code: string) => void;
+  buttons: { style: boolean; position: boolean };
 }) => {
   // Line number count
   let count = 0;
@@ -22,18 +19,12 @@ const Snippet = (props: {
       {/* Header */}
       <header
         className={clsx(
-          "flex w-full items-center gap-4 rounded-t-xl bg-white/85 px-4 dark:bg-slate-900/80",
+          "flex w-full items-center gap-8 rounded-t-xl bg-white/85 px-4 dark:bg-slate-900/80",
           {
             "justify-between": !props.buttons.position,
           },
         )}
       >
-        {!props.buttons.position ? (
-          <div className="-translate-x-6 scale-[60%]">
-            <Logo />
-          </div>
-        ) : undefined}
-
         {props.buttons.position ? (
           <Buttons
             style={props.buttons.style}
@@ -42,24 +33,7 @@ const Snippet = (props: {
         ) : undefined}
 
         <div className="flex items-center gap-2">
-          {props.code.tabs.length !== 0
-            ? props.code.tabs.map((item, idx) => (
-                <Tab
-                  code={item}
-                  key={`${item.name}-${idx}`}
-                  onTabSwitch={() => props.switchTab(idx)}
-                  onTabRemove={() => props.deleteTab(idx)}
-                  onTabUpdate={(n) => props.editTab(idx, n)}
-                />
-              ))
-            : undefined}
-
-          <button
-            onClick={() => props.createTab()}
-            className="flex h-8 w-8 items-center justify-center rounded-lg ring-1 ring-white hover:bg-white/80 active:bg-white/95 dark:ring-slate-900/95 dark:hover:bg-slate-800/80 dark:active:bg-slate-800/95"
-          >
-            <i className="bi bi-plus-lg" />
-          </button>
+          <Tab code={props.code.tab} onTabUpdate={(n) => props.editTab(n)} />
         </div>
 
         {!props.buttons.position ? (
@@ -73,52 +47,34 @@ const Snippet = (props: {
       {/* Main */}
       <main className="rounded-b-xl bg-white/75 p-4 dark:bg-slate-800/75 dark:text-slate-200">
         <section className="flex gap-4">
-          {props.code.tabs.length !== 0 ? (
-            <>
-              {props.code.displayLineNumbers ? (
-                <div className="grid text-center">
-                  {props.code.tabs[props.code.active]?.content
-                    .split("\n")
-                    .map(() => {
-                      count += 1;
-                      return <div key={count}>{count}</div>;
-                    })}
-                </div>
-              ) : undefined}
-
-              <div className="relative w-full">
-                <textarea
-                  autoFocus
-                  name="code"
-                  value={props.code.tabs[props.code.active]?.content}
-                  className="absolute inset-0 z-[1px] h-full min-h-full w-full min-w-full resize-none overflow-hidden whitespace-pre-wrap bg-transparent text-transparent caret-slate-800 outline-none dark:caret-white"
-                  onChange={(event) =>
-                    props.onContentChange(event.target.value)
-                  }
-                ></textarea>
-
-                <pre className="w-full whitespace-pre-wrap bg-transparent outline-none">
-                  <code
-                    id="code"
-                    style={{ padding: 0, background: "transparent" }}
-                    className={`hljs language-${props.code.tabs[props.code.active]?.language}`}
-                  >
-                    {props.code.tabs[props.code.active]?.content}
-                  </code>
-                </pre>
-              </div>
-            </>
-          ) : (
-            <div className="grid gap-4 p-4 md:px-24 md:py-16 lg:px-32 lg:py-24">
-              <div className="flex items-center gap-4">
-                <Logo />
-                <h1 className="text-3xl font-bold">Snippets</h1>
-              </div>
-              <p className="text-xl font-semibold">
-                Create beautiful images of your code snippets
-              </p>
+          {props.code.displayLineNumbers ? (
+            <div className="grid text-center">
+              {props.code.tab.content.split("\n").map(() => {
+                count += 1;
+                return <div key={count}>{count}</div>;
+              })}
             </div>
-          )}
+          ) : undefined}
+
+          <div className="relative w-full">
+            <textarea
+              autoFocus
+              name="code"
+              value={props.code.tab.content}
+              className="absolute inset-0 z-[1px] h-full min-h-full w-full min-w-full resize-none overflow-hidden whitespace-pre-wrap bg-transparent text-transparent caret-slate-800 outline-none dark:caret-white"
+              onChange={(event) => props.onContentChange(event.target.value)}
+            ></textarea>
+
+            <pre className="w-full whitespace-pre-wrap bg-transparent outline-none">
+              <code
+                id="code"
+                style={{ padding: 0, background: "transparent" }}
+                className={`hljs language-${props.code.tab.language}`}
+              >
+                {props.code.tab.content}
+              </code>
+            </pre>
+          </div>
         </section>
       </main>
     </article>

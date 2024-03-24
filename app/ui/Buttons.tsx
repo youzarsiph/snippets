@@ -21,15 +21,15 @@ const Buttons = (props: { style: boolean; position: boolean }) =>
       })}
     >
       <button className="peer flex h-8 w-8 items-center justify-center rounded-lg hover:bg-white/80 active:scale-95 active:bg-white/80 dark:text-slate-200 dark:hover:bg-slate-700/75 dark:active:bg-slate-700/80">
-        <i className="bi bi-dash-lg text-xl" />
+        <i className="bi bi-dash-lg" />
       </button>
 
       <button className="peer flex h-8 w-8 items-center justify-center rounded-lg hover:bg-white/80 active:scale-95 active:bg-white/80 dark:text-slate-200 dark:hover:bg-slate-700/75 dark:active:bg-slate-700/80">
-        <i className="bi bi-fullscreen text-xl" />
+        <i className="bi bi-fullscreen" />
       </button>
 
       <button className="peer flex h-8 w-8 items-center justify-center rounded-lg hover:bg-white/80 active:scale-95 active:bg-white/80 dark:text-slate-200 dark:hover:bg-slate-700/75 dark:active:bg-slate-700/80">
-        <i className="bi bi-x-lg text-xl" />
+        <i className="bi bi-x-lg" />
       </button>
     </div>
   );
