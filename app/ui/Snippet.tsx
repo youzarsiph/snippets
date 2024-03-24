@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import React from "react";
-import { PlusIcon } from "@heroicons/react/24/outline";
 import { Buttons, Logo, Tab } from "@/app/ui";
 import type { CodeSettings } from "@/app/types";
 
@@ -59,7 +58,7 @@ const Snippet = (props: {
             onClick={() => props.createTab()}
             className="flex h-8 w-8 items-center justify-center rounded-lg ring-1 ring-white hover:bg-white/80 active:bg-white/95 dark:ring-stone-900/95 dark:hover:bg-stone-800/80 dark:active:bg-stone-800/95"
           >
-            <PlusIcon className="h-4 w-4" />
+            <i className="bi bi-plus-lg" />
           </button>
         </div>
 

@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import React from "react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/app/ui";
 
 const Drawer = (
@@ -30,7 +29,7 @@ const Drawer = (
           <h2 className="text-xl">{props.title}</h2>
 
           <Button onClick={() => props.onDisplayChange()}>
-            <XMarkIcon className="h-6 w-6" />
+            <i className="bi bi-x-lg text-2xl" />
           </Button>
         </div>
 

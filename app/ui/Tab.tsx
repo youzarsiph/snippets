@@ -2,7 +2,6 @@ import clsx from "clsx";
 import React from "react";
 import Image from "next/image";
 import { getIconForFile } from "vscode-icons-js";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Code } from "@/app/types";
 
 const Tab = (props: {
@@ -50,7 +49,7 @@ const Tab = (props: {
             onClick={() => props.onTabRemove()}
             className="flex h-6 w-6 items-center justify-center rounded hover:bg-white/50 dark:hover:bg-stone-800/50 dark:active:bg-stone-800/80"
           >
-            <XMarkIcon className="h-4 w-4" />
+            <i className="bi bi-x-lg" />
           </button>
         </>
       ) : (

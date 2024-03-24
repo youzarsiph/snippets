@@ -1,17 +1,6 @@
 import clsx from "clsx";
 import React from "react";
 import hljs from "highlight.js";
-import {
-  CodeBracketSquareIcon,
-  EyeIcon,
-  EyeSlashIcon,
-  MoonIcon,
-  Squares2X2Icon,
-  SquaresPlusIcon,
-  SunIcon,
-  UserCircleIcon,
-  ViewfinderCircleIcon,
-} from "@heroicons/react/24/outline";
 import { Fonts } from "@/app/styles";
 import { Constants } from "@/app/utils";
 import { Button, Drawer, Input, Logo, Select } from "@/app/ui";
@@ -27,7 +16,7 @@ import {
 } from "@/app/types";
 
 const Nav = (props: {
-  account: AccountSettings;
+  author: AccountSettings;
   code: CodeSettings;
   container: ContainerSettings;
   export: ExportSettings;
@@ -38,20 +27,20 @@ const Nav = (props: {
   onExportChange: (exportSettings: ExportSettings) => void;
 }) => {
   const [display, setDisplay] = React.useState({
-    account: false,
+    author: false,
     code: false,
-    container: false,
+    menu: false,
     export: false,
   });
 
   return (
     <nav className="relative z-20 order-last w-full lg:static lg:-order-none lg:h-full lg:w-auto">
-      {/* Container Drawer */}
+      {/* Menu Drawer */}
       <Drawer
         tabIndex={-1}
-        title="Container"
-        isVisible={display.container}
-        onDisplayChange={() => setDisplay({ ...display, container: false })}
+        title="Menu"
+        isVisible={display.menu}
+        onDisplayChange={() => setDisplay({ ...display, menu: false })}
       >
         <div className="flex items-center justify-between gap-4">
           <p>Theme</p>
@@ -64,9 +53,9 @@ const Nav = (props: {
             }
           >
             {props.container.theme ? (
-              <MoonIcon className="h-6 w-6" />
+              <i className="bi bi-moon-fill text-2xl" />
             ) : (
-              <SunIcon className="h-6 w-6" />
+              <i className="bi bi-sun-fill text-2xl" />
             )}
             <span>{props.container.theme ? "Dark" : "Light"}</span>
           </Button>
@@ -369,28 +358,28 @@ const Nav = (props: {
             }
           >
             {props.code.displayLineNumbers ? (
-              <EyeSlashIcon className="h-6 w-6" />
+              <i className="bi bi-eye-slash-fill text-2xl" />
             ) : (
-              <EyeIcon className="h-6 w-6" />
+              <i className="bi bi-eye-fill text-2xl" />
             )}
             <span>{props.code.displayLineNumbers ? "Hide" : "Show"}</span>
           </Button>
         </div>
       </Drawer>
 
-      {/* Account Drawer */}
+      {/* Author Drawer */}
       <Drawer
         tabIndex={-1}
-        title="Account"
-        isVisible={display.account}
-        onDisplayChange={() => setDisplay({ ...display, account: false })}
+        title="Author"
+        isVisible={display.author}
+        onDisplayChange={() => setDisplay({ ...display, author: false })}
       >
         <Input
           label="Name"
-          value={props.account.name}
+          value={props.author.name}
           onChange={(event) =>
             props.onAccountChange({
-              ...props.account,
+              ...props.author,
               name: event.target.value,
             })
           }
@@ -398,10 +387,10 @@ const Nav = (props: {
 
         <Input
           label="Username"
-          value={props.account.username}
+          value={props.author.username}
           onChange={(event) =>
             props.onAccountChange({
-              ...props.account,
+              ...props.author,
               username: event.target.value,
             })
           }
@@ -412,17 +401,17 @@ const Nav = (props: {
           <Button
             onClick={() =>
               props.onAccountChange({
-                ...props.account,
-                isVisible: !props.account.isVisible,
+                ...props.author,
+                isVisible: !props.author.isVisible,
               })
             }
           >
-            {props.account.isVisible ? (
-              <EyeSlashIcon className="h-6 w-6" />
+            {props.author.isVisible ? (
+              <i className="bi bi-eye-fill text-2xl" />
             ) : (
-              <EyeIcon className="h-6 w-6" />
+              <i className="bi bi-eye-slash-fill text-2xl" />
             )}
-            <span>{props.account.isVisible ? "Hide" : "Show"}</span>
+            <span>{props.author.isVisible ? "Hide" : "Show"}</span>
           </Button>
         </div>
       </Drawer>
@@ -432,17 +421,17 @@ const Nav = (props: {
           <Button
             onClick={() =>
               setDisplay({
-                account: false,
+                author: false,
                 code: false,
-                container: !display.container,
+                menu: !display.menu,
                 export: false,
               })
             }
           >
-            {display.container ? (
-              <Squares2X2Icon className="h-6 w-6" />
+            {display.menu ? (
+              <i className="bi bi-x-lg text-2xl" />
             ) : (
-              <SquaresPlusIcon className="h-6 w-6" />
+              <i className="bi bi-list text-2xl" />
             )}
           </Button>
           <p className="text-xs">Menu</p>
@@ -452,14 +441,14 @@ const Nav = (props: {
           <Button
             onClick={() =>
               setDisplay({
-                account: false,
+                author: false,
                 code: false,
-                container: false,
+                menu: false,
                 export: !display.export,
               })
             }
           >
-            <ViewfinderCircleIcon className="h-6 w-6" />
+            <i className="bi bi-download text-2xl" />
           </Button>
           <p className="text-xs">Export</p>
         </div>
@@ -473,14 +462,14 @@ const Nav = (props: {
           <Button
             onClick={() =>
               setDisplay({
-                account: false,
+                author: false,
                 code: !display.code,
                 export: false,
-                container: false,
+                menu: false,
               })
             }
           >
-            <CodeBracketSquareIcon className="h-6 w-6" />
+            <i className="bi bi-code text-2xl" />
           </Button>
           <p className="text-xs">Code</p>
         </div>
@@ -489,14 +478,14 @@ const Nav = (props: {
           <Button
             onClick={() =>
               setDisplay({
-                account: !display.account,
+                author: !display.author,
                 code: false,
                 export: false,
-                container: false,
+                menu: false,
               })
             }
           >
-            <UserCircleIcon className="h-6 w-6" />
+            <i className="bi bi-person-fill text-2xl" />
           </Button>
           <p className="text-xs">Account</p>
         </div>

@@ -1,5 +1,4 @@
 import React from "react";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
 const Select = (
   props: React.JSX.IntrinsicAttributes &
@@ -16,7 +15,7 @@ const Select = (
         {props.children}
       </select>
       <div className="absolute right-4 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-white/50 shadow ring-1 ring-white backdrop-blur-3xl peer-focus:-rotate-180 peer-active:-rotate-180 dark:bg-stone-800/50 dark:ring-stone-900">
-        <ChevronDownIcon className="h-4 w-4" />
+        <i className="bi bi-chevron-expand text-2xl" />
       </div>
     </div>
   </label>
