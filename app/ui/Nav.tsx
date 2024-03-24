@@ -264,18 +264,12 @@ const Nav = (props: {
       >
         <Combobox
           label="Language"
-          value={props.code.tabs[props.code.active]?.language}
+          value={props.code.tab.language}
           data={hljs.listLanguages()}
           onChange={(value) =>
             props.onCodeChange({
               ...props.code,
-              tabs: props.code.tabs.map((i, idx) => {
-                if (idx === props.code.active) {
-                  i.language = value as Language;
-                }
-
-                return i;
-              }),
+              tab: { ...props.code.tab, language: value as Language },
             })
           }
         />

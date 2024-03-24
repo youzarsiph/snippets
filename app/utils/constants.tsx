@@ -565,7 +565,6 @@ const Constants = {
   ],
   samples: [
     {
-      isActive: true,
       name: "hello.py",
       language: "python",
       content: `""" Hello, Python """
@@ -577,7 +576,6 @@ def say_hello(name: str) -> str:
 `,
     },
     {
-      isActive: true,
       name: "hello.js",
       language: "javascript",
       content: `/**
@@ -590,7 +588,6 @@ const sayHello = (name) => {
 `,
     },
     {
-      isActive: true,
       name: "hello.ts",
       language: "typescript",
       content: `/**
@@ -603,7 +600,6 @@ const sayHello = (name: string): string => {
 `,
     },
     {
-      isActive: true,
       name: "hello.html",
       language: "html",
       content: `<!DOCTYPE html>

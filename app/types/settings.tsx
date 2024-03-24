@@ -17,9 +17,8 @@ type Author = {
 };
 
 type CodeSettings = {
+  tab: Code;
   font: Font;
-  tabs: Code[];
-  active: number;
   highlight: Highlight;
   displayLineNumbers: boolean;
 };

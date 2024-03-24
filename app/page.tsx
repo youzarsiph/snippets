@@ -5,7 +5,7 @@ import React from "react";
 import hljs from "highlight.js";
 import { Fonts } from "@/app/styles";
 import { Account, Background, Nav, Snippet } from "@/app/ui";
-import { Callbacks, Constants, exportImage } from "@/app/utils";
+import { Constants, exportImage } from "@/app/utils";
 import { CodeSettings, ContainerSettings, ExportSettings } from "@/app/types";
 
 const Home = () => {
@@ -32,11 +32,14 @@ const Home = () => {
 
   // Code Settings
   const [code, setCode] = React.useState<CodeSettings>({
-    active: 0,
     font: "JetBrains Mono",
     highlight: "github-dark",
     displayLineNumbers: true,
-    tabs: [],
+    tab: {
+      name: "Untitled",
+      content: "Type your code here.",
+      language: "plaintext",
+    },
   });
 
   // Author
@@ -50,12 +53,11 @@ const Home = () => {
     () =>
       setCode({
         ...code,
-        tabs: [
-          Constants.samples[
-            parseInt(`${Math.random() * 100}`) % Constants.samples.length
-          ],
+        tab: Constants.samples[
+          parseInt(`${Math.random() * 100}`) % Constants.samples.length
         ],
       }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
 
@@ -95,7 +97,7 @@ const Home = () => {
               exportImage(
                 target,
                 exportSettings.format,
-                code.tabs[code.active].name,
+                code.tab.name,
                 exportSettings.quality,
               )
             }
@@ -161,40 +163,13 @@ const Home = () => {
                   <Snippet
                     code={code}
                     buttons={container.buttons}
-                    createTab={() =>
-                      Callbacks.newTab(code.tabs, (res) =>
-                        setCode({
-                          ...code,
-                          tabs: res,
-                          active: code.tabs.length - 1,
-                        }),
-                      )
-                    }
-                    editTab={(idx, n) =>
-                      Callbacks.renameTab(code.tabs, idx, n, (c) =>
-                        setCode({ ...code, tabs: c }),
-                      )
-                    }
-                    switchTab={(idx) => setCode({ ...code, active: idx })}
-                    deleteTab={(idx) =>
-                      Callbacks.removeTab(code.tabs, code.tabs[idx], (res) =>
-                        setCode({
-                          ...code,
-                          tabs: res,
-                          active: code.tabs.length - 2,
-                        }),
-                      )
+                    editTab={(n) =>
+                      setCode({ ...code, tab: { ...code.tab, name: n } })
                     }
                     onContentChange={(c) =>
                       setCode({
                         ...code,
-                        tabs: code.tabs.map((i, idx) => {
-                          if (idx === code.active) {
-                            i.content = c;
-                          }
-
-                          return i;
-                        }),
+                        tab: { ...code.tab, content: c },
                       })
                     }
                   />
