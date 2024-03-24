@@ -9,7 +9,7 @@ const Input = (
     <span>{props.label}</span>
     <input
       {...props}
-      className="flex w-full appearance-none rounded-lg border border-white bg-transparent px-4 py-2 ring-1 ring-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-400 focus:ring-offset-2 dark:border-slate-900 dark:ring-slate-900"
+      className="flex w-full appearance-none rounded-lg border border-white bg-transparent px-4 py-2 outline-none ring-1 ring-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-400 focus:ring-offset-2 dark:border-slate-900 dark:ring-slate-900"
     >
       {props.children}
     </input>
