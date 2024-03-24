@@ -1,10 +1,10 @@
 [package]
-name = "app"
+name = "snippets"
 version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
-license = ""
-repository = ""
+description = "Create beautiful images of your code snippets"
+authors = ["https://github.com/youzarsiph"]
+license = "MIT"
+repository = "https://github.com/youzarsiph/snippets"
 default-run = "app"
 edition = "2021"
 rust-version = "1.60"
