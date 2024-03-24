@@ -1,10 +1,10 @@
 [package]
-name = "snippets"
-version = "0.1.0"
+name = "app"
+version = "0.1.2"
 description = "Create beautiful images of your code snippets"
-authors = ["https://github.com/youzarsiph"]
-license = "MIT"
-repository = "https://github.com/youzarsiph/snippets"
+authors = ["you"]
+license = ""
+repository = ""
 default-run = "app"
 edition = "2021"
 rust-version = "1.60"
