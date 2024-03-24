@@ -10,7 +10,7 @@ import {
   Size,
 } from "@/app/types";
 
-type AccountSettings = {
+type Author = {
   name: string;
   username: string;
   isVisible: boolean;
@@ -40,9 +40,4 @@ type ExportSettings = {
   quality: number;
 };
 
-export type {
-  AccountSettings,
-  CodeSettings,
-  ContainerSettings,
-  ExportSettings,
-};
+export type { Author, CodeSettings, ContainerSettings, ExportSettings };

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.18",
     "clsx": "^2.1.0",
     "highlight.js": "^11.9.0",
     "html-to-image": "^1.11.11",

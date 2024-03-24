@@ -3,26 +3,26 @@ import React from "react";
 import hljs from "highlight.js";
 import { Fonts } from "@/app/styles";
 import { Constants } from "@/app/utils";
-import { Button, Drawer, Input, Logo, Select } from "@/app/ui";
+import { Button, Combobox, Drawer, Input, Logo, Select } from "@/app/ui";
 import {
   Font,
   Language,
   Padding,
   Size,
-  AccountSettings,
+  Author,
   CodeSettings,
   ContainerSettings,
   ExportSettings,
 } from "@/app/types";
 
 const Nav = (props: {
-  author: AccountSettings;
+  author: Author;
   code: CodeSettings;
   container: ContainerSettings;
   export: ExportSettings;
   exportCallback: () => void;
   onCodeChange: (code: CodeSettings) => void;
-  onAccountChange: (account: AccountSettings) => void;
+  onAccountChange: (account: Author) => void;
   onContainerChange: (container: ContainerSettings) => void;
   onExportChange: (exportSettings: ExportSettings) => void;
 }) => {
@@ -53,9 +53,9 @@ const Nav = (props: {
             }
           >
             {props.container.theme ? (
-              <i className="bi bi-moon-fill text-2xl" />
+              <i className="bi bi-moon-fill text-xl" />
             ) : (
-              <i className="bi bi-sun-fill text-2xl" />
+              <i className="bi bi-sun-fill text-xl" />
             )}
             <span>{props.container.theme ? "Dark" : "Light"}</span>
           </Button>
@@ -63,37 +63,27 @@ const Nav = (props: {
 
         <Select
           label="Container Size"
+          data={Object.keys(Constants.sizes)}
           value={props.container.size}
-          onChange={(event) =>
+          onChange={(value) =>
             props.onContainerChange({
               ...props.container,
-              size: event.target.value as Size,
+              size: value as Size,
             })
           }
-        >
-          {Object.keys(Constants.sizes).map((size) => (
-            <option key={size} value={size}>
-              {size}
-            </option>
-          ))}
-        </Select>
+        />
 
         <Select
           label="Container Padding"
           value={props.container.padding}
-          onChange={(event) =>
+          data={Object.keys(Constants.paddings)}
+          onChange={(value) =>
             props.onContainerChange({
               ...props.container,
-              padding: event.target.value as Padding,
+              padding: value as Padding,
             })
           }
-        >
-          {Object.keys(Constants.paddings).map((padding) => (
-            <option key={padding} value={padding}>
-              {padding}
-            </option>
-          ))}
-        </Select>
+        />
 
         <div className="flex items-center justify-between gap-4">
           <p>Window Style</p>
@@ -146,36 +136,26 @@ const Nav = (props: {
         <Select
           label="Gradient Type"
           value={props.container.type}
-          onChange={(event) =>
+          data={Constants.types}
+          onChange={(value) =>
             props.onContainerChange({
               ...props.container,
-              type: event.target.value,
+              type: value,
             })
           }
-        >
-          {Constants.types.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </Select>
+        />
 
         <Select
           label="Gradient Direction"
           value={props.container.direction}
-          onChange={(event) =>
+          data={Constants.directions}
+          onChange={(value) =>
             props.onContainerChange({
               ...props.container,
-              direction: event.target.value,
+              direction: value,
             })
           }
-        >
-          {Constants.directions.map((direction) => (
-            <option key={direction} value={direction}>
-              {direction}
-            </option>
-          ))}
-        </Select>
+        />
 
         <div className="grid gap-2">
           <p>BG Colors</p>
@@ -251,34 +231,26 @@ const Nav = (props: {
         <Select
           label="Format"
           value={props.export.format}
-          onChange={(event) =>
+          data={Constants.formats}
+          onChange={(value) =>
             props.onExportChange({
               ...props.export,
-              format: event.target.value,
+              format: value,
             })
           }
-        >
-          {Constants.formats.map((format) => (
-            <option key={format} value={format}>
-              {format.toUpperCase()}
-            </option>
-          ))}
-        </Select>
+        />
 
         <Select
           label="Quality"
-          value={props.export.quality}
-          onChange={(event) =>
+          value={props.export.quality.toString()}
+          data={Object.keys({ "50%": 0.5, "75%": 0.75, "100%": 1 })}
+          onChange={(value) =>
             props.onExportChange({
               ...props.export,
-              quality: parseFloat(event.target.value),
+              quality: parseFloat(value),
             })
           }
-        >
-          <option value={0.5}>50 %</option>
-          <option value={0.75}>75 %</option>
-          <option value={1}>100 %</option>
-        </Select>
+        />
 
         <Button onClick={() => props.exportCallback()}>Export</Button>
       </Drawer>
@@ -290,62 +262,47 @@ const Nav = (props: {
         isVisible={display.code}
         onDisplayChange={() => setDisplay({ ...display, code: false })}
       >
-        <Select
+        <Combobox
           label="Language"
           value={props.code.tabs[props.code.active]?.language}
-          onChange={(event) =>
+          data={hljs.listLanguages()}
+          onChange={(value) =>
             props.onCodeChange({
               ...props.code,
               tabs: props.code.tabs.map((i, idx) => {
                 if (idx === props.code.active) {
-                  i.language = event.target.value as Language;
+                  i.language = value as Language;
                 }
 
                 return i;
               }),
             })
           }
-        >
-          {hljs.listLanguages().map((language) => (
-            <option key={language} value={language}>
-              {language}
-            </option>
-          ))}
-        </Select>
+        />
 
-        <Select
+        <Combobox
           label="Font Family"
           value={props.code.font}
-          onChange={(event) =>
+          data={Object.keys(Fonts)}
+          onChange={(value) =>
             props.onCodeChange({
               ...props.code,
-              font: event.target.value as Font,
+              font: value as Font,
             })
           }
-        >
-          {Object.keys(Fonts).map((font) => (
-            <option key={font} value={font}>
-              {font}
-            </option>
-          ))}
-        </Select>
+        />
 
-        <Select
+        <Combobox
           label="Highlight Theme"
           value={props.code.highlight}
-          onChange={(event) =>
+          data={Constants.highlights}
+          onChange={(value) =>
             props.onCodeChange({
               ...props.code,
-              highlight: event.target.value,
+              highlight: value,
             })
           }
-        >
-          {Constants.highlights.map((highlight) => (
-            <option key={highlight} value={highlight}>
-              {highlight}
-            </option>
-          ))}
-        </Select>
+        />
 
         <div className="flex items-center justify-between gap-4">
           <p>Line Numbers</p>
@@ -358,9 +315,9 @@ const Nav = (props: {
             }
           >
             {props.code.displayLineNumbers ? (
-              <i className="bi bi-eye-slash-fill text-2xl" />
+              <i className="bi bi-eye-slash-fill text-xl" />
             ) : (
-              <i className="bi bi-eye-fill text-2xl" />
+              <i className="bi bi-eye-fill text-xl" />
             )}
             <span>{props.code.displayLineNumbers ? "Hide" : "Show"}</span>
           </Button>
@@ -407,87 +364,106 @@ const Nav = (props: {
             }
           >
             {props.author.isVisible ? (
-              <i className="bi bi-eye-fill text-2xl" />
+              <i className="bi bi-eye-fill text-xl" />
             ) : (
-              <i className="bi bi-eye-slash-fill text-2xl" />
+              <i className="bi bi-eye-slash-fill text-xl" />
             )}
             <span>{props.author.isVisible ? "Hide" : "Show"}</span>
           </Button>
         </div>
       </Drawer>
 
-      <div className="relative flex w-full flex-row justify-evenly gap-4 bg-white/80 p-2 backdrop-blur-3xl lg:h-full lg:flex-col lg:justify-start lg:py-8 dark:bg-stone-800/75 dark:text-stone-200">
-        <div className="flex flex-col items-center gap-2">
+      <div className="relative flex w-full items-center justify-evenly gap-4 bg-white/80 p-2 backdrop-blur-3xl lg:h-full lg:flex-col lg:justify-between lg:py-8 dark:bg-stone-800/75 dark:text-stone-200">
+        <div className="flex w-full items-center justify-evenly gap-4 lg:flex-col lg:justify-start">
+          <div className="flex flex-col items-center gap-2">
+            <Button
+              onClick={() =>
+                setDisplay({
+                  author: false,
+                  code: false,
+                  menu: !display.menu,
+                  export: false,
+                })
+              }
+            >
+              {display.menu ? (
+                <i className="bi bi-x-lg text-xl" />
+              ) : (
+                <i className="bi bi-list text-xl" />
+              )}
+            </Button>
+            <p className="text-xs">Menu</p>
+          </div>
+
+          <div className="flex flex-col items-center gap-2">
+            <Button
+              onClick={() =>
+                setDisplay({
+                  author: false,
+                  code: false,
+                  menu: false,
+                  export: !display.export,
+                })
+              }
+            >
+              <i className="bi bi-download text-xl" />
+            </Button>
+            <p className="text-xs">Export</p>
+          </div>
+
+          <div className="flex flex-col items-center gap-1 lg:order-first">
+            <Logo />
+            <p className="text-xs font-semibold">Snippets</p>
+          </div>
+
+          <div className="flex flex-col items-center gap-2">
+            <Button
+              onClick={() =>
+                setDisplay({
+                  author: false,
+                  code: !display.code,
+                  export: false,
+                  menu: false,
+                })
+              }
+            >
+              <i className="bi bi-code text-xl" />
+            </Button>
+            <p className="text-xs">Code</p>
+          </div>
+
+          <div className="flex flex-col items-center gap-2">
+            <Button
+              onClick={() =>
+                setDisplay({
+                  author: !display.author,
+                  code: false,
+                  export: false,
+                  menu: false,
+                })
+              }
+            >
+              <i className="bi bi-person-fill text-xl" />
+            </Button>
+            <p className="text-xs">Account</p>
+          </div>
+        </div>
+
+        <div className="hidden lg:block">
           <Button
             onClick={() =>
-              setDisplay({
-                author: false,
-                code: false,
-                menu: !display.menu,
-                export: false,
+              props.onContainerChange({
+                ...props.container,
+                theme: !props.container.theme,
               })
             }
           >
-            {display.menu ? (
-              <i className="bi bi-x-lg text-2xl" />
+            {props.container.theme ? (
+              <i className="bi bi-moon-fill text-xl" />
             ) : (
-              <i className="bi bi-list text-2xl" />
+              <i className="bi bi-sun-fill text-xl" />
             )}
           </Button>
-          <p className="text-xs">Menu</p>
-        </div>
-
-        <div className="flex flex-col items-center gap-2">
-          <Button
-            onClick={() =>
-              setDisplay({
-                author: false,
-                code: false,
-                menu: false,
-                export: !display.export,
-              })
-            }
-          >
-            <i className="bi bi-download text-2xl" />
-          </Button>
-          <p className="text-xs">Export</p>
-        </div>
-
-        <div className="flex flex-col items-center gap-1 lg:order-first">
-          <Logo />
-          <p className="text-xs font-semibold">Snippets</p>
-        </div>
-
-        <div className="flex flex-col items-center gap-2">
-          <Button
-            onClick={() =>
-              setDisplay({
-                author: false,
-                code: !display.code,
-                export: false,
-                menu: false,
-              })
-            }
-          >
-            <i className="bi bi-code text-2xl" />
-          </Button>
-          <p className="text-xs">Code</p>
-        </div>
-
-        <div className="flex flex-col items-center gap-2">
-          <Button
-            onClick={() =>
-              setDisplay({
-                author: !display.author,
-                code: false,
-                export: false,
-                menu: false,
-              })
-            }
-          >
-            <i className="bi bi-person-fill text-2xl" />
-          </Button>
-          <p className="text-xs">Account</p>
         </div>
       </div>
     </nav>

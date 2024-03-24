@@ -1,5 +1,9 @@
+/**
+ * Types
+ */
+
 import {
-  AccountSettings,
+  Author,
   CodeSettings,
   ContainerSettings,
   ExportSettings,
@@ -18,7 +22,7 @@ import {
 } from "@/app/types/common";
 
 export type {
-  AccountSettings,
+  Author,
   Code,
   CodeSettings,
   ContainerSettings,
