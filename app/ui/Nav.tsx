@@ -1,57 +1,46 @@
 import clsx from "clsx";
 import React from "react";
 import hljs from "highlight.js";
-import {
-  CodeBracketSquareIcon,
-  EyeIcon,
-  EyeSlashIcon,
-  MoonIcon,
-  Squares2X2Icon,
-  SquaresPlusIcon,
-  SunIcon,
-  UserCircleIcon,
-  ViewfinderCircleIcon,
-} from "@heroicons/react/24/outline";
 import { Fonts } from "@/app/styles";
 import { Constants } from "@/app/utils";
-import { Button, Drawer, Input, Logo, Select } from "@/app/ui";
+import { Button, Combobox, Modal, Input, Logo, Select } from "@/app/ui";
 import {
   Font,
   Language,
   Padding,
   Size,
-  AccountSettings,
+  Author,
   CodeSettings,
   ContainerSettings,
   ExportSettings,
 } from "@/app/types";
 
 const Nav = (props: {
-  account: AccountSettings;
+  author: Author;
   code: CodeSettings;
   container: ContainerSettings;
   export: ExportSettings;
   exportCallback: () => void;
   onCodeChange: (code: CodeSettings) => void;
-  onAccountChange: (account: AccountSettings) => void;
+  onAuthorChange: (author: Author) => void;
   onContainerChange: (container: ContainerSettings) => void;
   onExportChange: (exportSettings: ExportSettings) => void;
 }) => {
-  const [display, setDisplay] = React.useState({
-    account: false,
+  const [show, setShow] = React.useState({
+    author: false,
     code: false,
-    container: false,
+    menu: false,
     export: false,
   });
 
   return (
     <nav className="relative z-20 order-last w-full lg:static lg:-order-none lg:h-full lg:w-auto">
-      {/* Container Drawer */}
-      <Drawer
-        tabIndex={-1}
-        title="Container"
-        isVisible={display.container}
-        onDisplayChange={() => setDisplay({ ...display, container: false })}
+      {/* Menu Modal */}
+      <Modal
+        title="Menu"
+        show={show.menu}
+        theme={props.container.theme}
+        onClose={() => setShow({ ...show, menu: false })}
       >
         <div className="flex items-center justify-between gap-4">
           <p>Theme</p>
@@ -64,9 +53,9 @@ const Nav = (props: {
             }
           >
             {props.container.theme ? (
-              <MoonIcon className="h-6 w-6" />
+              <i className="bi bi-moon-fill text-xl" />
             ) : (
-              <SunIcon className="h-6 w-6" />
+              <i className="bi bi-sun-fill text-xl" />
             )}
             <span>{props.container.theme ? "Dark" : "Light"}</span>
           </Button>
@@ -74,37 +63,27 @@ const Nav = (props: {
 
         <Select
           label="Container Size"
+          data={Object.keys(Constants.sizes)}
           value={props.container.size}
-          onChange={(event) =>
+          onChange={(value) =>
             props.onContainerChange({
               ...props.container,
-              size: event.target.value as Size,
+              size: value as Size,
             })
           }
-        >
-          {Object.keys(Constants.sizes).map((size) => (
-            <option key={size} value={size}>
-              {size}
-            </option>
-          ))}
-        </Select>
+        />
 
         <Select
           label="Container Padding"
           value={props.container.padding}
-          onChange={(event) =>
+          data={Object.keys(Constants.paddings)}
+          onChange={(value) =>
             props.onContainerChange({
               ...props.container,
-              padding: event.target.value as Padding,
+              padding: value as Padding,
             })
           }
-        >
-          {Object.keys(Constants.paddings).map((padding) => (
-            <option key={padding} value={padding}>
-              {padding}
-            </option>
-          ))}
-        </Select>
+        />
 
         <div className="flex items-center justify-between gap-4">
           <p>Window Style</p>
@@ -157,36 +136,26 @@ const Nav = (props: {
         <Select
           label="Gradient Type"
           value={props.container.type}
-          onChange={(event) =>
+          data={Constants.types}
+          onChange={(value) =>
             props.onContainerChange({
               ...props.container,
-              type: event.target.value,
+              type: value,
             })
           }
-        >
-          {Constants.types.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </Select>
+        />
 
         <Select
           label="Gradient Direction"
           value={props.container.direction}
-          onChange={(event) =>
+          data={Constants.directions}
+          onChange={(value) =>
             props.onContainerChange({
               ...props.container,
-              direction: event.target.value,
+              direction: value,
             })
           }
-        >
-          {Constants.directions.map((direction) => (
-            <option key={direction} value={direction}>
-              {direction}
-            </option>
-          ))}
-        </Select>
+        />
 
         <div className="grid gap-2">
           <p>BG Colors</p>
@@ -250,113 +219,90 @@ const Nav = (props: {
             ))}
           </div>
         </div>
-      </Drawer>
+      </Modal>
 
-      {/* Export Drawer */}
-      <Drawer
-        tabIndex={-1}
+      {/* Export Modal */}
+      <Modal
         title="Export"
-        isVisible={display.export}
-        onDisplayChange={() => setDisplay({ ...display, export: false })}
+        show={show.export}
+        theme={props.container.theme}
+        onClose={() => setShow({ ...show, export: false })}
       >
         <Select
           label="Format"
           value={props.export.format}
-          onChange={(event) =>
+          data={Constants.formats}
+          onChange={(value) =>
             props.onExportChange({
               ...props.export,
-              format: event.target.value,
+              format: value,
             })
           }
-        >
-          {Constants.formats.map((format) => (
-            <option key={format} value={format}>
-              {format.toUpperCase()}
-            </option>
-          ))}
-        </Select>
+        />
 
         <Select
           label="Quality"
-          value={props.export.quality}
-          onChange={(event) =>
+          value={props.export.quality.toString()}
+          data={Object.keys({ "50%": 0.5, "75%": 0.75, "100%": 1 })}
+          onChange={(value) =>
             props.onExportChange({
               ...props.export,
-              quality: parseFloat(event.target.value),
+              quality: parseFloat(value),
             })
           }
-        >
-          <option value={0.5}>50 %</option>
-          <option value={0.75}>75 %</option>
-          <option value={1}>100 %</option>
-        </Select>
+        />
 
         <Button onClick={() => props.exportCallback()}>Export</Button>
-      </Drawer>
+      </Modal>
 
-      {/* Code Drawer */}
-      <Drawer
-        tabIndex={-1}
+      {/* Code Modal */}
+      <Modal
         title="Code"
-        isVisible={display.code}
-        onDisplayChange={() => setDisplay({ ...display, code: false })}
+        show={show.code}
+        theme={props.container.theme}
+        onClose={() => setShow({ ...show, code: false })}
       >
-        <Select
+        <Combobox
           label="Language"
           value={props.code.tabs[props.code.active]?.language}
-          onChange={(event) =>
+          data={hljs.listLanguages()}
+          onChange={(value) =>
             props.onCodeChange({
               ...props.code,
               tabs: props.code.tabs.map((i, idx) => {
                 if (idx === props.code.active) {
-                  i.language = event.target.value as Language;
+                  i.language = value as Language;
                 }
 
                 return i;
               }),
             })
           }
-        >
-          {hljs.listLanguages().map((language) => (
-            <option key={language} value={language}>
-              {language}
-            </option>
-          ))}
-        </Select>
+        />
 
-        <Select
+        <Combobox
           label="Font Family"
           value={props.code.font}
-          onChange={(event) =>
+          data={Object.keys(Fonts)}
+          onChange={(value) =>
             props.onCodeChange({
               ...props.code,
-              font: event.target.value as Font,
+              font: value as Font,
             })
           }
-        >
-          {Object.keys(Fonts).map((font) => (
-            <option key={font} value={font}>
-              {font}
-            </option>
-          ))}
-        </Select>
+        />
 
-        <Select
+        <Combobox
           label="Highlight Theme"
           value={props.code.highlight}
-          onChange={(event) =>
+          data={Constants.highlights}
+          onChange={(value) =>
             props.onCodeChange({
               ...props.code,
-              highlight: event.target.value,
+              highlight: value,
             })
           }
-        >
-          {Constants.highlights.map((highlight) => (
-            <option key={highlight} value={highlight}>
-              {highlight}
-            </option>
-          ))}
-        </Select>
+        />
 
         <div className="flex items-center justify-between gap-4">
           <p>Line Numbers</p>
@@ -369,28 +315,28 @@ const Nav = (props: {
             }
           >
             {props.code.displayLineNumbers ? (
-              <EyeSlashIcon className="h-6 w-6" />
+              <i className="bi bi-eye-slash-fill text-xl" />
             ) : (
-              <EyeIcon className="h-6 w-6" />
+              <i className="bi bi-eye-fill text-xl" />
             )}
             <span>{props.code.displayLineNumbers ? "Hide" : "Show"}</span>
           </Button>
         </div>
-      </Drawer>
+      </Modal>
 
-      {/* Account Drawer */}
-      <Drawer
-        tabIndex={-1}
-        title="Account"
-        isVisible={display.account}
-        onDisplayChange={() => setDisplay({ ...display, account: false })}
+      {/* Author Modal */}
+      <Modal
+        title="Author"
+        show={show.author}
+        theme={props.container.theme}
+        onClose={() => setShow({ ...show, author: false })}
       >
         <Input
           label="Name"
-          value={props.account.name}
+          value={props.author.name}
           onChange={(event) =>
-            props.onAccountChange({
-              ...props.account,
+            props.onAuthorChange({
+              ...props.author,
               name: event.target.value,
             })
           }
@@ -398,10 +344,10 @@ const Nav = (props: {
 
         <Input
           label="Username"
-          value={props.account.username}
+          value={props.author.username}
           onChange={(event) =>
-            props.onAccountChange({
-              ...props.account,
+            props.onAuthorChange({
+              ...props.author,
               username: event.target.value,
             })
           }
@@ -411,94 +357,113 @@ const Nav = (props: {
           <p>Visibility</p>
           <Button
             onClick={() =>
-              props.onAccountChange({
-                ...props.account,
-                isVisible: !props.account.isVisible,
+              props.onAuthorChange({
+                ...props.author,
+                isVisible: !props.author.isVisible,
               })
             }
           >
-            {props.account.isVisible ? (
-              <EyeSlashIcon className="h-6 w-6" />
+            {props.author.isVisible ? (
+              <i className="bi bi-eye-fill text-xl" />
             ) : (
-              <EyeIcon className="h-6 w-6" />
+              <i className="bi bi-eye-slash-fill text-xl" />
             )}
-            <span>{props.account.isVisible ? "Hide" : "Show"}</span>
+            <span>{props.author.isVisible ? "Hide" : "Show"}</span>
           </Button>
         </div>
-      </Drawer>
+      </Modal>
 
-      <div className="relative flex w-full flex-row justify-evenly gap-4 bg-white/80 p-2 backdrop-blur-3xl lg:h-full lg:flex-col lg:justify-start lg:py-8 dark:bg-stone-800/75 dark:text-stone-200">
-        <div className="flex flex-col items-center gap-2">
+      <div className="relative flex w-full items-center justify-evenly gap-4 bg-white/80 p-2 backdrop-blur-3xl lg:h-full lg:flex-col lg:justify-between lg:py-8 dark:bg-slate-800/75 dark:text-slate-200">
+        <div className="flex w-full items-center justify-evenly gap-4 lg:flex-col lg:justify-start">
+          <div className="flex flex-col items-center gap-2">
+            <Button
+              onClick={() =>
+                setShow({
+                  author: false,
+                  code: false,
+                  menu: !show.menu,
+                  export: false,
+                })
+              }
+            >
+              {show.menu ? (
+                <i className="bi bi-x-lg text-xl" />
+              ) : (
+                <i className="bi bi-list text-xl" />
+              )}
+            </Button>
+            <p className="text-xs">Menu</p>
+          </div>
+
+          <div className="flex flex-col items-center gap-2">
+            <Button
+              onClick={() =>
+                setShow({
+                  author: false,
+                  code: false,
+                  menu: false,
+                  export: !show.export,
+                })
+              }
+            >
+              <i className="bi bi-download text-xl" />
+            </Button>
+            <p className="text-xs">Export</p>
+          </div>
+
+          <div className="flex flex-col items-center gap-1 lg:order-first">
+            <Logo />
+            <p className="text-xs font-semibold">Snippets</p>
+          </div>
+
+          <div className="flex flex-col items-center gap-2">
+            <Button
+              onClick={() =>
+                setShow({
+                  author: false,
+                  code: !show.code,
+                  export: false,
+                  menu: false,
+                })
+              }
+            >
+              <i className="bi bi-code text-xl" />
+            </Button>
+            <p className="text-xs">Code</p>
+          </div>
+
+          <div className="flex flex-col items-center gap-2">
+            <Button
+              onClick={() =>
+                setShow({
+                  author: !show.author,
+                  code: false,
+                  export: false,
+                  menu: false,
+                })
+              }
+            >
+              <i className="bi bi-person-fill text-xl" />
+            </Button>
+            <p className="text-xs">Author</p>
+          </div>
+        </div>
+
+        <div className="hidden lg:block">
           <Button
             onClick={() =>
-              setDisplay({
-                account: false,
-                code: false,
-                container: !display.container,
-                export: false,
+              props.onContainerChange({
+                ...props.container,
+                theme: !props.container.theme,
               })
             }
           >
-            {display.container ? (
-              <Squares2X2Icon className="h-6 w-6" />
+            {props.container.theme ? (
+              <i className="bi bi-moon-fill text-xl" />
             ) : (
-              <SquaresPlusIcon className="h-6 w-6" />
+              <i className="bi bi-sun-fill text-xl" />
             )}
           </Button>
-          <p className="text-xs">Menu</p>
-        </div>
-
-        <div className="flex flex-col items-center gap-2">
-          <Button
-            onClick={() =>
-              setDisplay({
-                account: false,
-                code: false,
-                container: false,
-                export: !display.export,
-              })
-            }
-          >
-            <ViewfinderCircleIcon className="h-6 w-6" />
-          </Button>
-          <p className="text-xs">Export</p>
-        </div>
-
-        <div className="flex flex-col items-center gap-1 lg:order-first">
-          <Logo />
-          <p className="text-xs font-semibold">Snippets</p>
-        </div>
-
-        <div className="flex flex-col items-center gap-2">
-          <Button
-            onClick={() =>
-              setDisplay({
-                account: false,
-                code: !display.code,
-                export: false,
-                container: false,
-              })
-            }
-          >
-            <CodeBracketSquareIcon className="h-6 w-6" />
-          </Button>
-          <p className="text-xs">Code</p>
-        </div>
-
-        <div className="flex flex-col items-center gap-2">
-          <Button
-            onClick={() =>
-              setDisplay({
-                account: !display.account,
-                code: false,
-                export: false,
-                container: false,
-              })
-            }
-          >
-            <UserCircleIcon className="h-6 w-6" />
-          </Button>
-          <p className="text-xs">Account</p>
         </div>
       </div>
     </nav>

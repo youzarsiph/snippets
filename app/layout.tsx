@@ -5,7 +5,7 @@ const noto = Noto_Sans({ subsets: ["latin"] });
 
 export const metadata = {
   metadataBase: new URL("https://snippets-gamma.vercel.app"),
-  title: "Sippets",
+  title: "Snippets",
   description: " Create beautiful images of your code snippets",
   openGraph: {
     images: "/og-image.png",

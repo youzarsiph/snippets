@@ -4,7 +4,7 @@
 
 @layer base {
   * {
-    @apply font-[inherit] text-stone-800 transition-all duration-500 dark:text-stone-200;
+    @apply font-[inherit] text-slate-800 transition-all duration-500 dark:text-slate-200;
   }
 
   pre,

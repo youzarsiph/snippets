@@ -1,10 +1,5 @@
 import clsx from "clsx";
 import React from "react";
-import {
-  MinusIcon,
-  Square2StackIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
 
 const Buttons = (props: { style: boolean; position: boolean }) =>
   props.style ? (
@@ -25,16 +20,16 @@ const Buttons = (props: { style: boolean; position: boolean }) =>
         "flex-row-reverse": props.position,
       })}
     >
-      <button className="peer flex h-8 w-8 items-center justify-center rounded-lg hover:bg-white/80 active:scale-95 active:bg-white/80 dark:text-stone-200 dark:hover:bg-stone-700/75 dark:active:bg-stone-700/80">
-        <MinusIcon className="h-4 w-4" />
+      <button className="peer flex h-8 w-8 items-center justify-center rounded-lg hover:bg-white/80 active:scale-95 active:bg-white/80 dark:text-slate-200 dark:hover:bg-slate-700/75 dark:active:bg-slate-700/80">
+        <i className="bi bi-dash-lg text-xl" />
       </button>
 
-      <button className="peer flex h-8 w-8 items-center justify-center rounded-lg hover:bg-white/80 active:scale-95 active:bg-white/80 dark:text-stone-200 dark:hover:bg-stone-700/75 dark:active:bg-stone-700/80">
-        <Square2StackIcon className="h-4 w-4" />
+      <button className="peer flex h-8 w-8 items-center justify-center rounded-lg hover:bg-white/80 active:scale-95 active:bg-white/80 dark:text-slate-200 dark:hover:bg-slate-700/75 dark:active:bg-slate-700/80">
+        <i className="bi bi-fullscreen text-xl" />
       </button>
 
-      <button className="peer flex h-8 w-8 items-center justify-center rounded-lg hover:bg-white/80 active:scale-95 active:bg-white/80 dark:text-stone-200 dark:hover:bg-stone-700/75 dark:active:bg-stone-700/80">
-        <XMarkIcon className="h-4 w-4" />
+      <button className="peer flex h-8 w-8 items-center justify-center rounded-lg hover:bg-white/80 active:scale-95 active:bg-white/80 dark:text-slate-200 dark:hover:bg-slate-700/75 dark:active:bg-slate-700/80">
+        <i className="bi bi-x-lg text-xl" />
       </button>
     </div>
   );

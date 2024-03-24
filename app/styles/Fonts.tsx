@@ -10,20 +10,12 @@ import {
   Roboto_Mono,
   Share_Tech_Mono,
   Noto_Sans_Mono,
-  Victor_Mono,
   Anonymous_Pro,
   Fragment_Mono,
   Spline_Sans_Mono,
 } from "next/font/google";
 
 const noto_sans_mono = Noto_Sans_Mono({
-  weight: "400",
-  display: "swap",
-  subsets: ["latin"],
-  fallback: ["ui-monospace", "monospace"],
-});
-
-const victor_mono = Victor_Mono({
   weight: "400",
   display: "swap",
   subsets: ["latin"],
@@ -128,7 +120,6 @@ const Fonts = {
   "Fira Mono": fira_mono,
   "Fira Code": fira_code,
   "Anonymous Pro": anonymous_pro,
-  "Victor Mono": victor_mono,
   "Spline Sans Mono": spline_sans_mono,
   "Source Code Pro": source_code_pro,
   "IBM Plex Mono": ibm_plex_mono,

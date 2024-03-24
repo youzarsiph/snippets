@@ -39,8 +39,8 @@ const Home = () => {
     tabs: [],
   });
 
-  // Account Settings
-  const [account, setAccount] = React.useState({
+  // Author
+  const [author, setAuthor] = React.useState({
     isVisible: false,
     name: "Your Name",
     username: "github.com/username",
@@ -71,6 +71,10 @@ const Home = () => {
     <div className={clsx({ dark: container.theme }, "block h-screen w-screen")}>
       <link
         rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"
+      />
+      <link
+        rel="stylesheet"
         href={`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/${code.highlight}.css`}
       />
 
@@ -80,11 +84,11 @@ const Home = () => {
         <main className="relative flex h-full w-full flex-col items-center lg:flex-row">
           <Nav
             code={code}
-            account={account}
+            author={author}
             container={container}
             export={exportSettings}
             onCodeChange={(c) => setCode(c)}
-            onAccountChange={(a) => setAccount(a)}
+            onAuthorChange={(a) => setAuthor(a)}
             onContainerChange={(c) => setContainer(c)}
             onExportChange={(e) => setExport(e)}
             exportCallback={() =>
@@ -195,8 +199,8 @@ const Home = () => {
                     }
                   />
 
-                  {account.isVisible ? (
-                    <Account name={account.name} username={account.username} />
+                  {author.isVisible ? (
+                    <Account name={author.name} username={author.username} />
                   ) : undefined}
                 </section>
               </div>

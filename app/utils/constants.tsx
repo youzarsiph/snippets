@@ -46,7 +46,7 @@ const Constants = {
     "bg-fuchsia-500 from-fuchsia-500 to-fuchsia-300 ring-1 ring-fuchsia-500 dark:bg-fuchsia-800 dark:from-fuchsia-950 dark:to-fuchsia-700 dark:ring-fuchsia-950",
     "bg-orange-500 from-orange-500 to-orange-300 ring-1 ring-orange-500 dark:bg-orange-800 dark:from-orange-950 dark:to-orange-700 dark:ring-orange-950",
     "bg-slate-500 from-slate-500 to-slate-300 ring-1 ring-slate-500 dark:bg-slate-800 dark:from-slate-950 dark:to-slate-700 dark:ring-slate-950",
-    "bg-stone-500 from-stone-500 to-stone-300 ring-1 ring-stone-500 dark:bg-stone-800 dark:from-stone-950 dark:to-stone-700 dark:ring-stone-950",
+    "bg-slate-500 from-slate-500 to-slate-300 ring-1 ring-slate-500 dark:bg-slate-800 dark:from-slate-950 dark:to-slate-700 dark:ring-slate-950",
     "bg-sky-400 from-sky-400 to-lime-400 ring-1 ring-sky-400 dark:bg-sky-800 dark:from-sky-700 dark:to-lime-700 dark:ring-sky-700",
     "bg-sky-400 from-sky-400 to-pink-400 ring-1 ring-sky-400 dark:bg-sky-800 dark:from-sky-700 dark:to-pink-800 dark:ring-sky-700",
     "bg-lime-300 from-lime-300 to-orange-300 ring-1 ring-lime-300 dark:bg-lime-800 dark:from-lime-700 dark:to-orange-600 dark:ring-lime-700",

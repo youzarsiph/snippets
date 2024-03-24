@@ -1,7 +1,7 @@
 import React from "react";
 
 const Logo = () => (
-  <div className="rounded-3xl bg-white/80 px-4 py-2 ring-1 ring-white dark:bg-stone-800/75 dark:ring-stone-900/95">
+  <div className="rounded-3xl bg-white/80 px-4 py-2 ring-1 ring-white dark:bg-slate-800/75 dark:ring-slate-900/95">
     <div className="relative h-9 w-12">
       <div className="absolute right-[43.15%] top-0 h-2 w-2 rounded-full bg-gradient-to-tr from-red-500 to-orange-500"></div>
 
