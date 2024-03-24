@@ -28,8 +28,8 @@ const Modal = (props: {
         <div className="fixed inset-0 bg-slate-900/30" />
       </Transition.Child>
 
-      <div className="fixed inset-x-0 bottom-0 overflow-y-auto lg:inset-y-0">
-        <div className="flex min-h-full items-center justify-center p-4 text-center">
+      <div className="fixed inset-x-0 bottom-0 flex items-center justify-center lg:inset-y-0">
+        <div className="flex items-center justify-center p-4 text-center">
           <Transition.Child
             as={React.Fragment}
             enter="ease-out duration-300"
@@ -39,7 +39,7 @@ const Modal = (props: {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <Dialog.Panel className="relative grid max-h-[40rem] w-full min-w-[30rem] transform gap-6 overflow-hidden overflow-y-auto rounded-2xl rounded-t-3xl bg-white bg-white/80 p-6 text-left align-middle shadow-xl ring-1 ring-white transition-all lg:inset-x-auto lg:top-4 lg:max-h-full lg:max-w-md lg:rounded-3xl dark:bg-slate-800/75 dark:ring-slate-900">
+            <Dialog.Panel className="relative grid max-h-[40rem] w-full min-w-[30rem] transform gap-6 overflow-hidden overflow-y-auto rounded-2xl rounded-t-3xl bg-white bg-white/80 p-6 text-left align-middle shadow-xl ring-1 ring-white transition-all lg:inset-x-auto lg:max-h-[50rem] lg:max-w-md lg:rounded-3xl dark:bg-slate-800/75 dark:ring-slate-900">
               <div className="absolute inset-0 -z-10 rounded-3xl backdrop-blur-3xl"></div>
 
               <div className="flex items-center justify-between gap-4">

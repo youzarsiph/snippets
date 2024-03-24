@@ -22,7 +22,7 @@ const Nav = (props: {
   export: ExportSettings;
   exportCallback: () => void;
   onCodeChange: (code: CodeSettings) => void;
-  onAccountChange: (account: Author) => void;
+  onAuthorChange: (author: Author) => void;
   onContainerChange: (container: ContainerSettings) => void;
   onExportChange: (exportSettings: ExportSettings) => void;
 }) => {
@@ -335,7 +335,7 @@ const Nav = (props: {
           label="Name"
           value={props.author.name}
           onChange={(event) =>
-            props.onAccountChange({
+            props.onAuthorChange({
               ...props.author,
               name: event.target.value,
             })
@@ -346,7 +346,7 @@ const Nav = (props: {
           label="Username"
           value={props.author.username}
           onChange={(event) =>
-            props.onAccountChange({
+            props.onAuthorChange({
               ...props.author,
               username: event.target.value,
             })
@@ -357,7 +357,7 @@ const Nav = (props: {
           <p>Visibility</p>
           <Button
             onClick={() =>
-              props.onAccountChange({
+              props.onAuthorChange({
                 ...props.author,
                 isVisible: !props.author.isVisible,
               })
@@ -445,7 +445,7 @@ const Nav = (props: {
             >
               <i className="bi bi-person-fill text-xl" />
             </Button>
-            <p className="text-xs">Account</p>
+            <p className="text-xs">Author</p>
           </div>
         </div>
 

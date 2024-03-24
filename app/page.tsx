@@ -40,7 +40,7 @@ const Home = () => {
   });
 
   // Author
-  const [author, setAccount] = React.useState({
+  const [author, setAuthor] = React.useState({
     isVisible: false,
     name: "Your Name",
     username: "github.com/username",
@@ -88,7 +88,7 @@ const Home = () => {
             container={container}
             export={exportSettings}
             onCodeChange={(c) => setCode(c)}
-            onAccountChange={(a) => setAccount(a)}
+            onAuthorChange={(a) => setAuthor(a)}
             onContainerChange={(c) => setContainer(c)}
             onExportChange={(e) => setExport(e)}
             exportCallback={() =>
