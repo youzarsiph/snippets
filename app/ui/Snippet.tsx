@@ -13,7 +13,7 @@ const Snippet = (props: {
   let count = 0;
 
   return (
-    <article className="relative  grid rounded-xl shadow-lg ring-1 ring-white backdrop-blur-3xl dark:ring-slate-900/95">
+    <article className="relative grid rounded-xl text-sm shadow-lg ring-1 ring-white backdrop-blur-3xl lg:text-base dark:ring-slate-900/95">
       <div className="absolute inset-0 -z-10 rounded-3xl backdrop-blur-3xl"></div>
 
       {/* Header */}

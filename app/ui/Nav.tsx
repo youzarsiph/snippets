@@ -62,7 +62,7 @@ const Nav = (props: {
         </div>
 
         <Select
-          label="Container Size"
+          label="Background Size"
           data={Object.keys(Constants.sizes)}
           value={props.container.size}
           onChange={(value) =>
@@ -74,7 +74,7 @@ const Nav = (props: {
         />
 
         <Select
-          label="Container Padding"
+          label="Background Padding"
           value={props.container.padding}
           data={Object.keys(Constants.paddings)}
           onChange={(value) =>
@@ -103,7 +103,7 @@ const Nav = (props: {
         </div>
 
         <div className="flex items-center justify-between gap-4">
-          <p>Window Position</p>
+          <p>Buttons Position</p>
           <Button
             onClick={() =>
               props.onContainerChange({
