@@ -7,8 +7,8 @@
     "distDir": "../out"
   },
   "package": {
-    "productName": "snippets",
-    "version": "0.1.3"
+    "productName": "Snippets",
+    "version": "0.1.4"
   },
   "tauri": {
     "allowlist": {
