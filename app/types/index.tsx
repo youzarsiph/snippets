@@ -7,8 +7,8 @@ import {
   CodeSettings,
   ContainerSettings,
   ExportSettings,
-} from "@/app/types/settings";
-import Code from "@/app/types/Code";
+} from '@/app/types/settings'
+import Code from '@/app/types/Code'
 import {
   Color,
   Direction,
@@ -19,7 +19,7 @@ import {
   Language,
   Padding,
   Size,
-} from "@/app/types/common";
+} from '@/app/types/common'
 
 export type {
   Author,
@@ -36,4 +36,4 @@ export type {
   Language,
   Padding,
   Size,
-};
+}

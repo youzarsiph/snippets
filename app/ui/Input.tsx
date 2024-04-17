@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const Input = (
   props: React.JSX.IntrinsicAttributes &
@@ -14,6 +14,6 @@ const Input = (
       {props.children}
     </input>
   </label>
-);
+)
 
-export default Input;
+export default Input

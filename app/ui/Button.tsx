@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const Button = (
   props: React.JSX.IntrinsicAttributes &
@@ -11,6 +11,6 @@ const Button = (
   >
     {props.children}
   </button>
-);
+)
 
-export default Button;
+export default Button

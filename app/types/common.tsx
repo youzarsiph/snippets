@@ -1,23 +1,23 @@
-import { Fonts } from "@/app/styles";
-import { Constants } from "@/app/utils";
+import { Fonts } from '@/app/styles'
+import { Constants } from '@/app/utils'
 
-type Color = (typeof Constants.colors)[number];
+type Color = (typeof Constants.colors)[number]
 
-type Direction = (typeof Constants.directions)[number];
+type Direction = (typeof Constants.directions)[number]
 
-type Font = keyof typeof Fonts;
+type Font = keyof typeof Fonts
 
-type Format = (typeof Constants.formats)[number];
+type Format = (typeof Constants.formats)[number]
 
-type GradientType = (typeof Constants.types)[number];
+type GradientType = (typeof Constants.types)[number]
 
-type Highlight = (typeof Constants.highlights)[number];
+type Highlight = (typeof Constants.highlights)[number]
 
-type Language = (typeof Constants.languages)[number];
+type Language = (typeof Constants.languages)[number]
 
-type Padding = keyof typeof Constants.paddings;
+type Padding = keyof typeof Constants.paddings
 
-type Size = keyof typeof Constants.sizes;
+type Size = keyof typeof Constants.sizes
 
 export type {
   Color,
@@ -29,4 +29,4 @@ export type {
   Language,
   Padding,
   Size,
-};
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const Logo = () => (
   <div className="rounded-3xl bg-white/80 px-4 py-2 ring-1 ring-white dark:bg-slate-800/75 dark:ring-slate-900/95">
@@ -18,6 +18,6 @@ const Logo = () => (
       <div className="absolute bottom-0 right-[43.15%] h-2 w-2 rounded-full bg-gradient-to-tr from-green-500 to-sky-500"></div>
     </div>
   </div>
-);
+)
 
-export default Logo;
+export default Logo

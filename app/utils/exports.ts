@@ -1,5 +1,5 @@
-import React from "react";
-import * as HtmlToImg from "html-to-image";
+import React from 'react'
+import * as HtmlToImg from 'html-to-image'
 
 const exportImage = (
   target: React.MutableRefObject<null>,
@@ -8,41 +8,41 @@ const exportImage = (
   quality: number,
 ) => {
   if (target.current === null) {
-    return;
+    return
   }
 
   switch (format) {
-    case "svg":
+    case 'svg':
       HtmlToImg.toSvg(target.current, {
         cacheBust: true,
         quality: quality,
       })
         .then((dataUrl) => {
-          const link = document.createElement("a");
-          link.download = fileName.replaceAll(" ", "-") + ".svg";
-          link.href = dataUrl;
-          link.click();
+          const link = document.createElement('a')
+          link.download = fileName.replaceAll(' ', '-') + '.svg'
+          link.href = dataUrl
+          link.click()
         })
         .catch((err) => {
-          console.log(err);
-        });
-      break;
+          console.log(err)
+        })
+      break
 
-    case "jpeg":
+    case 'jpeg':
       HtmlToImg.toJpeg(target.current, {
         cacheBust: true,
         quality: quality,
       })
         .then((dataUrl: string) => {
-          const link = document.createElement("a");
-          link.download = fileName.replaceAll(" ", "-") + ".jpeg";
-          link.href = dataUrl;
-          link.click();
+          const link = document.createElement('a')
+          link.download = fileName.replaceAll(' ', '-') + '.jpeg'
+          link.href = dataUrl
+          link.click()
         })
         .catch((err: any) => {
-          console.log(err);
-        });
-      break;
+          console.log(err)
+        })
+      break
 
     default:
       HtmlToImg.toPng(target.current, {
@@ -50,16 +50,16 @@ const exportImage = (
         quality: quality,
       })
         .then((dataUrl) => {
-          const link = document.createElement("a");
-          link.download = fileName.replaceAll(" ", "-") + ".png";
-          link.href = dataUrl;
-          link.click();
+          const link = document.createElement('a')
+          link.download = fileName.replaceAll(' ', '-') + '.png'
+          link.href = dataUrl
+          link.click()
         })
         .catch((err) => {
-          console.log(err);
-        });
-      break;
+          console.log(err)
+        })
+      break
   }
-};
+}
 
-export default exportImage;
+export default exportImage

@@ -1,12 +1,12 @@
-import clsx from "clsx";
-import React from "react";
-import { Listbox, Transition } from "@headlessui/react";
+import clsx from 'clsx'
+import React from 'react'
+import { Listbox, Transition } from '@headlessui/react'
 
 const Select = (props: {
-  label: string;
-  value: string;
-  data: string[];
-  onChange: (val: string) => void;
+  label: string
+  value: string
+  data: string[]
+  onChange: (val: string) => void
 }) => (
   <div className="grid gap-2">
     <span>{props.label}</span>
@@ -29,9 +29,9 @@ const Select = (props: {
                 key={index}
                 className={({ active }) =>
                   clsx(
-                    "flex items-center justify-between gap-4 rounded-lg px-2 py-1",
+                    'flex items-center justify-between gap-4 rounded-lg px-2 py-1',
                     {
-                      "bg-indigo-500 text-white": active,
+                      'bg-indigo-500 text-white': active,
                     },
                   )
                 }
@@ -40,9 +40,9 @@ const Select = (props: {
                 {({ selected }) => (
                   <>
                     <span
-                      className={clsx("block truncate", {
-                        "font-medium": selected,
-                        "font-normal": !selected,
+                      className={clsx('block truncate', {
+                        'font-medium': selected,
+                        'font-normal': !selected,
                       })}
                     >
                       {item}
@@ -59,6 +59,6 @@ const Select = (props: {
       </div>
     </Listbox>
   </div>
-);
+)
 
-export default Select;
+export default Select

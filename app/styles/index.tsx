@@ -2,6 +2,6 @@
  * Styles
  */
 
-import Fonts from "@/app/styles/Fonts";
+import Fonts from '@/app/styles/Fonts'
 
-export { Fonts };
+export { Fonts }

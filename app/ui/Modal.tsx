@@ -1,20 +1,20 @@
-import clsx from "clsx";
-import React from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import { Button } from "@/app/ui";
+import clsx from 'clsx'
+import React from 'react'
+import { Dialog, Transition } from '@headlessui/react'
+import { Button } from '@/app/ui'
 
 const Modal = (props: {
-  title: string;
-  show: boolean;
-  theme: boolean;
-  onClose: () => void;
-  children?: React.ReactNode | React.ReactNode[];
+  title: string
+  show: boolean
+  theme: boolean
+  onClose: () => void
+  children?: React.ReactNode | React.ReactNode[]
 }) => (
   <Transition appear show={props.show} as={React.Fragment}>
     <Dialog
       as="div"
       onClose={() => props.onClose()}
-      className={clsx({ dark: props.theme }, "relative z-50")}
+      className={clsx({ dark: props.theme }, 'relative z-50')}
     >
       <Transition.Child
         as={React.Fragment}
@@ -64,6 +64,6 @@ const Modal = (props: {
       </div>
     </Dialog>
   </Transition>
-);
+)
 
-export default Modal;
+export default Modal
