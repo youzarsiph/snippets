@@ -12,6 +12,7 @@ import {
   Select,
   Switch,
   ModeSwitch,
+  ColorPicker,
 } from '@/app/ui'
 import {
   Font,
@@ -41,6 +42,47 @@ const Nav = (props: {
     menu: false,
     export: false,
   })
+
+  const getColor = (color: string) =>
+    clsx(color, {
+      'ring-4 ring-opacity-75 ring-offset-1': color === props.container.color,
+      'bg-gradient-to-t':
+        props.container.isGradient &&
+        props.container.type === 'linear' &&
+        props.container.direction === 'top',
+      'bg-gradient-to-tr':
+        props.container.isGradient &&
+        props.container.type === 'linear' &&
+        props.container.direction === 'top-right',
+      'bg-gradient-to-r':
+        props.container.isGradient &&
+        props.container.type === 'linear' &&
+        props.container.direction === 'right',
+      'bg-gradient-to-br':
+        props.container.isGradient &&
+        props.container.type === 'linear' &&
+        props.container.direction === 'bottom-right',
+      'bg-gradient-to-b':
+        props.container.isGradient &&
+        props.container.type === 'linear' &&
+        props.container.direction === 'bottom',
+      'bg-gradient-to-bl':
+        props.container.isGradient &&
+        props.container.type === 'linear' &&
+        props.container.direction === 'bottom-left',
+      'bg-gradient-to-l':
+        props.container.isGradient &&
+        props.container.type === 'linear' &&
+        props.container.direction === 'left',
+      'bg-gradient-to-tl':
+        props.container.isGradient &&
+        props.container.type === 'linear' &&
+        props.container.direction === 'top-left',
+      'bg-gradient-conic':
+        props.container.isGradient && props.container.type === 'conic',
+      'bg-gradient-radial':
+        props.container.isGradient && props.container.type === 'radial',
+    })
 
   return (
     <nav className="relative z-20 order-last w-full lg:static lg:-order-none lg:h-full lg:w-auto">
@@ -162,79 +204,17 @@ const Nav = (props: {
           }
         />
 
-        {/* <ColorPicker
-          label="BG Colors"
-          value={props.container.color}
-          data={Constants.colors}
+        <ColorPicker
+          label="Background Color"
+          value={getColor(props.container.color)}
+          data={[...Constants.colors.map((color) => getColor(color))]}
           onChange={(color) =>
             props.onContainerChange({
               ...props.container,
               color: color,
             })
           }
-        /> */}
-        <div className="grid gap-2">
-          <p>BG Colors</p>
-          <div className="flex flex-wrap items-center gap-2">
-            {Constants.colors.map((clr) => (
-              <button
-                key={clr}
-                onClick={() =>
-                  props.onContainerChange({
-                    ...props.container,
-                    color: clr,
-                  })
-                }
-                className={clsx(
-                  'h-8 w-8 rounded-sm shadow-lg hover:-translate-y-8 hover:scale-[400%] hover:shadow-xl',
-                  clr,
-                  {
-                    'ring-4 ring-opacity-75 ring-offset-1':
-                      clr === props.container.color,
-                    'bg-gradient-to-t':
-                      props.container.isGradient &&
-                      props.container.type === 'linear' &&
-                      props.container.direction === 'top',
-                    'bg-gradient-to-tr':
-                      props.container.isGradient &&
-                      props.container.type === 'linear' &&
-                      props.container.direction === 'top-right',
-                    'bg-gradient-to-r':
-                      props.container.isGradient &&
-                      props.container.type === 'linear' &&
-                      props.container.direction === 'right',
-                    'bg-gradient-to-br':
-                      props.container.isGradient &&
-                      props.container.type === 'linear' &&
-                      props.container.direction === 'bottom-right',
-                    'bg-gradient-to-b':
-                      props.container.isGradient &&
-                      props.container.type === 'linear' &&
-                      props.container.direction === 'bottom',
-                    'bg-gradient-to-bl':
-                      props.container.isGradient &&
-                      props.container.type === 'linear' &&
-                      props.container.direction === 'bottom-left',
-                    'bg-gradient-to-l':
-                      props.container.isGradient &&
-                      props.container.type === 'linear' &&
-                      props.container.direction === 'left',
-                    'bg-gradient-to-tl':
-                      props.container.isGradient &&
-                      props.container.type === 'linear' &&
-                      props.container.direction === 'top-left',
-                    'bg-gradient-conic':
-                      props.container.isGradient &&
-                      props.container.type === 'conic',
-                    'bg-gradient-radial':
-                      props.container.isGradient &&
-                      props.container.type === 'radial',
-                  },
-                )}
-              ></button>
-            ))}
-          </div>
-        </div>
+        />
       </Modal>
 
       {/* Export Modal */}
