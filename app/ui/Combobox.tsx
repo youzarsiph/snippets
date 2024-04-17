@@ -1,24 +1,24 @@
-import clsx from "clsx";
-import React from "react";
-import { Combobox as BaseCombobox, Transition } from "@headlessui/react";
+import clsx from 'clsx'
+import React from 'react'
+import { Combobox as BaseCombobox, Transition } from '@headlessui/react'
 
 const Combobox = (props: {
-  label: string;
-  value: string;
-  data: string[];
-  onChange: (val: string) => void;
+  label: string
+  value: string
+  data: string[]
+  onChange: (val: string) => void
 }) => {
-  const [query, setQuery] = React.useState("");
+  const [query, setQuery] = React.useState('')
 
   const filteredData =
-    query === ""
+    query === ''
       ? props.data
       : props.data.filter((item) =>
           item
             .toLowerCase()
-            .replace(/\s+/g, "")
-            .includes(query.toLowerCase().replace(/\s+/g, "")),
-        );
+            .replace(/\s+/g, '')
+            .includes(query.toLowerCase().replace(/\s+/g, '')),
+        )
 
   return (
     <div className="grid gap-2">
@@ -42,10 +42,10 @@ const Combobox = (props: {
             leave="transition ease-in duration-100"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
-            afterLeave={() => setQuery("")}
+            afterLeave={() => setQuery('')}
           >
             <BaseCombobox.Options className="absolute z-10 mt-1 grid max-h-60 w-full cursor-pointer gap-2 overflow-y-auto overflow-x-hidden rounded-md bg-white px-1 py-2 shadow-xl ring-1 ring-white focus:outline-none dark:bg-slate-800 dark:ring-slate-900">
-              {filteredData.length === 0 && query !== "" ? (
+              {filteredData.length === 0 && query !== '' ? (
                 <div className="relative cursor-default select-none px-4 py-2 text-gray-700">
                   Nothing found.
                 </div>
@@ -55,9 +55,9 @@ const Combobox = (props: {
                     key={item}
                     className={({ active }) =>
                       clsx(
-                        "flex items-center justify-between gap-4 rounded-lg px-2 py-1",
+                        'flex items-center justify-between gap-4 rounded-lg px-2 py-1',
                         {
-                          "bg-indigo-500 text-white": active,
+                          'bg-indigo-500 text-white': active,
                         },
                       )
                     }
@@ -66,9 +66,9 @@ const Combobox = (props: {
                     {({ selected }) => (
                       <>
                         <span
-                          className={clsx("block truncate", {
-                            "font-medium": selected,
-                            "font-normal": !selected,
+                          className={clsx('block truncate', {
+                            'font-medium': selected,
+                            'font-normal': !selected,
                           })}
                         >
                           {item}
@@ -86,7 +86,7 @@ const Combobox = (props: {
         </div>
       </BaseCombobox>
     </div>
-  );
-};
+  )
+}
 
-export default Combobox;
+export default Combobox

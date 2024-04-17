@@ -1,53 +1,53 @@
-"use client";
+'use client'
 
-import clsx from "clsx";
-import React from "react";
-import hljs from "highlight.js";
-import { Fonts } from "@/app/styles";
-import { Account, Background, Nav, Snippet } from "@/app/ui";
-import { Constants, exportImage } from "@/app/utils";
-import { CodeSettings, ContainerSettings, ExportSettings } from "@/app/types";
+import clsx from 'clsx'
+import React from 'react'
+import hljs from 'highlight.js'
+import { Fonts } from '@/app/styles'
+import { Account, Background, Nav, Snippet } from '@/app/ui'
+import { Constants, exportImage } from '@/app/utils'
+import { CodeSettings, ContainerSettings, ExportSettings } from '@/app/types'
 
 const Home = () => {
   // Target element
-  const target = React.useRef(null);
+  const target = React.useRef(null)
 
   // Container Settings
   const [container, setContainer] = React.useState<ContainerSettings>({
     theme: true,
-    size: "auto",
-    type: "linear",
-    padding: "64px",
+    size: 'auto',
+    type: 'linear',
+    padding: '64px',
     isGradient: true,
-    direction: "top-right",
+    direction: 'top-right',
     color: Constants.colors[0],
     buttons: { style: true, position: true },
-  });
+  })
 
   // Export settings
   const [exportSettings, setExport] = React.useState<ExportSettings>({
     quality: 1,
-    format: "png",
-  });
+    format: 'png',
+  })
 
   // Code Settings
   const [code, setCode] = React.useState<CodeSettings>({
-    font: "JetBrains Mono",
-    highlight: "github-dark",
+    font: 'JetBrains Mono',
+    highlight: 'github-dark',
     displayLineNumbers: true,
     tab: {
-      name: "Untitled",
-      content: "Type your code here.",
-      language: "plaintext",
+      name: 'Untitled',
+      content: 'Type your code here.',
+      language: 'plaintext',
     },
-  });
+  })
 
   // Author
   const [author, setAuthor] = React.useState({
     isVisible: false,
-    name: "Your Name",
-    username: "github.com/username",
-  });
+    name: 'Your Name',
+    username: 'github.com/username',
+  })
 
   React.useEffect(
     () =>
@@ -59,18 +59,18 @@ const Home = () => {
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
-  );
+  )
 
   React.useEffect(() => {
     // Remove attribute to re-highlight code
-    document.getElementById("code")?.removeAttribute("data-highlighted");
+    document.getElementById('code')?.removeAttribute('data-highlighted')
 
     // Highlight code
-    hljs.highlightAll();
-  }, [code]);
+    hljs.highlightAll()
+  }, [code])
 
   return (
-    <div className={clsx({ dark: container.theme }, "block h-screen w-screen")}>
+    <div className={clsx({ dark: container.theme }, 'block h-screen w-screen')}>
       <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"
@@ -107,56 +107,56 @@ const Home = () => {
             <div className={`relative h-fit w-fit`}>
               <div
                 ref={target}
-                className={clsx("p-1", Fonts[code.font].className)}
+                className={clsx('p-1', Fonts[code.font].className)}
               >
                 <section
                   style={Constants.sizes[container.size]}
                   className={clsx(
-                    "relative flex h-full w-full flex-col items-center justify-center overflow-auto rounded-lg shadow-xl",
+                    'relative flex h-full w-full flex-col items-center justify-center overflow-auto rounded-lg shadow-xl',
                     container.color,
                     {
-                      "p-4": container.padding === "16px",
-                      "p-8": container.padding === "32px",
-                      "p-16": container.padding === "64px",
-                      "p-32": container.padding === "128px",
+                      'p-4': container.padding === '16px',
+                      'p-8': container.padding === '32px',
+                      'p-16': container.padding === '64px',
+                      'p-32': container.padding === '128px',
                     },
                     {
-                      "bg-gradient-to-t":
+                      'bg-gradient-to-t':
                         container.isGradient &&
-                        container.type === "linear" &&
-                        container.direction === "top",
-                      "bg-gradient-to-tr":
+                        container.type === 'linear' &&
+                        container.direction === 'top',
+                      'bg-gradient-to-tr':
                         container.isGradient &&
-                        container.type === "linear" &&
-                        container.direction === "top-right",
-                      "bg-gradient-to-r":
+                        container.type === 'linear' &&
+                        container.direction === 'top-right',
+                      'bg-gradient-to-r':
                         container.isGradient &&
-                        container.type === "linear" &&
-                        container.direction === "right",
-                      "bg-gradient-to-br":
+                        container.type === 'linear' &&
+                        container.direction === 'right',
+                      'bg-gradient-to-br':
                         container.isGradient &&
-                        container.type === "linear" &&
-                        container.direction === "bottom-right",
-                      "bg-gradient-to-b":
+                        container.type === 'linear' &&
+                        container.direction === 'bottom-right',
+                      'bg-gradient-to-b':
                         container.isGradient &&
-                        container.type === "linear" &&
-                        container.direction === "bottom",
-                      "bg-gradient-to-bl":
+                        container.type === 'linear' &&
+                        container.direction === 'bottom',
+                      'bg-gradient-to-bl':
                         container.isGradient &&
-                        container.type === "linear" &&
-                        container.direction === "bottom-left",
-                      "bg-gradient-to-l":
+                        container.type === 'linear' &&
+                        container.direction === 'bottom-left',
+                      'bg-gradient-to-l':
                         container.isGradient &&
-                        container.type === "linear" &&
-                        container.direction === "left",
-                      "bg-gradient-to-tl":
+                        container.type === 'linear' &&
+                        container.direction === 'left',
+                      'bg-gradient-to-tl':
                         container.isGradient &&
-                        container.type === "linear" &&
-                        container.direction === "top-left",
-                      "bg-gradient-conic":
-                        container.isGradient && container.type === "conic",
-                      "bg-gradient-radial":
-                        container.isGradient && container.type === "radial",
+                        container.type === 'linear' &&
+                        container.direction === 'top-left',
+                      'bg-gradient-conic':
+                        container.isGradient && container.type === 'conic',
+                      'bg-gradient-radial':
+                        container.isGradient && container.type === 'radial',
                     },
                   )}
                 >
@@ -184,7 +184,7 @@ const Home = () => {
         </main>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

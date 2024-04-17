@@ -1,16 +1,16 @@
-import clsx from "clsx";
-import React from "react";
-import { Buttons, Tab } from "@/app/ui";
-import type { CodeSettings } from "@/app/types";
+import clsx from 'clsx'
+import React from 'react'
+import { Buttons, Tab } from '@/app/ui'
+import type { CodeSettings } from '@/app/types'
 
 const Snippet = (props: {
-  code: CodeSettings;
-  editTab: (name: string) => void;
-  onContentChange: (code: string) => void;
-  buttons: { style: boolean; position: boolean };
+  code: CodeSettings
+  editTab: (name: string) => void
+  onContentChange: (code: string) => void
+  buttons: { style: boolean; position: boolean }
 }) => {
   // Line number count
-  let count = 0;
+  let count = 0
 
   return (
     <article className="relative grid rounded-xl text-sm shadow-lg ring-1 ring-white backdrop-blur-3xl lg:text-base dark:ring-slate-900/95">
@@ -19,9 +19,9 @@ const Snippet = (props: {
       {/* Header */}
       <header
         className={clsx(
-          "flex w-full items-center gap-8 rounded-t-xl bg-white/85 px-4 dark:bg-slate-900/80",
+          'flex w-full items-center gap-8 rounded-t-xl bg-white/85 px-4 dark:bg-slate-900/80',
           {
-            "justify-between": !props.buttons.position,
+            'justify-between': !props.buttons.position,
           },
         )}
       >
@@ -49,9 +49,9 @@ const Snippet = (props: {
         <section className="flex gap-4">
           {props.code.displayLineNumbers ? (
             <div className="grid text-center">
-              {props.code.tab.content.split("\n").map(() => {
-                count += 1;
-                return <div key={count}>{count}</div>;
+              {props.code.tab.content.split('\n').map(() => {
+                count += 1
+                return <div key={count}>{count}</div>
               })}
             </div>
           ) : undefined}
@@ -68,7 +68,7 @@ const Snippet = (props: {
             <pre className="w-full whitespace-pre-wrap bg-transparent outline-none">
               <code
                 id="code"
-                style={{ padding: 0, background: "transparent" }}
+                style={{ padding: 0, background: 'transparent' }}
                 className={`hljs language-${props.code.tab.language}`}
               >
                 {props.code.tab.content}
@@ -78,7 +78,7 @@ const Snippet = (props: {
         </section>
       </main>
     </article>
-  );
-};
+  )
+}
 
-export default Snippet;
+export default Snippet

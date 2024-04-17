@@ -1,9 +1,18 @@
-import clsx from "clsx";
-import React from "react";
-import hljs from "highlight.js";
-import { Fonts } from "@/app/styles";
-import { Constants } from "@/app/utils";
-import { Button, Combobox, Modal, Input, Logo, Select } from "@/app/ui";
+import clsx from 'clsx'
+import React from 'react'
+import hljs from 'highlight.js'
+import { Fonts } from '@/app/styles'
+import { Constants } from '@/app/utils'
+import {
+  Button,
+  Combobox,
+  Modal,
+  Input,
+  Logo,
+  Select,
+  Switch,
+  ModeSwitch,
+} from '@/app/ui'
 import {
   Font,
   Language,
@@ -13,25 +22,25 @@ import {
   CodeSettings,
   ContainerSettings,
   ExportSettings,
-} from "@/app/types";
+} from '@/app/types'
 
 const Nav = (props: {
-  author: Author;
-  code: CodeSettings;
-  container: ContainerSettings;
-  export: ExportSettings;
-  exportCallback: () => void;
-  onCodeChange: (code: CodeSettings) => void;
-  onAuthorChange: (author: Author) => void;
-  onContainerChange: (container: ContainerSettings) => void;
-  onExportChange: (exportSettings: ExportSettings) => void;
+  author: Author
+  code: CodeSettings
+  container: ContainerSettings
+  export: ExportSettings
+  exportCallback: () => void
+  onCodeChange: (code: CodeSettings) => void
+  onAuthorChange: (author: Author) => void
+  onContainerChange: (container: ContainerSettings) => void
+  onExportChange: (exportSettings: ExportSettings) => void
 }) => {
   const [show, setShow] = React.useState({
     author: false,
     code: false,
     menu: false,
     export: false,
-  });
+  })
 
   return (
     <nav className="relative z-20 order-last w-full lg:static lg:-order-none lg:h-full lg:w-auto">
@@ -44,21 +53,15 @@ const Nav = (props: {
       >
         <div className="flex items-center justify-between gap-4">
           <p>Theme</p>
-          <Button
-            onClick={() =>
+          <ModeSwitch
+            value={props.container.theme}
+            onChange={() =>
               props.onContainerChange({
                 ...props.container,
                 theme: !props.container.theme,
               })
             }
-          >
-            {props.container.theme ? (
-              <i className="bi bi-moon-fill text-xl" />
-            ) : (
-              <i className="bi bi-sun-fill text-xl" />
-            )}
-            <span>{props.container.theme ? "Dark" : "Light"}</span>
-          </Button>
+          />
         </div>
 
         <Select
@@ -86,9 +89,10 @@ const Nav = (props: {
         />
 
         <div className="flex items-center justify-between gap-4">
-          <p>Window Style</p>
-          <Button
-            onClick={() =>
+          <p>Window Style: {props.container.buttons.style ? 'Mac' : 'Win'}</p>
+          <Switch
+            value={props.container.buttons.style}
+            onChange={() =>
               props.onContainerChange({
                 ...props.container,
                 buttons: {
@@ -97,15 +101,18 @@ const Nav = (props: {
                 },
               })
             }
-          >
-            {props.container.buttons.style ? "Mac" : "Windows"}
-          </Button>
+          />
         </div>
 
         <div className="flex items-center justify-between gap-4">
-          <p>Buttons Position</p>
-          <Button
-            onClick={() =>
+          <p>
+            Buttons Position:{' '}
+            {props.container.buttons.position ? 'Left' : 'Right'}
+          </p>
+
+          <Switch
+            value={props.container.buttons.position}
+            onChange={() =>
               props.onContainerChange({
                 ...props.container,
                 buttons: {
@@ -114,23 +121,21 @@ const Nav = (props: {
                 },
               })
             }
-          >
-            {props.container.buttons.position ? "Left" : "Right"}
-          </Button>
+          />
         </div>
 
         <div className="flex items-center justify-between gap-4">
           <p>Gradient Background</p>
-          <Button
-            onClick={() =>
+
+          <Switch
+            value={props.container.isGradient}
+            onChange={() =>
               props.onContainerChange({
                 ...props.container,
                 isGradient: !props.container.isGradient,
               })
             }
-          >
-            {props.container.isGradient ? "Yes" : "No"}
-          </Button>
+          />
         </div>
 
         <Select
@@ -157,6 +162,17 @@ const Nav = (props: {
           }
         />
 
+        {/* <ColorPicker
+          label="BG Colors"
+          value={props.container.color}
+          data={Constants.colors}
+          onChange={(color) =>
+            props.onContainerChange({
+              ...props.container,
+              color: color,
+            })
+          }
+        /> */}
         <div className="grid gap-2">
           <p>BG Colors</p>
           <div className="flex flex-wrap items-center gap-2">
@@ -170,49 +186,49 @@ const Nav = (props: {
                   })
                 }
                 className={clsx(
-                  "h-8 w-8 rounded-sm shadow-lg hover:-translate-y-8 hover:scale-[400%] hover:shadow-xl",
+                  'h-8 w-8 rounded-sm shadow-lg hover:-translate-y-8 hover:scale-[400%] hover:shadow-xl',
                   clr,
                   {
-                    "ring-4 ring-opacity-75 ring-offset-1":
+                    'ring-4 ring-opacity-75 ring-offset-1':
                       clr === props.container.color,
-                    "bg-gradient-to-t":
+                    'bg-gradient-to-t':
                       props.container.isGradient &&
-                      props.container.type === "linear" &&
-                      props.container.direction === "top",
-                    "bg-gradient-to-tr":
+                      props.container.type === 'linear' &&
+                      props.container.direction === 'top',
+                    'bg-gradient-to-tr':
                       props.container.isGradient &&
-                      props.container.type === "linear" &&
-                      props.container.direction === "top-right",
-                    "bg-gradient-to-r":
+                      props.container.type === 'linear' &&
+                      props.container.direction === 'top-right',
+                    'bg-gradient-to-r':
                       props.container.isGradient &&
-                      props.container.type === "linear" &&
-                      props.container.direction === "right",
-                    "bg-gradient-to-br":
+                      props.container.type === 'linear' &&
+                      props.container.direction === 'right',
+                    'bg-gradient-to-br':
                       props.container.isGradient &&
-                      props.container.type === "linear" &&
-                      props.container.direction === "bottom-right",
-                    "bg-gradient-to-b":
+                      props.container.type === 'linear' &&
+                      props.container.direction === 'bottom-right',
+                    'bg-gradient-to-b':
                       props.container.isGradient &&
-                      props.container.type === "linear" &&
-                      props.container.direction === "bottom",
-                    "bg-gradient-to-bl":
+                      props.container.type === 'linear' &&
+                      props.container.direction === 'bottom',
+                    'bg-gradient-to-bl':
                       props.container.isGradient &&
-                      props.container.type === "linear" &&
-                      props.container.direction === "bottom-left",
-                    "bg-gradient-to-l":
+                      props.container.type === 'linear' &&
+                      props.container.direction === 'bottom-left',
+                    'bg-gradient-to-l':
                       props.container.isGradient &&
-                      props.container.type === "linear" &&
-                      props.container.direction === "left",
-                    "bg-gradient-to-tl":
+                      props.container.type === 'linear' &&
+                      props.container.direction === 'left',
+                    'bg-gradient-to-tl':
                       props.container.isGradient &&
-                      props.container.type === "linear" &&
-                      props.container.direction === "top-left",
-                    "bg-gradient-conic":
+                      props.container.type === 'linear' &&
+                      props.container.direction === 'top-left',
+                    'bg-gradient-conic':
                       props.container.isGradient &&
-                      props.container.type === "conic",
-                    "bg-gradient-radial":
+                      props.container.type === 'conic',
+                    'bg-gradient-radial':
                       props.container.isGradient &&
-                      props.container.type === "radial",
+                      props.container.type === 'radial',
                   },
                 )}
               ></button>
@@ -243,7 +259,7 @@ const Nav = (props: {
         <Select
           label="Quality"
           value={props.export.quality.toString()}
-          data={Object.keys({ "50%": 0.5, "75%": 0.75, "100%": 1 })}
+          data={Object.keys({ '50%': 0.5, '75%': 0.75, '100%': 1 })}
           onChange={(value) =>
             props.onExportChange({
               ...props.export,
@@ -300,21 +316,15 @@ const Nav = (props: {
 
         <div className="flex items-center justify-between gap-4">
           <p>Line Numbers</p>
-          <Button
-            onClick={() =>
+          <Switch
+            value={props.code.displayLineNumbers}
+            onChange={() =>
               props.onCodeChange({
                 ...props.code,
                 displayLineNumbers: !props.code.displayLineNumbers,
               })
             }
-          >
-            {props.code.displayLineNumbers ? (
-              <i className="bi bi-eye-slash-fill text-xl" />
-            ) : (
-              <i className="bi bi-eye-fill text-xl" />
-            )}
-            <span>{props.code.displayLineNumbers ? "Hide" : "Show"}</span>
-          </Button>
+          />
         </div>
       </Modal>
 
@@ -349,21 +359,15 @@ const Nav = (props: {
 
         <div className="flex items-center justify-between gap-4">
           <p>Visibility</p>
-          <Button
-            onClick={() =>
+          <Switch
+            value={props.author.isVisible}
+            onChange={() =>
               props.onAuthorChange({
                 ...props.author,
                 isVisible: !props.author.isVisible,
               })
             }
-          >
-            {props.author.isVisible ? (
-              <i className="bi bi-eye-fill text-xl" />
-            ) : (
-              <i className="bi bi-eye-slash-fill text-xl" />
-            )}
-            <span>{props.author.isVisible ? "Hide" : "Show"}</span>
-          </Button>
+          />
         </div>
       </Modal>
 
@@ -443,25 +447,20 @@ const Nav = (props: {
           </div>
         </div>
 
-        <div className="hidden lg:block">
-          <Button
-            onClick={() =>
+        <div className="hidden rotate-90 lg:block">
+          <ModeSwitch
+            value={props.container.theme}
+            onChange={() =>
               props.onContainerChange({
                 ...props.container,
                 theme: !props.container.theme,
               })
             }
-          >
-            {props.container.theme ? (
-              <i className="bi bi-moon-fill text-xl" />
-            ) : (
-              <i className="bi bi-sun-fill text-xl" />
-            )}
-          </Button>
+          />
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Nav;
+export default Nav

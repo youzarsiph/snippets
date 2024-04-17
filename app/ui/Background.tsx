@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const Background = () => (
   <>
@@ -21,6 +21,6 @@ const Background = () => (
       <div className="absolute -bottom-36 right-[43.15%] h-52 w-52 animate-spin rounded-full border-[4rem] border-b-orange-500 border-l-red-500 border-r-blue-500 border-t-green-500"></div>
     </div>
   </>
-);
+)
 
-export default Background;
+export default Background
