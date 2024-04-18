@@ -13,6 +13,7 @@ import {
 type Author = {
   name: string
   username: string
+  website: string
   isVisible: boolean
 }
 

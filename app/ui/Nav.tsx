@@ -326,6 +326,18 @@ const Nav = (props: {
           }
         />
 
+        <Select
+          label="Social website"
+          data={Constants.sites}
+          value={props.author.website}
+          onChange={(val) =>
+            props.onAuthorChange({
+              ...props.author,
+              website: val,
+            })
+          }
+        />
+
         <Input
           label="Username"
           value={props.author.username}

@@ -1,9 +1,6 @@
 const Icons = {
   getSocialIconFromURL: (url: string) => {
-    // Extract the domain name from the URL
-    const domain = new URL(url).hostname.split('.')[0]
-
-    switch (domain) {
+    switch (url) {
       case 'github':
         return (
           <svg
