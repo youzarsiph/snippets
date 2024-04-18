@@ -12,6 +12,7 @@ import {
   Select,
   Switch,
   ModeSwitch,
+  ColorPicker,
 } from '@/app/ui'
 import {
   Font,
@@ -42,6 +43,47 @@ const Nav = (props: {
     export: false,
   })
 
+  const getColor = (color: string) =>
+    clsx(color, {
+      'ring-4 ring-opacity-75 ring-offset-1': color === props.container.color,
+      'bg-gradient-to-t':
+        props.container.isGradient &&
+        props.container.type === 'linear' &&
+        props.container.direction === 'top',
+      'bg-gradient-to-tr':
+        props.container.isGradient &&
+        props.container.type === 'linear' &&
+        props.container.direction === 'top-right',
+      'bg-gradient-to-r':
+        props.container.isGradient &&
+        props.container.type === 'linear' &&
+        props.container.direction === 'right',
+      'bg-gradient-to-br':
+        props.container.isGradient &&
+        props.container.type === 'linear' &&
+        props.container.direction === 'bottom-right',
+      'bg-gradient-to-b':
+        props.container.isGradient &&
+        props.container.type === 'linear' &&
+        props.container.direction === 'bottom',
+      'bg-gradient-to-bl':
+        props.container.isGradient &&
+        props.container.type === 'linear' &&
+        props.container.direction === 'bottom-left',
+      'bg-gradient-to-l':
+        props.container.isGradient &&
+        props.container.type === 'linear' &&
+        props.container.direction === 'left',
+      'bg-gradient-to-tl':
+        props.container.isGradient &&
+        props.container.type === 'linear' &&
+        props.container.direction === 'top-left',
+      'bg-gradient-conic':
+        props.container.isGradient && props.container.type === 'conic',
+      'bg-gradient-radial':
+        props.container.isGradient && props.container.type === 'radial',
+    })
+
   return (
     <nav className="relative z-20 order-last w-full lg:static lg:-order-none lg:h-full lg:w-auto">
       {/* Menu Modal */}
@@ -65,7 +107,7 @@ const Nav = (props: {
         </div>
 
         <Select
-          label="Background Size"
+          label="Size"
           data={Object.keys(Constants.sizes)}
           value={props.container.size}
           onChange={(value) =>
@@ -77,13 +119,63 @@ const Nav = (props: {
         />
 
         <Select
-          label="Background Padding"
+          label="Padding"
           value={props.container.padding}
           data={Object.keys(Constants.paddings)}
           onChange={(value) =>
             props.onContainerChange({
               ...props.container,
               padding: value as Padding,
+            })
+          }
+        />
+
+        <ColorPicker
+          label="Color"
+          value={getColor(props.container.color)}
+          data={[...Constants.colors.map((color) => getColor(color))]}
+          onChange={(color) =>
+            props.onContainerChange({
+              ...props.container,
+              color: color,
+            })
+          }
+        />
+
+        <div className="flex items-center justify-between gap-4">
+          <p>Gradient Colors</p>
+
+          <Switch
+            value={props.container.isGradient}
+            onChange={() =>
+              props.onContainerChange({
+                ...props.container,
+                isGradient: !props.container.isGradient,
+              })
+            }
+          />
+        </div>
+
+        <Select
+          label="Gradient Direction"
+          value={props.container.direction}
+          data={Constants.directions}
+          onChange={(value) =>
+            props.onContainerChange({
+              ...props.container,
+              direction: value,
+            })
+          }
+        />
+
+        <Select
+          label="Gradient Type"
+          value={props.container.type}
+          data={Constants.types}
+          onChange={(value) =>
+            props.onContainerChange({
+              ...props.container,
+              type: value,
             })
           }
         />
@@ -122,118 +214,6 @@ const Nav = (props: {
               })
             }
           />
-        </div>
-
-        <div className="flex items-center justify-between gap-4">
-          <p>Gradient Background</p>
-
-          <Switch
-            value={props.container.isGradient}
-            onChange={() =>
-              props.onContainerChange({
-                ...props.container,
-                isGradient: !props.container.isGradient,
-              })
-            }
-          />
-        </div>
-
-        <Select
-          label="Gradient Type"
-          value={props.container.type}
-          data={Constants.types}
-          onChange={(value) =>
-            props.onContainerChange({
-              ...props.container,
-              type: value,
-            })
-          }
-        />
-
-        <Select
-          label="Gradient Direction"
-          value={props.container.direction}
-          data={Constants.directions}
-          onChange={(value) =>
-            props.onContainerChange({
-              ...props.container,
-              direction: value,
-            })
-          }
-        />
-
-        {/* <ColorPicker
-          label="BG Colors"
-          value={props.container.color}
-          data={Constants.colors}
-          onChange={(color) =>
-            props.onContainerChange({
-              ...props.container,
-              color: color,
-            })
-          }
-        /> */}
-        <div className="grid gap-2">
-          <p>BG Colors</p>
-          <div className="flex flex-wrap items-center gap-2">
-            {Constants.colors.map((clr) => (
-              <button
-                key={clr}
-                onClick={() =>
-                  props.onContainerChange({
-                    ...props.container,
-                    color: clr,
-                  })
-                }
-                className={clsx(
-                  'h-8 w-8 rounded-sm shadow-lg hover:-translate-y-8 hover:scale-[400%] hover:shadow-xl',
-                  clr,
-                  {
-                    'ring-4 ring-opacity-75 ring-offset-1':
-                      clr === props.container.color,
-                    'bg-gradient-to-t':
-                      props.container.isGradient &&
-                      props.container.type === 'linear' &&
-                      props.container.direction === 'top',
-                    'bg-gradient-to-tr':
-                      props.container.isGradient &&
-                      props.container.type === 'linear' &&
-                      props.container.direction === 'top-right',
-                    'bg-gradient-to-r':
-                      props.container.isGradient &&
-                      props.container.type === 'linear' &&
-                      props.container.direction === 'right',
-                    'bg-gradient-to-br':
-                      props.container.isGradient &&
-                      props.container.type === 'linear' &&
-                      props.container.direction === 'bottom-right',
-                    'bg-gradient-to-b':
-                      props.container.isGradient &&
-                      props.container.type === 'linear' &&
-                      props.container.direction === 'bottom',
-                    'bg-gradient-to-bl':
-                      props.container.isGradient &&
-                      props.container.type === 'linear' &&
-                      props.container.direction === 'bottom-left',
-                    'bg-gradient-to-l':
-                      props.container.isGradient &&
-                      props.container.type === 'linear' &&
-                      props.container.direction === 'left',
-                    'bg-gradient-to-tl':
-                      props.container.isGradient &&
-                      props.container.type === 'linear' &&
-                      props.container.direction === 'top-left',
-                    'bg-gradient-conic':
-                      props.container.isGradient &&
-                      props.container.type === 'conic',
-                    'bg-gradient-radial':
-                      props.container.isGradient &&
-                      props.container.type === 'radial',
-                  },
-                )}
-              ></button>
-            ))}
-          </div>
         </div>
       </Modal>
 
@@ -279,6 +259,18 @@ const Nav = (props: {
         onClose={() => setShow({ ...show, code: false })}
       >
         <Combobox
+          label="Highlight Theme"
+          value={props.code.highlight}
+          data={Constants.highlights}
+          onChange={(value) =>
+            props.onCodeChange({
+              ...props.code,
+              highlight: value,
+            })
+          }
+        />
+
+        <Combobox
           label="Language"
           value={props.code.tab.language}
           data={hljs.listLanguages()}
@@ -298,18 +290,6 @@ const Nav = (props: {
             props.onCodeChange({
               ...props.code,
               font: value as Font,
-            })
-          }
-        />
-
-        <Combobox
-          label="Highlight Theme"
-          value={props.code.highlight}
-          data={Constants.highlights}
-          onChange={(value) =>
-            props.onCodeChange({
-              ...props.code,
-              highlight: value,
             })
           }
         />
@@ -342,6 +322,18 @@ const Nav = (props: {
             props.onAuthorChange({
               ...props.author,
               name: event.target.value,
+            })
+          }
+        />
+
+        <Select
+          label="Social website"
+          data={Constants.sites}
+          value={props.author.website}
+          onChange={(val) =>
+            props.onAuthorChange({
+              ...props.author,
+              website: val,
             })
           }
         />
@@ -384,11 +376,7 @@ const Nav = (props: {
                 })
               }
             >
-              {show.menu ? (
-                <i className="bi bi-x-lg text-xl" />
-              ) : (
-                <i className="bi bi-list text-xl" />
-              )}
+              <i className="bi bi-list text-xl" />
             </Button>
             <p className="text-xs">Menu</p>
           </div>

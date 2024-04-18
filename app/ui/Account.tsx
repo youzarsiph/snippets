@@ -1,42 +1,19 @@
-import clsx from 'clsx'
 import React from 'react'
+import { Icons } from '@/app/utils'
+import { Author } from '@/app/types'
 
-const Account = (props: { name: string; username: string }) => (
+const Account = (props: Author) => (
   <div className="absolute bottom-0 left-0 rounded-tr-xl bg-white/80 px-4 py-2 ring-1 ring-white dark:bg-slate-800/75 dark:text-slate-200 dark:ring-slate-900">
-    <div className="relative flex items-center gap-6">
+    <div className="relative flex items-center gap-8">
       <div className="absolute inset-0 -z-10 rounded-3xl backdrop-blur-3xl"></div>
 
-      <h1 className="flex items-center gap-4">
-        <svg
-          width="16"
-          height="16"
-          fill="currentColor"
-          viewBox="0 0 16 16"
-          className="bi bi-person-circle"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-          <path
-            fill-rule="evenodd"
-            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
-          />
-        </svg>
-
+      <h1 className="flex items-center gap-2">
+        <i className="bi bi-person-circle text-xl" />
         <span>{props.name}</span>
       </h1>
 
-      <small className="flex items-center gap-4">
-        <i
-          className={clsx('bi text-xl', {
-            'bi-github': props.username.includes('github'),
-            'bi-gitlab': props.username.includes('gitlab'),
-            'bi-facebook': props.username.includes('facebook'),
-            'bi-twitter': props.username.includes('twitter'),
-            'bi-instagram': props.username.includes('instagram'),
-            'bi-linkedin': props.username.includes('linkedin'),
-            'bi-youtube': props.username.includes('youtube'),
-          })}
-        />
+      <small className="flex items-center gap-2">
+        {Icons.getSocialIconFromURL(props.website)}
         <span>{props.username}</span>
       </small>
     </div>

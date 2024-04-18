@@ -6,7 +6,12 @@ import hljs from 'highlight.js'
 import { Fonts } from '@/app/styles'
 import { Account, Background, Nav, Snippet } from '@/app/ui'
 import { Constants, exportImage } from '@/app/utils'
-import { CodeSettings, ContainerSettings, ExportSettings } from '@/app/types'
+import {
+  Author,
+  CodeSettings,
+  ContainerSettings,
+  ExportSettings,
+} from '@/app/types'
 
 const Home = () => {
   // Target element
@@ -43,10 +48,11 @@ const Home = () => {
   })
 
   // Author
-  const [author, setAuthor] = React.useState({
+  const [author, setAuthor] = React.useState<Author>({
     isVisible: false,
     name: 'Your Name',
-    username: 'github.com/username',
+    website: 'github',
+    username: 'username',
   })
 
   React.useEffect(
@@ -174,9 +180,7 @@ const Home = () => {
                     }
                   />
 
-                  {author.isVisible ? (
-                    <Account name={author.name} username={author.username} />
-                  ) : undefined}
+                  {author.isVisible ? <Account {...author} /> : undefined}
                 </section>
               </div>
             </div>

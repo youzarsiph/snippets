@@ -4,6 +4,7 @@ const Constants = {
   languages: hljs.listLanguages(),
   formats: ['svg', 'png', 'jpeg'],
   types: ['conic', 'linear', 'radial'],
+  sites: ['github', 'gitlab', 'facebook', 'instagram', 'youtube', 'linkedin'],
   paddings: {
     '16px': 'p-4',
     '32px': 'p-8',
