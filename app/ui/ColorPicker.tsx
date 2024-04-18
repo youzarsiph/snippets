@@ -14,7 +14,7 @@ const ColorPicker = (props: {
       <div className="relative mt-1">
         <Listbox.Button
           className={clsx(
-            'flex w-full cursor-pointer items-center justify-between gap-4 rounded-lg border border-white bg-transparent px-8 py-4 ring-1 ring-white focus:ring-4 focus:ring-offset-2 dark:border-slate-900 dark:ring-slate-900',
+            'flex w-full cursor-pointer items-center justify-between gap-4 rounded-lg border border-white px-8 py-4 ring-1 focus:ring-4 focus:ring-offset-2 dark:border-slate-900',
             props.value,
           )}
         >
@@ -28,13 +28,13 @@ const ColorPicker = (props: {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="absolute z-10 mt-1 grid max-h-60 w-full cursor-pointer gap-4 overflow-auto rounded-md bg-white px-1 py-2 shadow-xl ring-1 ring-white focus:outline-none dark:bg-slate-800 dark:ring-slate-900">
+          <Listbox.Options className="absolute z-10 mt-1 grid max-h-60 w-full cursor-pointer gap-4 overflow-auto rounded-md bg-white p-2 shadow-xl ring-1 ring-white focus:outline-none dark:bg-slate-800 dark:ring-slate-900">
             {props.data.map((item, index) => (
               <Listbox.Option
                 key={index}
                 value={item}
                 className={clsx(
-                  'flex items-center justify-between gap-4 rounded-lg px-8 py-4',
+                  'flex items-center justify-between gap-4 rounded-lg px-8 py-4 ring-2',
                   item,
                 )}
               >

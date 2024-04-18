@@ -107,7 +107,7 @@ const Nav = (props: {
         </div>
 
         <Select
-          label="Background Size"
+          label="Size"
           data={Object.keys(Constants.sizes)}
           value={props.container.size}
           onChange={(value) =>
@@ -119,13 +119,63 @@ const Nav = (props: {
         />
 
         <Select
-          label="Background Padding"
+          label="Padding"
           value={props.container.padding}
           data={Object.keys(Constants.paddings)}
           onChange={(value) =>
             props.onContainerChange({
               ...props.container,
               padding: value as Padding,
+            })
+          }
+        />
+
+        <ColorPicker
+          label="Color"
+          value={getColor(props.container.color)}
+          data={[...Constants.colors.map((color) => getColor(color))]}
+          onChange={(color) =>
+            props.onContainerChange({
+              ...props.container,
+              color: color,
+            })
+          }
+        />
+
+        <div className="flex items-center justify-between gap-4">
+          <p>Gradient Colors</p>
+
+          <Switch
+            value={props.container.isGradient}
+            onChange={() =>
+              props.onContainerChange({
+                ...props.container,
+                isGradient: !props.container.isGradient,
+              })
+            }
+          />
+        </div>
+
+        <Select
+          label="Gradient Direction"
+          value={props.container.direction}
+          data={Constants.directions}
+          onChange={(value) =>
+            props.onContainerChange({
+              ...props.container,
+              direction: value,
+            })
+          }
+        />
+
+        <Select
+          label="Gradient Type"
+          value={props.container.type}
+          data={Constants.types}
+          onChange={(value) =>
+            props.onContainerChange({
+              ...props.container,
+              type: value,
             })
           }
         />
@@ -165,56 +215,6 @@ const Nav = (props: {
             }
           />
         </div>
-
-        <div className="flex items-center justify-between gap-4">
-          <p>Gradient Background</p>
-
-          <Switch
-            value={props.container.isGradient}
-            onChange={() =>
-              props.onContainerChange({
-                ...props.container,
-                isGradient: !props.container.isGradient,
-              })
-            }
-          />
-        </div>
-
-        <Select
-          label="Gradient Type"
-          value={props.container.type}
-          data={Constants.types}
-          onChange={(value) =>
-            props.onContainerChange({
-              ...props.container,
-              type: value,
-            })
-          }
-        />
-
-        <Select
-          label="Gradient Direction"
-          value={props.container.direction}
-          data={Constants.directions}
-          onChange={(value) =>
-            props.onContainerChange({
-              ...props.container,
-              direction: value,
-            })
-          }
-        />
-
-        <ColorPicker
-          label="Background Color"
-          value={getColor(props.container.color)}
-          data={[...Constants.colors.map((color) => getColor(color))]}
-          onChange={(color) =>
-            props.onContainerChange({
-              ...props.container,
-              color: color,
-            })
-          }
-        />
       </Modal>
 
       {/* Export Modal */}
@@ -259,6 +259,18 @@ const Nav = (props: {
         onClose={() => setShow({ ...show, code: false })}
       >
         <Combobox
+          label="Highlight Theme"
+          value={props.code.highlight}
+          data={Constants.highlights}
+          onChange={(value) =>
+            props.onCodeChange({
+              ...props.code,
+              highlight: value,
+            })
+          }
+        />
+
+        <Combobox
           label="Language"
           value={props.code.tab.language}
           data={hljs.listLanguages()}
@@ -278,18 +290,6 @@ const Nav = (props: {
             props.onCodeChange({
               ...props.code,
               font: value as Font,
-            })
-          }
-        />
-
-        <Combobox
-          label="Highlight Theme"
-          value={props.code.highlight}
-          data={Constants.highlights}
-          onChange={(value) =>
-            props.onCodeChange({
-              ...props.code,
-              highlight: value,
             })
           }
         />
@@ -364,11 +364,7 @@ const Nav = (props: {
                 })
               }
             >
-              {show.menu ? (
-                <i className="bi bi-x-lg text-xl" />
-              ) : (
-                <i className="bi bi-list text-xl" />
-              )}
+              <i className="bi bi-list text-xl" />
             </Button>
             <p className="text-xs">Menu</p>
           </div>
