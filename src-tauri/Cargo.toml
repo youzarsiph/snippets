@@ -1,6 +1,6 @@
 [package]
 name = "snippets"
-version = "0.1.5"
+version = "0.1.6"
 description = "Create beautiful images of your code snippets"
 authors = ["https://github.com/youzarsiph"]
 license = "MIT"
