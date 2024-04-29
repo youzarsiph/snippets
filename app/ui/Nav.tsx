@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import React from 'react'
 import hljs from 'highlight.js'
 import { Fonts } from '@/app/styles'
-import { Constants } from '@/app/utils'
+import { Constants, Icons } from '@/app/utils'
 import {
   Button,
   Combobox,
@@ -376,7 +376,7 @@ const Nav = (props: {
                 })
               }
             >
-              <i className="bi bi-list text-xl" />
+              {Icons.menu}
             </Button>
             <p className="text-xs">Menu</p>
           </div>
@@ -392,7 +392,7 @@ const Nav = (props: {
                 })
               }
             >
-              <i className="bi bi-download text-xl" />
+              {Icons.download}
             </Button>
             <p className="text-xs">Export</p>
           </div>
@@ -413,7 +413,7 @@ const Nav = (props: {
                 })
               }
             >
-              <i className="bi bi-code text-xl" />
+              {Icons.code}
             </Button>
             <p className="text-xs">Code</p>
           </div>
@@ -429,7 +429,7 @@ const Nav = (props: {
                 })
               }
             >
-              <i className="bi bi-person-fill text-xl" />
+              {Icons.account}
             </Button>
             <p className="text-xs">Author</p>
           </div>

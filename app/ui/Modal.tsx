@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import React from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { Button } from '@/app/ui'
+import { Icons } from '../utils'
 
 const Modal = (props: {
   title: string
@@ -50,9 +51,7 @@ const Modal = (props: {
                   {props.title}
                 </Dialog.Title>
 
-                <Button onClick={() => props.onClose()}>
-                  <i className="bi bi-x-lg text-xl" />
-                </Button>
+                <Button onClick={() => props.onClose()}>{Icons.close}</Button>
               </div>
 
               <div className="grid max-h-[40rem] w-full min-w-full gap-6 overflow-hidden overflow-y-auto px-6 py-2 lg:max-h-[40rem] lg:min-w-[30rem] lg:max-w-md">

@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import React from 'react'
 import { Listbox, Transition } from '@headlessui/react'
+import { Icons } from '../utils'
 
 const ColorPicker = (props: {
   label: string
@@ -19,7 +20,7 @@ const ColorPicker = (props: {
           )}
         >
           <span>Click to change</span>
-          <i className="bi bi-chevron-expand text-xl" />
+          {Icons.expand}
         </Listbox.Button>
 
         <Transition
@@ -41,9 +42,7 @@ const ColorPicker = (props: {
                 {({ selected }) => (
                   <>
                     <span>{selected ? 'Selected' : undefined}</span>
-                    {selected ? (
-                      <i className="bi bi-check-lg text-xl" />
-                    ) : undefined}
+                    {selected ? Icons.check : undefined}
                   </>
                 )}
               </Listbox.Option>

@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import React from 'react'
+import { Icons } from '../utils'
 
 const Buttons = (props: { style: boolean; position: boolean }) =>
   props.style ? (
@@ -21,15 +22,15 @@ const Buttons = (props: { style: boolean; position: boolean }) =>
       })}
     >
       <button className="peer flex h-8 w-8 items-center justify-center rounded-lg hover:bg-white/80 active:scale-95 active:bg-white/80 dark:text-slate-200 dark:hover:bg-slate-700/75 dark:active:bg-slate-700/80">
-        <i className="bi bi-dash-lg" />
+        {Icons.minimize}
       </button>
 
       <button className="peer flex h-8 w-8 items-center justify-center rounded-lg hover:bg-white/80 active:scale-95 active:bg-white/80 dark:text-slate-200 dark:hover:bg-slate-700/75 dark:active:bg-slate-700/80">
-        <i className="bi bi-fullscreen" />
+        {Icons.fullscreen}
       </button>
 
       <button className="peer flex h-8 w-8 items-center justify-center rounded-lg hover:bg-white/80 active:scale-95 active:bg-white/80 dark:text-slate-200 dark:hover:bg-slate-700/75 dark:active:bg-slate-700/80">
-        <i className="bi bi-x-lg" />
+        {Icons.close}
       </button>
     </div>
   )

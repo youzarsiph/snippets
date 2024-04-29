@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import React from 'react'
 import { Listbox, Transition } from '@headlessui/react'
+import { Icons } from '../utils'
 
 const Select = (props: {
   label: string
@@ -14,7 +15,7 @@ const Select = (props: {
       <div className="relative mt-1">
         <Listbox.Button className="flex w-full cursor-pointer items-center justify-between gap-4 rounded-lg border border-white bg-transparent px-4 py-2 ring-1 ring-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-400 focus:ring-offset-2 dark:border-slate-900 dark:ring-slate-900">
           <span className="block truncate">{props.value}</span>
-          <i className="bi bi-chevron-expand text-xl" />
+          {Icons.expand}
         </Listbox.Button>
 
         <Transition
@@ -47,9 +48,7 @@ const Select = (props: {
                     >
                       {item}
                     </span>
-                    {selected ? (
-                      <i className="bi bi-check-lg text-xl" />
-                    ) : undefined}
+                    {selected ? Icons.check : undefined}
                   </>
                 )}
               </Listbox.Option>

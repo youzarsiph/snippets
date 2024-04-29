@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import React from 'react'
 import { Combobox as BaseCombobox, Transition } from '@headlessui/react'
+import { Icons } from '../utils'
 
 const Combobox = (props: {
   label: string
@@ -33,7 +34,7 @@ const Combobox = (props: {
               className="flex w-full cursor-pointer items-center justify-between gap-4 rounded-lg border border-white bg-transparent px-4 py-2 ring-1 ring-white focus:border-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-400 focus:ring-offset-2 dark:border-slate-900 dark:ring-slate-900"
             />
             <BaseCombobox.Button className="absolute inset-y-0 right-0 pr-4">
-              <i className="bi bi-chevron-expand text-xl" />
+              {Icons.expand}
             </BaseCombobox.Button>
           </div>
 
@@ -73,9 +74,7 @@ const Combobox = (props: {
                         >
                           {item}
                         </span>
-                        {selected ? (
-                          <i className="bi bi-check-lg text-xl" />
-                        ) : undefined}
+                        {selected ? Icons.check : undefined}
                       </>
                     )}
                   </BaseCombobox.Option>

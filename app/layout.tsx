@@ -1,5 +1,5 @@
 import { Noto_Sans } from 'next/font/google'
-import '@/app/globals.css'
+import '@/app/styles/globals.css'
 
 const noto = Noto_Sans({ subsets: ['latin'] })
 
