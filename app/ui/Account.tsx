@@ -8,12 +8,12 @@ const Account = (props: Author) => (
       <div className="absolute inset-0 -z-10 rounded-3xl backdrop-blur-3xl"></div>
 
       <h1 className="flex items-center gap-2">
-        {Icons.account}
+        <Icons.Account />
         <span>{props.name}</span>
       </h1>
 
       <small className="flex items-center gap-2">
-        {Icons.github}
+        {Icons.getWebsiteIcon(props.website)}
         <span>{props.username}</span>
       </small>
     </div>

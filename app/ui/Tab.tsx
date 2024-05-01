@@ -22,7 +22,7 @@ const Tab = (props: { code: Code; onTabUpdate: (name: string) => void }) => {
       </div>
       {display ? (
         <button
-          title="Select tab"
+          title="Double click to edit"
           onBlur={() => setDisplay(true)}
           className="bg-transparent outline-none"
           onDoubleClick={() => setDisplay(false)}

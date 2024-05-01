@@ -20,7 +20,7 @@ const ColorPicker = (props: {
           )}
         >
           <span>Click to change</span>
-          {Icons.expand}
+          <Icons.Expand className="h-6 w-6" />
         </Listbox.Button>
 
         <Transition
@@ -42,7 +42,7 @@ const ColorPicker = (props: {
                 {({ selected }) => (
                   <>
                     <span>{selected ? 'Selected' : undefined}</span>
-                    {selected ? Icons.check : undefined}
+                    {selected ? Icons.Check : undefined}
                   </>
                 )}
               </Listbox.Option>

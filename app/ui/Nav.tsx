@@ -376,7 +376,7 @@ const Nav = (props: {
                 })
               }
             >
-              {Icons.menu}
+              <Icons.Menu className="h-6 w-6" />
             </Button>
             <p className="text-xs">Menu</p>
           </div>
@@ -392,7 +392,7 @@ const Nav = (props: {
                 })
               }
             >
-              {Icons.download}
+              <Icons.Download className="h-6 w-6" />
             </Button>
             <p className="text-xs">Export</p>
           </div>
@@ -413,7 +413,7 @@ const Nav = (props: {
                 })
               }
             >
-              {Icons.code}
+              <Icons.Code className="h-6 w-6" />
             </Button>
             <p className="text-xs">Code</p>
           </div>
@@ -429,7 +429,7 @@ const Nav = (props: {
                 })
               }
             >
-              {Icons.account}
+              <Icons.Account className="h-6 w-6" />
             </Button>
             <p className="text-xs">Author</p>
           </div>

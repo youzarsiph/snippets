@@ -51,7 +51,9 @@ const Modal = (props: {
                   {props.title}
                 </Dialog.Title>
 
-                <Button onClick={() => props.onClose()}>{Icons.close}</Button>
+                <Button onClick={() => props.onClose()}>
+                  <Icons.Close className="h-6 w-6" />
+                </Button>
               </div>
 
               <div className="grid max-h-[40rem] w-full min-w-full gap-6 overflow-hidden overflow-y-auto px-6 py-2 lg:max-h-[40rem] lg:min-w-[30rem] lg:max-w-md">

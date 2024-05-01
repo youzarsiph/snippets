@@ -22,15 +22,15 @@ const Buttons = (props: { style: boolean; position: boolean }) =>
       })}
     >
       <button className="peer flex h-8 w-8 items-center justify-center rounded-lg hover:bg-white/80 active:scale-95 active:bg-white/80 dark:text-slate-200 dark:hover:bg-slate-700/75 dark:active:bg-slate-700/80">
-        {Icons.minimize}
+        <Icons.Minimize />
       </button>
 
       <button className="peer flex h-8 w-8 items-center justify-center rounded-lg hover:bg-white/80 active:scale-95 active:bg-white/80 dark:text-slate-200 dark:hover:bg-slate-700/75 dark:active:bg-slate-700/80">
-        {Icons.fullscreen}
+        <Icons.Fullscreen />
       </button>
 
       <button className="peer flex h-8 w-8 items-center justify-center rounded-lg hover:bg-white/80 active:scale-95 active:bg-white/80 dark:text-slate-200 dark:hover:bg-slate-700/75 dark:active:bg-slate-700/80">
-        {Icons.close}
+        <Icons.Close />
       </button>
     </div>
   )

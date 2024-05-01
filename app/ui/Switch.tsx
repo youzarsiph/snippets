@@ -8,7 +8,7 @@ const Switch = (props: { value: boolean; onChange: () => void }) => (
     onChange={() => props.onChange()}
     className={clsx(
       { 'bg-indigo-600': props.value },
-      'relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent ring-1 ring-white ease-in-out hover:border-indigo-600 hover:bg-indigo-500/75 focus:border-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-400 focus:ring-offset-2 focus-visible:ring-2 focus-visible:ring-white/75 active:scale-95 dark:border-slate-900 dark:ring-slate-900  dark:hover:bg-indigo-600/75',
+      'relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent ring-1 ring-white ease-in-out hover:border-indigo-600 hover:bg-indigo-500/75 focus:border-indigo-600 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-offset-2 focus-visible:ring-2 focus-visible:ring-white/75 active:scale-95 dark:border-slate-900 dark:ring-slate-900  dark:hover:bg-indigo-600/75',
     )}
   >
     <span className="sr-only">Use setting</span>
